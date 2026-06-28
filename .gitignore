@@ -1,0 +1,10 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Dependency / build dirs (none needed for a static site, but safe to ignore)
+node_modules/
+.vscode/
+.idea/
