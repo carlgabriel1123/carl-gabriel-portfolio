@@ -798,6 +798,12 @@ footer{
   box-shadow:0 0 0 1px var(--rose), 0 26px 50px -26px rgba(255,77,94,.4);
 }
 .stat--hl .stat-ic{background:var(--rose);color:#fff;border-color:var(--rose)}
+/* proof-in-numbers section — creator views + meta ads */
+#numbers .mono-line{display:block;margin-bottom:18px;color:var(--blue)}
+.num-block + .num-block{margin-top:clamp(36px,5vw,56px)}
+.num-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:760px){.num-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:440px){.num-grid{grid-template-columns:1fr}}
 @media (max-width:760px){.proof-grid{grid-template-columns:1fr 1fr}}
 
 /* --- work filter tabs --- */
