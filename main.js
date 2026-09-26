@@ -444,6 +444,11 @@
         });
       }
 
+      // The open menu covers the page (styles.css 05): tabbing out of the nav closes it
+      nav.addEventListener('focusout', function (e) {
+        if (isOpen() && e.relatedTarget && !nav.contains(e.relatedTarget)) setOpen(false);
+      });
+
       document.addEventListener('keydown', function (e) {
         if ((e.key === 'Escape' || e.key === 'Esc') && isOpen()) {
           setOpen(false);
@@ -1552,9 +1557,13 @@
     }
 
     scrollBus.add(function (y) {
-      // the sticky slot, not the box: .nav--hidden slides the chips up (styles.css 23)
-      // but scroll-margin-top still parks targets under nav + chips
-      var line = (parseFloat(window.getComputedStyle(bar).top) || 0) + bar.offsetHeight + 24;
+      // where jumps park targets (scroll-margin-top: nav + chips + 16, styles.css 01),
+      // not the chips' sticky top, which drops to 0 under .nav--hidden (styles.css 23);
+      // the sticky line stays as a floor for engines without scroll-margin
+      var line = Math.max(
+        (parseFloat(window.getComputedStyle(bar).top) || 0) + bar.offsetHeight + 24,
+        (parseFloat(window.getComputedStyle(items[0].sec).scrollMarginTop) || 0) + 8
+      );
       var active = null;
       for (var i = 0; i < items.length; i++) {
         if (items[i].sec.getBoundingClientRect().top <= line) active = items[i];

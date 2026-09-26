@@ -4,13 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
-/* Old one-page links (…/#gallery, …/#faq) land on the page that now holds that section */
+/* Old one-page links (…/#gallery, …/#faq) land on the page that now holds that section,
+   on load and on hashchange (an old link opened in the same tab while Home is open is a
+   fragment navigation, not a reload) */
 (function () {
   var map = { work: 'work.html', proof: 'results.html', gallery: 'results.html#gallery',
     services: 'services.html', edge: 'services.html#edge', process: 'services.html#process',
     about: 'about.html', experience: 'about.html#experience', faq: 'contact.html#faq', contact: 'contact.html' };
-  var id = location.hash.slice(1);
-  if (Object.prototype.hasOwnProperty.call(map, id)) location.replace(map[id]);
+  var hasOwn = Object.prototype.hasOwnProperty;
+  function go() {
+    var id = location.hash.slice(1);
+    if (hasOwn.call(map, id)) location.replace(map[id]);
+  }
+  go();
+  addEventListener('hashchange', go);
 })();
 </script>
 <title>Carl Gabriel Piramo — Digital Marketing &amp; E-commerce Growth Manager</title>
@@ -292,59 +299,59 @@
         </div>
         <div class="tile-body">
           <span class="chip chip--accent">Selected work</span>
-          <h3 class="tile-title"><a class="tile-link" href="work.html"><span data-vt="vt-work">Growth needs fuel. <em>I make mine in-house.</em></span></a></h3>
+          <h3 class="tile-title"><a class="tile-link" id="tl-work" aria-labelledby="tl-work tg-work" href="work.html"><span data-vt="vt-work">Growth needs fuel. <em>I make mine in-house.</em></span></a></h3>
           <p class="tile-meta">8 videos · 10 static creatives</p>
-          <span class="tile-go" aria-hidden="true">See the work →</span>
+          <span class="tile-go" aria-hidden="true"><span id="tg-work">See the work</span> →</span>
         </div>
       </article>
 
       <article class="tile tile--results card card--lift">
         <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
-        <h3 class="tile-title"><a class="tile-link" href="results.html"><span data-vt="vt-results">Results</span></a></h3>
+        <h3 class="tile-title"><a class="tile-link" id="tl-results" aria-labelledby="tl-results tg-results" href="results.html">Results</a></h3>
         <p class="stat-num"><span class="pre">$</span><span class="val" data-count="3.8">3.8</span><span class="suf">M</span></p>
         <p class="tile-label">Shopify sales in one day</p>
         <ul class="tile-list">
           <li><b>8.71×</b> peak Meta ROAS</li>
           <li><b>₱4.99M</b> TikTok Shop LIVE GMV</li>
         </ul>
-        <span class="tile-go" aria-hidden="true">See the proof →</span>
+        <span class="tile-go" aria-hidden="true"><span id="tg-results">See the proof</span> →</span>
       </article>
 
       <article class="tile tile--dash card card--lift">
         <span class="tile-shot" aria-hidden="true"><img src="assets/proof/proof-shopify-sales-day.jpg" alt="" width="1100" height="1076" loading="lazy" decoding="async"></span>
         <div class="tile-body">
-          <h3 class="tile-title"><a class="tile-link" href="results.html#gallery">Dashboards</a></h3>
+          <h3 class="tile-title"><a class="tile-link" id="tl-dash" aria-labelledby="tl-dash tg-dash" href="results.html#gallery">Dashboards</a></h3>
           <p class="tile-meta">9 dashboards · names blurred</p>
-          <span class="tile-go" aria-hidden="true">Open the gallery →</span>
+          <span class="tile-go" aria-hidden="true"><span id="tg-dash">Open the gallery</span> →</span>
         </div>
       </article>
 
       <article class="tile tile--services card card--lift">
         <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></svg></span>
-        <h3 class="tile-title"><a class="tile-link" href="services.html"><span data-vt="vt-services">Four growth levers. <em>One operator.</em></span></a></h3>
+        <h3 class="tile-title"><a class="tile-link" id="tl-services" aria-labelledby="tl-services tg-services" href="services.html"><span data-vt="vt-services">Four growth levers. <em>One operator.</em></span></a></h3>
         <ul class="tile-chips">
           <li class="chip chip--accent">Paid media</li>
           <li class="chip chip--blue">E-commerce</li>
           <li class="chip chip--win">Social &amp; creators</li>
           <li class="chip">AI &amp; search</li>
         </ul>
-        <span class="tile-go" aria-hidden="true">How I work →</span>
+        <span class="tile-go" aria-hidden="true"><span id="tg-services">How I work</span> →</span>
       </article>
 
       <article class="tile tile--exp card card--lift">
         <span class="chip chip--win">Current</span>
-        <h3 class="tile-title"><a class="tile-link" href="about.html#experience">Experience</a></h3>
+        <h3 class="tile-title"><a class="tile-link" id="tl-exp" aria-labelledby="tl-exp tg-exp" href="about.html#experience">Experience</a></h3>
         <p class="tile-label">Now: Digital Marketing Manager · SKYHEGLOBAL</p>
         <p class="tile-meta">3+ years · PH · SG · USA</p>
-        <span class="tile-go" aria-hidden="true">Where the numbers came from →</span>
+        <span class="tile-go" aria-hidden="true"><span id="tg-exp">Where the numbers came from</span> →</span>
       </article>
 
       <article class="tile tile--contact card">
         <div>
           <p class="eyebrow">Let's talk</p>
-          <h3 class="tile-title tile-title--xl"><a class="tile-link" href="contact.html"><span data-vt="vt-contact">Your next winning ad is <em>one call away.</em></span></a></h3>
+          <h3 class="tile-title tile-title--xl"><a class="tile-link" id="tl-contact" aria-labelledby="tl-contact tg-contact" href="contact.html"><span data-vt="vt-contact">Your next winning ad is <em>one call away.</em></span></a></h3>
         </div>
-        <span class="btn btn--primary" aria-hidden="true">Book a strategy call →</span>
+        <span class="btn btn--primary" aria-hidden="true"><span id="tg-contact">Book a strategy call</span> →</span>
       </article>
     </div>
   </div>
@@ -394,7 +401,7 @@
     <div class="footer-col">
       <p class="footer-h">Contact</p>
       <ul class="footer-contact">
-        <li><a href="mailto:piramocarlgabriel@gmail.com">piramocarlgabriel@gmail.com</a></li>
+        <li><a href="mailto:piramocarlgabriel@gmail.com"><span>piramocarlgabriel@<wbr>gmail.com</span></a></li>
         <li><a href="tel:+639261730117">+63 926 173 0117</a></li>
         <li><a href="assets/Carl-Gabriel-Piramo-CV.pdf" download>Download CV (PDF)</a></li>
       </ul>

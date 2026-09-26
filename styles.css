@@ -745,7 +745,7 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
   display:grid;grid-auto-flow:column;grid-auto-columns:clamp(150px,18vw,200px);gap:14px;
   overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
   padding:10px 4px 28px;margin-bottom:-10px;
-  scroll-snap-type:x proximity;scroll-padding-inline:4px;
+  scroll-snap-type:x mandatory;scroll-padding-inline:4px;
   scrollbar-width:thin;scrollbar-color:var(--edge) transparent;
 }
 .still{
@@ -766,6 +766,19 @@ a.still:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 }
 a.still:hover .still-zoom,a.still:focus-visible .still-zoom{opacity:1;transform:none}
 @media (hover:none){.still-zoom{opacity:1;transform:none}} /* touch: keep the zoom cue visible */
+@media (max-width:760px){
+  /* phones: fade the right edge so a clipped card reads as "swipe for more"; the end padding
+     lets the last card scroll clear of the 32px fade */
+  .reel-track,.stills-track{
+    padding-right:32px;
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);
+            mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);
+  }
+  /* a mask clips everything outside the border box, focus rings included: drop it while focus is inside.
+     Two rules on purpose: an engine without :has() drops only the second */
+  .reel-track:focus-visible,.stills-track:focus-visible{-webkit-mask-image:none;mask-image:none}
+  .reel-track:has(:focus-visible),.stills-track:has(:focus-visible){-webkit-mask-image:none;mask-image:none}
+}
 
 
 /* ============================================================
@@ -832,8 +845,9 @@ a.still:hover .still-zoom,a.still:focus-visible .still-zoom{opacity:1;transform:
 }
 .seg-btn[aria-pressed="true"] .gal-count{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.28);color:#fff}
 
-/* grid: singles 4:3 (3 per row ≥1000px, 2 below), wides span the full row at ~2.7:1 */
-.gal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row dense;gap:18px}
+/* grid: singles 4:3 (3 per row ≥1000px, 2 below), wides span the full row at ~2.7:1.
+   No `dense` packing: visual order must stay DOM (Tab, lightbox) order, so 2 columns may leave an empty cell */
+.gal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 @media (min-width:1000px){.gal-grid{grid-template-columns:repeat(3,minmax(0,1fr))}} /* wides still span the full row */
 .gal-item{
   display:block;overflow:hidden;border-radius:var(--r-lg);
@@ -1254,8 +1268,9 @@ html:has(.lightbox[open]),body.lb-open{overflow:hidden} /* scroll lock (html car
 .faq-mark::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .4s var(--ease-out)}
 .faq-q[aria-expanded="true"] .faq-mark{border-color:var(--accent);color:var(--accent);transform:rotate(180deg)}
 .faq-q[aria-expanded="true"] .faq-mark::after{transform:translate(-50%,-50%) rotate(0deg)}
-.faq-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
-.faq-item.is-open .faq-panel,.faq-panel.is-open{grid-template-rows:1fr}
+/* visibility keeps a closed answer out of the a11y tree; its delay lets the collapse finish first */
+.faq-panel{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .45s var(--ease),visibility 0s linear .45s}
+.faq-item.is-open .faq-panel,.faq-panel.is-open{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
 .faq-body{overflow:hidden;min-height:0}
 .faq-body p{
   padding:0 2px 24px;max-width:64ch;
@@ -1446,7 +1461,7 @@ a.ci-row:hover{border-color:rgba(var(--accent-rgb),.5);background:rgba(30,28,58,
   background:rgba(244,242,252,.03);border:1px solid var(--edge);
   transition:color .25s var(--ease),border-color .25s var(--ease),background-color .25s var(--ease),box-shadow .25s var(--ease);
 }
-.jumpnav a:hover{color:var(--text);border-color:var(--mute)}
+@media (hover:hover){.jumpnav a:hover{color:var(--text);border-color:var(--mute)}} /* touch keeps :hover on the last tapped chip */
 .jumpnav a[aria-current="location"]{
   color:#fff;border-color:transparent;
   background:linear-gradient(135deg,var(--accent-btn),var(--accent-btn-deep));
@@ -1458,6 +1473,12 @@ a.ci-row:hover{border-color:rgba(var(--accent-rgb),.5);background:rgba(30,28,58,
     -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);
             mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);
   }
+}
+@media (max-height:500px){
+  /* short viewports (landscape phones, 200%+ zoom): chips scroll away; only the nav sticks.
+     relative, not static, so z-index still applies; must follow 01's body.has-jump [id] (same specificity) */
+  .jumpnav{position:relative;top:auto}
+  body.has-jump [id]{scroll-margin-top:calc(var(--nav-h) + 16px)}
 }
 
 
@@ -1485,7 +1506,8 @@ a.ci-row:hover{border-color:rgba(var(--accent-rgb),.5);background:rgba(30,28,58,
 .tile--work .tile-title,.tile-title--xl{font-size:clamp(28px,3.4vw,44px)}
 .tile-link{color:inherit;text-decoration:none}
 .tile-link::after{content:'';position:absolute;inset:0;z-index:2;border-radius:inherit}
-.tile-link:focus-visible{outline:none}
+/* the ring moves from the link to the whole tile only where :has() can draw it; elsewhere the link keeps 01's ring */
+@supports selector(:has(*)){.tile-link:focus-visible{outline:none}}
 .tile:has(.tile-link:focus-visible){outline:2px solid var(--accent);outline-offset:4px}
 .tile-link [data-vt]{display:block} /* a named view-transition element must never fragment across lines */
 .tile-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
@@ -1498,7 +1520,9 @@ a.ci-row:hover{border-color:rgba(var(--accent-rgb),.5);background:rgba(30,28,58,
   font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);
   transition:transform .35s var(--ease-out),color .25s var(--ease);
 }
-.tile:hover .tile-go,.tile:has(.tile-link:focus-visible) .tile-go{transform:translateX(5px);color:var(--text)}
+/* separate rules: in a list, an engine without :has() would drop the hover nudge too */
+.tile:hover .tile-go{transform:translateX(5px);color:var(--text)}
+.tile:has(.tile-link:focus-visible) .tile-go{transform:translateX(5px);color:var(--text)}
 .tile-body{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;padding:26px 26px 24px}
 /* work and dashboards tiles: stretch the body over the whole tile so .tile-link::after (which
    takes .tile-body as its containing block) covers the full tap target, not just the copy strip */
@@ -1521,12 +1545,12 @@ a.ci-row:hover{border-color:rgba(var(--accent-rgb),.5);background:rgba(30,28,58,
 .tile--dash{justify-content:flex-end;padding:0}
 .tile-shot{position:absolute;inset:0;z-index:0;overflow:hidden;background:var(--bg-2)}
 .tile-shot img{width:100%;height:100%;object-fit:cover;object-position:top left;transform-origin:30% 20%;opacity:.85;transition:transform .7s var(--ease-out)}
-.tile-shot::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,11,30,.1) 20%,rgba(12,11,30,.94))}
+.tile-shot::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,11,30,.1) 20%,rgba(12,11,30,.94) 60%)} /* reaches full strength by the copy, so the 10.5px meta and go-link keep 4.5:1 */
 .tile--dash:hover .tile-shot img{transform:scale(1.06)}
 .tile--dash .tile-body{padding:22px}
 .tile--dash .tile-go{margin-top:0} /* .tile-go's margin-top:auto would otherwise push the title to the top of the stretched body */
 /* contact tile: the visual button is decoration, the whole tile is the link */
-.tile--contact .eyebrow{margin-bottom:10px}
+.tile--contact .eyebrow{margin-bottom:10px;color:var(--text)} /* --blue on the coral gradient falls short of 4.5:1 */
 .tile--contact .tile-title{max-width:22ch}
 .tile--contact .btn{position:relative;z-index:1;pointer-events:none}
 .tile--contact:hover .btn{box-shadow:0 16px 40px rgba(var(--accent-rgb),.48),inset 0 1px 0 rgba(255,255,255,.25)}
@@ -1603,13 +1627,18 @@ html{-webkit-tap-highlight-color:transparent} /* replaced by the :active states 
   .hero-social a:hover,.ci-social a:hover,.footer-social a:hover,.pager-prev:hover,.pager-next:hover,
   .tile:hover .tile-go,.tile--dash:hover .tile-shot img{transform:none}
 }
-/* press feedback, touch and mouse alike (iOS needs the no-op touchstart in main.js 22) */
+/* press feedback, touch and mouse alike (iOS needs the no-op touchstart in main.js 22);
+   every control that loses the tap highlight above gets one */
 .btn:active,.seg-btn:active,.jumpnav a:active,.pager a:active,a.ci-row:active,.faq-q:active,
 .nav-links a:active,.footer-links a:active,.gal-item:active,a.still:active,.vframe:active,
-.tile:has(.tile-link:active){
+.brand:active,.nav-toggle:active,.cta-dock:active,.to-top:active,.ticker-pause:active,.proof-to-gal:active,
+.lb-close:active,.lb-prev:active,.lb-next:active,.bento-video .vframe-toggle:active,
+.hero-social a:active,.ci-social a:active,.footer-social a:active,.footer-contact a:active{
   scale:.97 !important; /* the separate `scale` property composes with any transform (magnet offset, hover lift) instead of replacing it */
   transition:scale .12s var(--ease) !important;
 }
+/* its own rule: in the list above, an engine without :has() would drop every press state */
+.tile:has(.tile-link:active){scale:.97 !important;transition:scale .12s var(--ease) !important}
 
 
 /* ============================================================
@@ -1688,6 +1717,8 @@ body.loaded .d5{transition-delay:.5s}
   .faq-body p{opacity:1;transform:none}
   .glow{opacity:.1}
   .still-zoom,a.still:hover .still-zoom,.pager-prev:hover,.pager-next:hover,.tile:hover .tile-go,.tile--dash:hover .tile-shot img{transform:none}
-  :is(.btn,.seg-btn,.jumpnav a,.pager a,a.ci-row,.faq-q,.nav-links a,.footer-links a,.gal-item,a.still,.vframe):active,
-  .tile:has(.tile-link:active){transition:none !important}
+  :is(.btn,.seg-btn,.jumpnav a,.pager a,a.ci-row,.faq-q,.nav-links a,.footer-links a,.gal-item,a.still,.vframe,
+      .brand,.nav-toggle,.cta-dock,.to-top,.ticker-pause,.proof-to-gal,.lb-close,.lb-prev,.lb-next,.bento-video .vframe-toggle,
+      .hero-social a,.ci-social a,.footer-social a,.footer-contact a):active{transition:none !important}
+  .tile:has(.tile-link:active){transition:none !important} /* same (0,3,0) as the press rule in 27, wins on source order */
 }
