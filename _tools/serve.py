@@ -42,13 +42,24 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         segs = [s for s in rel.split('/') if s]
         if any(s.startswith(('_', '.')) for s in segs):
             return 'missing'
-        fs = os.path.join(ROOT, *segs)
+        fs = ROOT
+        for s in segs:
+            # Exact-name match: os.path.isdir/isfile would also accept other
+            # cases, trailing dots/spaces, NTFS stream suffixes and backslash
+            # segments on Windows; GitHub Pages is case-sensitive and has none
+            # of those quirks.
+            try:
+                if s not in os.listdir(fs):
+                    return 'missing'
+            except OSError:
+                return 'missing'
+            fs = os.path.join(fs, s)
         if os.path.isdir(fs):
             if not rel.endswith('/'):
                 return 'redirect:' + PREFIX + rel + '/'
             if not os.path.isfile(os.path.join(fs, 'index.html')):
                 return 'missing'
-        elif not os.path.isfile(fs):
+        elif rel.endswith('/') or not os.path.isfile(fs):
             return 'missing'
         self.path = rel + ('?' + parts.query if parts.query else '')
         return 'ok'
