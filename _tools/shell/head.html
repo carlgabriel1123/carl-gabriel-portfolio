@@ -1,0 +1,51 @@
+<meta name="theme-color" content="#12112A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Schibsted+Grotesk:wght@400;500;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=10">
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"selector_matches":"a[href$='.html'], a[href='./']"},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}
+</script>
+<script>
+/* Page transitions (styles.css 26): a title morphs between a Home tile and a page <h1>.
+   It is named only while on screen and only when the other side of the navigation is
+   Home, and never when the navigation lands on a #section. Arriving through a
+   transition skips the banner's own load choreography (.vt-arrive). */
+(function () {
+  var TARGETS = { 'work.html': 1, 'results.html': 1, 'services.html': 1, 'contact.html': 1 };
+  function file(url) {
+    var p;
+    try { p = new URL(url, location.href).pathname; } catch (e) { return ''; }
+    return p.slice(p.lastIndexOf('/') + 1) || 'index.html';
+  }
+  function hash(url) { try { return new URL(url, location.href).hash; } catch (e) { return ''; } }
+  function visible(el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; }
+  function reset() {
+    var named = document.querySelectorAll('[data-vt]');
+    for (var i = 0; i < named.length; i++) named[i].style.viewTransitionName = '';
+  }
+  function shared(other) {
+    var here = file(location.href), there = file(other), el = null;
+    if (here === 'index.html' && TARGETS[there]) el = document.querySelector('[data-vt="vt-' + there.replace('.html', '') + '"]');
+    else if (there === 'index.html' && TARGETS[here]) el = document.querySelector('.page-hero [data-vt]');
+    return el && visible(el) ? el : null;
+  }
+  function name(other) {
+    reset();
+    var el = other ? shared(other) : null;
+    if (el) el.style.viewTransitionName = el.getAttribute('data-vt');
+  }
+  addEventListener('pageswap', function (e) {
+    if (!e.viewTransition) return;
+    var to = e.activation && e.activation.entry ? e.activation.entry.url : null;
+    name(to && !hash(to) ? to : null);
+  });
+  addEventListener('pagereveal', function (e) {
+    if (!e.viewTransition) return;
+    document.documentElement.classList.add('vt-arrive');
+    var nav = window.navigation;
+    var from = nav && nav.activation && nav.activation.from ? nav.activation.from.url : null;
+    name(location.hash ? null : from);
+  });
+})();
+</script>
