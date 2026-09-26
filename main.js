@@ -10,13 +10,14 @@
    06 rotator          .rotator .rot-item cycling
    07 hero parallax    [data-depth] layers follow the pointer
    08 cards            spotlight vars, 3D tilt, magnetic buttons
-   09 videos           play while visible, progress bar, tap to toggle
+   09 videos           play while visible, progress bar, tap/keyboard toggle
    10 work tabs        filter .work-group by data-filter
    11 timeline         --tl-p progress + .lit nodes
    12 faq              accordion toggles
    13 contact form     validate + mailto
    14 dock / to-top    floating UI + footer year
    15 anchors          same-page links scroll smoothly (reduced-motion aware)
+   16 ticker           user-operable pause for the brand marquee
    All features are guarded: a missing element never throws.
    ============================================================ */
 (function () {
@@ -37,16 +38,26 @@
   var raf = window.requestAnimationFrame
     ? function (fn) { return window.requestAnimationFrame(fn); }
     : function (fn) { return setTimeout(fn, 16); };
+  var caf = window.requestAnimationFrame
+    ? function (id) { window.cancelAnimationFrame(id); }
+    : function (id) { clearTimeout(id); };
 
-  /* rAF-throttle any handler: the latest arguments win, one call per frame */
+  /* rAF-throttle any handler: the latest arguments win, one call per frame.
+     wrapped.cancel() drops a queued frame so a synchronous reset (pointerleave)
+     is never overwritten by a stale pointermove that landed in the same frame. */
   function throttleRaf(fn) {
-    var pending = false, lastArgs = null, lastThis = null;
-    return function () {
+    var pending = false, id = null, lastArgs = null, lastThis = null;
+    function wrapped() {
       lastArgs = arguments; lastThis = this;
       if (pending) return;
       pending = true;
-      raf(function () { pending = false; fn.apply(lastThis, lastArgs); });
+      id = raf(function () { id = null; pending = false; fn.apply(lastThis, lastArgs); });
+    }
+    wrapped.cancel = function () {
+      if (id !== null) { caf(id); id = null; }
+      pending = false;
     };
+    return wrapped;
   }
 
   /* One passive scroll/resize listener, one rAF per frame, many subscribers */
@@ -85,14 +96,11 @@
   function initLoaded() {
     var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
     var timeout = new Promise(function (resolve) { setTimeout(resolve, 800); });
-    Promise.race([fontsReady, timeout]).then(function () {
-      raf(function () {
-        document.body.classList.add('loaded');
-        $$('.hero [data-split]').forEach(function (el) { el.classList.add('in'); });
-      });
-    }).catch(function () {
+    function go() {
       document.body.classList.add('loaded');
-    });
+      $$('.hero [data-split]').forEach(function (el) { el.classList.add('in'); });
+    }
+    Promise.race([fontsReady, timeout]).then(function () { raf(go); }).catch(go);
   }
 
   /* ------------------------------------------------------------
@@ -154,10 +162,13 @@
     $$('[data-stagger]').forEach(function (parent) {
       var step = parseFloat(parent.getAttribute('data-stagger')) || 0;
       var extra = parent.getAttribute('data-stagger-class');
-      Array.prototype.slice.call(parent.children).forEach(function (child, i) {
+      var i = 0;
+      Array.prototype.slice.call(parent.children).forEach(function (child) {
+        if (child.getAttribute('aria-hidden') === 'true') return; // e.g. .steps-line: decorative, not a stagger item
         child.classList.add('reveal');
         if (extra) child.classList.add(extra);
         child.setAttribute('data-delay', String(Math.round(i * step)));
+        i++;
       });
       var isTrack = (parent.matches && parent.matches(TRACK_SEL)) || parent.scrollWidth > parent.clientWidth + 1;
       if (isTrack) tracks.push(parent);
@@ -268,14 +279,42 @@
 
     if (reduceMotion || !hasIO) { vals.forEach(run); return; }
 
+    // never show the final number before the count: zero it up front (only on the animated path)
+    vals.forEach(function (el) {
+      var raw = el.getAttribute('data-count');
+      if (!isNaN(parseFloat(raw))) el.textContent = (0).toFixed(decimalsOf(raw));
+    });
+    function settle(el) {
+      var raw = el.getAttribute('data-count');
+      var t = parseFloat(raw);
+      if (!isNaN(t)) el.textContent = t.toFixed(decimalsOf(raw));
+    }
+
+    var pending = vals.slice();
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         io.unobserve(entry.target);
-        run(entry.target);
+        pending = pending.filter(function (v) { return v !== entry.target; });
+        // start once the host card's staggered fade has begun so the count is seen from 0
+        var host = entry.target.closest ? entry.target.closest('[data-delay]') : null;
+        var wait = 0;
+        if (host && !host.classList.contains('in')) {
+          wait = (parseInt(host.getAttribute('data-delay'), 10) || 0) + 120;
+        }
+        setTimeout(function () { run(entry.target); }, wait);
       });
     }, { threshold: 0.5 });
     vals.forEach(function (el) { io.observe(el); });
+
+    // Safety net: a counter scrolled past without ever intersecting shows its final value
+    scrollBus.add(function () {
+      if (!pending.length) return;
+      pending = pending.filter(function (el) {
+        if (el.getBoundingClientRect().bottom < 0) { io.unobserve(el); settle(el); return false; }
+        return true;
+      });
+    });
   }
 
   /* ------------------------------------------------------------
@@ -450,6 +489,7 @@
     }, { passive: true });
 
     hero.addEventListener('pointerleave', function () {
+      move.cancel();
       layers.forEach(function (l) { l.el.style.transform = ''; });
     });
   }
@@ -478,6 +518,7 @@
       });
       card.addEventListener('pointermove', onMove, { passive: true });
       card.addEventListener('pointerleave', function () {
+        onMove.cancel();
         if (isTilt) card.style.transform = '';
       });
     });
@@ -492,7 +533,7 @@
         btn.style.transform = 'translate(' + (dx * 0.18).toFixed(2) + 'px,' + (dy * 0.18).toFixed(2) + 'px)';
       });
       btn.addEventListener('pointermove', onMove, { passive: true });
-      btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
+      btn.addEventListener('pointerleave', function () { onMove.cancel(); btn.style.transform = ''; });
     });
   }
 
@@ -514,7 +555,7 @@
       io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           var v = entry.target;
-          if (entry.isIntersecting) play(v); else v.pause();
+          if (entry.isIntersecting) { if (!v.userPaused) play(v); } else v.pause();
         });
       }, { threshold: 0.35 });
     }
@@ -527,9 +568,16 @@
           if (v.duration) bar.style.transform = 'scaleX(' + (v.currentTime / v.duration).toFixed(4) + ')';
         });
       }
-      v.addEventListener('click', function () {
-        if (v.paused) play(v); else v.pause();
-      });
+      // .vframe-toggle is a real <button> over the frame (Enter/Space work natively); aria-pressed mirrors playback
+      var toggle = frame ? $('.vframe-toggle', frame) : null;
+      function sync() { if (toggle) toggle.setAttribute('aria-pressed', v.paused ? 'false' : 'true'); }
+      v.addEventListener('play', sync);
+      v.addEventListener('pause', sync);
+      function userToggle() {
+        if (v.paused) { v.userPaused = false; play(v); }
+        else { v.userPaused = true; v.pause(); }
+      }
+      if (toggle) toggle.addEventListener('click', userToggle); else v.addEventListener('click', userToggle);
       if (io) io.observe(v);
     });
   }
@@ -615,15 +663,27 @@
     var note = $('.cf-note', form);
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+    var FIELDS = ['name', 'email', 'message'];
+
     function field(name) { return form.elements[name] || null; }
     function value(name) { var f = field(name); return f ? String(f.value || '').trim() : ''; }
     function say(msg, ok) {
       if (!note) return;
       note.textContent = msg;
-      note.style.color = ok ? 'var(--win)' : 'var(--accent)';
-      note.classList.toggle('is-ok', !!ok);
+      note.classList.toggle('is-ok', !!ok);   // .is-ok / .is-error carry the colours
       note.classList.toggle('is-error', !ok);
     }
+    function clearInvalid(f) {
+      f.removeAttribute('aria-invalid');
+      f.removeAttribute('aria-describedby');
+    }
+    function clearAllInvalid() {
+      FIELDS.forEach(function (n) { var f = field(n); if (f) clearInvalid(f); });
+    }
+    FIELDS.forEach(function (n) {
+      var f = field(n);
+      if (f) f.addEventListener('input', function () { clearInvalid(f); });
+    });
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -637,7 +697,12 @@
       else if (!email || !EMAIL_RE.test(email)) problem = { f: field('email'), msg: 'Please add a valid email address.' };
       else if (!message) problem = { f: field('message'), msg: 'Tell me a little about what you need.' };
 
+      clearAllInvalid();
       if (problem) {
+        if (problem.f) {
+          problem.f.setAttribute('aria-invalid', 'true');
+          if (note && note.id) problem.f.setAttribute('aria-describedby', note.id);
+        }
         say(problem.msg, false);
         if (problem.f && problem.f.focus) problem.f.focus();
         return;
@@ -661,13 +726,29 @@
   function initFloatingUi() {
     var dock = $('.cta-dock');
     var hero = $('#top');
+    var contact = $('#contact');
     if (dock && hero) {
+      // hidden while the hero is on screen, and while the user is already inside #contact (its own target)
+      var heroOn = true, contactOn = false;
+      var sync = function () { dock.classList.toggle('show', !heroOn && !contactOn); };
       if (hasIO) {
         new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) { dock.classList.toggle('show', !entry.isIntersecting); });
+          heroOn = entries[entries.length - 1].isIntersecting; sync();
         }, { threshold: 0 }).observe(hero);
+        if (contact) {
+          new IntersectionObserver(function (entries) {
+            contactOn = entries[entries.length - 1].isIntersecting; sync();
+          }, { threshold: 0.15 }).observe(contact);
+        }
       } else {
-        scrollBus.add(function () { dock.classList.toggle('show', hero.getBoundingClientRect().bottom <= 0); });
+        scrollBus.add(function () {
+          heroOn = hero.getBoundingClientRect().bottom > 0;
+          if (contact) {
+            var r = contact.getBoundingClientRect();
+            contactOn = r.top < window.innerHeight * 0.85 && r.bottom > window.innerHeight * 0.15;
+          }
+          sync();
+        });
       }
     }
 
@@ -717,6 +798,19 @@
   }
 
   /* ------------------------------------------------------------
+     16 TICKER PAUSE
+     ------------------------------------------------------------ */
+  function initTicker() {
+    var ticker = $('.ticker');
+    var btn = ticker ? $('.ticker-pause', ticker) : null;
+    if (!ticker || !btn) return;
+    btn.addEventListener('click', function () {
+      var paused = ticker.classList.toggle('ticker--paused');
+      btn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+    });
+  }
+
+  /* ------------------------------------------------------------
      BOOT
      ------------------------------------------------------------ */
   function init() {
@@ -735,6 +829,7 @@
     feature('contactForm', initContactForm);
     feature('floatingUi', initFloatingUi);
     feature('anchors', initAnchors);
+    feature('ticker', initTicker);
     scrollBus.request();
   }
 

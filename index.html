@@ -13,6 +13,12 @@
 <meta property="og:image" content="https://carlgabriel1123.github.io/carl-gabriel-portfolio/assets/media/portrait-carl.png">
 <meta property="og:site_name" content="Carl Gabriel Piramo">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Carl Gabriel Piramo — Digital Marketing &amp; E-commerce Growth Manager">
+<meta name="twitter:description" content="Meta media buying, Shopify growth, UGC creator programs and AI marketing automation — one operator, one feedback loop. US$60M+ Facebook Ads revenue, 1B+ views, 8.71× peak ROAS.">
+<meta name="twitter:image" content="https://carlgabriel1123.github.io/carl-gabriel-portfolio/assets/media/portrait-carl.png">
+<meta name="twitter:image:alt" content="Portrait of Carl Gabriel Piramo">
+<meta property="og:image:alt" content="Portrait of Carl Gabriel Piramo">
+<link rel="canonical" href="https://carlgabriel1123.github.io/carl-gabriel-portfolio/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Schibsted+Grotesk:wght@400;500;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -69,7 +75,8 @@
       <h1 class="hero-name snap-in d1" data-split>Carl Gabriel <span class="ac">Piramo</span></h1>
       <p class="hero-role snap-in d2">Digital Marketing &amp; <span>E-commerce Growth</span> Manager</p>
       <p class="hero-run snap-in d2"><b>I run</b>
-        <span class="rotator" aria-live="polite">
+        <span class="sr-only">Meta media buying, Shopify growth &amp; CRO, UGC &amp; creator programs, AI marketing automation and marketplace launches</span>
+        <span class="rotator" aria-hidden="true">
           <span class="rot-item is-on">Meta media buying</span>
           <span class="rot-item">Shopify growth &amp; CRO</span>
           <span class="rot-item">UGC &amp; creator programs</span>
@@ -125,8 +132,8 @@
       </div>
     </div>
 
-    <div class="hero-social snap-in d5" aria-label="Follow me">
-      <span class="hs-label">Follow me</span>
+    <div class="hero-social snap-in d5" role="group" aria-labelledby="hsLabel">
+      <span class="hs-label" id="hsLabel">Follow me</span>
       <span class="hs-line" aria-hidden="true"></span>
       <a href="https://www.instagram.com/crl.gbb" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16Zm0 1.44c-3.14 0-3.51.01-4.75.07-2.5.11-3.5 1.13-3.61 3.61-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.11 2.48 1.11 3.5 3.61 3.61 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c2.5-.11 3.5-1.13 3.61-3.61.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.11-2.48-1.11-3.5-3.61-3.61-1.24-.06-1.61-.07-4.75-.07Zm0 3.68a4.72 4.72 0 1 1 0 9.44 4.72 4.72 0 0 1 0-9.44Zm0 7.79a3.07 3.07 0 1 0 0-6.14 3.07 3.07 0 0 0 0 6.14Zm6.01-7.98a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg>
@@ -150,6 +157,7 @@
      BRAND TICKER
      ============================================================ -->
 <section class="ticker" aria-label="Brands I have worked with">
+  <div class="ticker-viewport">
   <div class="ticker-track">
     <ul class="ticker-list">
       <li>SUPR<span class="ticker-tag">Singapore</span></li>
@@ -170,6 +178,10 @@
       <li>Skyheglobal<span class="ticker-tag">Manila</span></li>
     </ul>
   </div>
+  </div>
+  <button class="ticker-pause" type="button" aria-pressed="false" aria-label="Pause brand ticker">
+    <span class="ticker-pause__on">Pause</span><span class="ticker-pause__off">Play</span>
+  </button>
 </section>
 
 <!-- ============================================================
@@ -268,6 +280,7 @@
     </div>
 
     <figure class="loop reveal">
+      <div class="loop-scroll">
       <svg viewBox="0 0 680 160" role="img" aria-label="The growth loop: creative feeds ads, ads feed the store, store data feeds the next creative">
         <defs>
           <marker id="loopArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
@@ -309,6 +322,7 @@
           </circle>
         </g>
       </svg>
+      </div>
       <figcaption>The loop most brands split across three vendors. <strong>I run the whole thing.</strong></figcaption>
     </figure>
   </div>
@@ -332,45 +346,53 @@
     </div>
 
     <div class="work-group" data-group="video">
-      <div class="reel-track" data-stagger="70">
+      <div class="reel-track" data-stagger="70" tabindex="0" role="region" aria-label="Video reel - scrolls horizontally">
         <figure class="vframe">
           <span class="chip chip--accent">UGC</span>
-          <video src="assets/video/reel-02-ugc-supplement.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-02-ugc-supplement.jpg" aria-label="UGC-style supplement ad"></video>
+          <video src="assets/video/reel-02-ugc-supplement.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-02-ugc-supplement.jpg" aria-label="UGC-style beauty product ad"></video>
+          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: UGC-style beauty product ad"></button>
           <span class="vframe-bar" aria-hidden="true"><i></i></span>
         </figure>
         <figure class="vframe">
           <span class="chip chip--accent">Offer promo</span>
           <video src="assets/video/reel-03-offer-promo.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-03-offer-promo.jpg" aria-label="New collection offer promo edit"></video>
+          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: New collection offer promo edit"></button>
           <span class="vframe-bar" aria-hidden="true"><i></i></span>
         </figure>
         <figure class="vframe">
           <span class="chip chip--accent">GRWM</span>
           <video src="assets/video/reel-04-grwm.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-04-grwm.jpg" aria-label="Get-ready-with-me beauty video"></video>
+          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Get-ready-with-me beauty video"></button>
           <span class="vframe-bar" aria-hidden="true"><i></i></span>
         </figure>
         <figure class="vframe">
           <span class="chip chip--accent">Product demo</span>
-          <video src="assets/video/reel-05-product-demo.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-05-product-demo.jpg" aria-label="Skincare product demo close-up"></video>
+          <video src="assets/video/reel-05-product-demo.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-05-product-demo.jpg" aria-label="Beauty product demo close-up"></video>
+          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Beauty product demo close-up"></button>
           <span class="vframe-bar" aria-hidden="true"><i></i></span>
         </figure>
         <figure class="vframe">
           <span class="chip chip--accent">Mini vlog</span>
           <video src="assets/video/reel-01-mini-vlog.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-01-mini-vlog.jpg" aria-label="Mini vlog lifestyle edit"></video>
+          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Mini vlog lifestyle edit"></button>
           <span class="vframe-bar" aria-hidden="true"><i></i></span>
         </figure>
         <figure class="vframe">
           <span class="chip chip--accent">Brand film</span>
           <video src="assets/video/reel-07-brand-film.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-07-brand-film.jpg" aria-label="Fashion brand film"></video>
+          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Fashion brand film"></button>
           <span class="vframe-bar" aria-hidden="true"><i></i></span>
         </figure>
         <figure class="vframe">
           <span class="chip chip--accent">Fashion edit</span>
           <video src="assets/video/reel-06-fashion-edit.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-06-fashion-edit.jpg" aria-label="Black and white fashion edit"></video>
+          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Black and white fashion edit"></button>
           <span class="vframe-bar" aria-hidden="true"><i></i></span>
         </figure>
         <figure class="vframe">
           <span class="chip chip--accent">Style edit</span>
           <video src="assets/video/reel-08-style-edit.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-08-style-edit.jpg" aria-label="Street style edit"></video>
+          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Street style edit"></button>
           <span class="vframe-bar" aria-hidden="true"><i></i></span>
         </figure>
       </div>
@@ -379,17 +401,17 @@
     <div class="work-group stills" data-group="static">
       <h3 class="reveal">Static creatives</h3>
       <p class="reveal">Posts and product graphics that keep a brand's feed selling between videos.</p>
-      <div class="stills-track" data-stagger="50" data-stagger-class="reveal--pop">
-        <figure class="still"><img src="assets/media/still-01.png" alt="Static creative 1" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-02.png" alt="Static creative 2" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-03.png" alt="Static creative 3" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-04.png" alt="Static creative 4" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-05.png" alt="Static creative 5" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-06.png" alt="Static creative 6" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-07.png" alt="Static creative 7" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-08.png" alt="Static creative 8" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-09.png" alt="Static creative 9" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-10.png" alt="Static creative 10" loading="lazy" width="400" height="400"></figure>
+      <div class="stills-track" data-stagger="50" data-stagger-class="reveal--pop" tabindex="0" role="region" aria-label="Static creatives - scrolls horizontally">
+        <figure class="still"><img src="assets/media/still-01.png" alt="Sunscreen ad - blue tube in a water splash with 12-hour UVA/UVB protection callouts" loading="lazy" width="400" height="400"></figure>
+        <figure class="still"><img src="assets/media/still-02.png" alt="Vitamin C serum product-benefits graphic - dropper bottle with revitalizing, brightening, hydrating and plumping callouts" loading="lazy" width="400" height="400"></figure>
+        <figure class="still"><img src="assets/media/still-03.png" alt="Skin care online shopping day ad - three bottles on a podium with 50% off pre-order offer" loading="lazy" width="400" height="400"></figure>
+        <figure class="still"><img src="assets/media/still-04.png" alt="Beauty skin care serum ad on orange background with tropical leaves and benefit bubbles" loading="lazy" width="400" height="400"></figure>
+        <figure class="still"><img src="assets/media/still-05.png" alt="New serum launch graphic - gold serum bottle on a stone with pure-ingredient callouts" loading="lazy" width="400" height="400"></figure>
+        <figure class="still"><img src="assets/media/still-06.png" alt="Pink serum dropper ad with zero irritants, fragrance-free, colorant-free and all-skin-types badges" loading="lazy" width="400" height="400"></figure>
+        <figure class="still"><img src="assets/media/still-07.png" alt="Summer sale collection ad - buy one get one on cleansing foam and beauty lotion" loading="lazy" width="400" height="400"></figure>
+        <figure class="still"><img src="assets/media/still-08.png" alt="Beauty skin care ad - three white cream jars on a podium with shop now button" loading="lazy" width="400" height="400"></figure>
+        <figure class="still"><img src="assets/media/still-09.png" alt="Product features graphic - skincare set with fast absorption, natural ingredients and non-clogging callouts" loading="lazy" width="400" height="400"></figure>
+        <figure class="still"><img src="assets/media/still-10.png" alt="Beauty skin care ad - green serum bottle on a plinth with palm leaves and benefit callouts" loading="lazy" width="400" height="400"></figure>
       </div>
     </div>
   </div>
@@ -516,7 +538,7 @@
     <div class="section-head">
       <p class="eyebrow reveal">Experience</p>
       <h2 class="hook" data-split>Where the numbers <em>came from.</em></h2>
-      <p class="lede reveal">Three years across paid media, Shopify growth and creator programs — for brands in the Philippines, Singapore and the USA.</p>
+      <p class="lede reveal">3+ years across paid media, Shopify growth and creator programs — for brands in the Philippines, Singapore and the USA.</p>
     </div>
 
     <div class="timeline">
@@ -689,7 +711,7 @@
     <div class="edge-grid">
       <div class="edge-copy reveal reveal--left">
         <p>When your strategist, your media buyer, your creative team and your Shopify developer are four different vendors, feedback dies in a Slack thread. The ad account says hook #3 is winning; the next batch of creative never hears about it. The product page leaks half the traffic; nobody's job is to notice.</p>
-        <p>I've sat inside that machine — <strong>managing 300 UGC creators and brand operations for Goli Nutrition</strong> inside a large-scale creator and performance-marketing ecosystem, working across Meta tools, analytics dashboards and content systems every day.</p>
+        <p>I've sat inside that machine — <strong>supporting brand, store and creator operations for Goli Nutrition</strong> inside a large-scale creator and performance-marketing ecosystem, and managing 300 UGC creators across campaigns that passed 1B+ views.</p>
         <p>Now I run the whole loop myself. <strong>Every metric I see in Ads Manager shapes the next move — in the funnel, the budget, the creative and the store.</strong></p>
         <ul class="pains" data-stagger="80">
           <li>Your creative testing is random</li>
@@ -700,12 +722,12 @@
       </div>
       <div class="ops-stack reveal reveal--right">
         <figure>
-          <img src="assets/media/ops-01.png" alt="Creator and campaign operations tracker" loading="lazy">
-          <figcaption>Real operations — creator &amp; campaign systems I've run</figcaption>
+          <img src="assets/media/ops-02.png" alt="Meta Business Suite — scheduled posts queue" loading="lazy">
+          <figcaption>Real operations — content &amp; campaign systems I've run</figcaption>
         </figure>
         <figure>
-          <img src="assets/media/ops-04.png" alt="Performance tracking dashboard" loading="lazy">
-          <figcaption>Performance tracking, daily</figcaption>
+          <img src="assets/media/ops-06.png" alt="Content planner spreadsheet with dates, creatives and captions" loading="lazy">
+          <figcaption>Content planning, daily</figcaption>
         </figure>
       </div>
     </div>
@@ -797,7 +819,7 @@
         <h2 class="hook" data-split>Carl Gabriel <em>Piramo.</em></h2>
         <div class="about-text reveal">
           <p>I'm a digital marketing and e-commerce manager with 3+ years across paid media, Shopify growth and creator programs for local and international brands. I lead campaign strategy, store optimization and affiliate teams, with brand experience across the Philippines, Singapore and the USA.</p>
-          <p>I came up inside large creator and performance-marketing teams — supporting brand, store and creator operations for Goli Nutrition, managing 300 UGC creators and campaigns that passed 1B+ views. Today I lead digital marketing at Skyheglobal for <strong>Goli PH, Biolane PH and MaryRuth's PH</strong>, reporting directly to the CEO and running the e-commerce and affiliate teams behind three Shopify stores.</p>
+          <p>I came up inside large creator and performance-marketing teams, Goli Nutrition among them, and have managed 300 UGC creators across campaigns that passed 1B+ views. Today I lead digital marketing at Skyheglobal for <strong>Goli PH, Biolane PH and MaryRuth's PH</strong>, reporting directly to the CEO and running the e-commerce and affiliate teams behind three Shopify stores.</p>
           <p>The Computer Science degree is the quiet advantage. I build n8n automations for reporting and content ops, wrote an AI SEO agent that audits and fixes stores through the Shopify Admin API, and produce AI video and imagery in-house. <strong>The marketing brain leads. The code just means I never wait on anyone to execute.</strong></p>
         </div>
         <ul class="about-facts mono-line reveal">
@@ -807,7 +829,7 @@
         </ul>
         <div class="skills">
           <div class="skill-group">
-            <h4>Marketing &amp; commerce</h4>
+            <h3>Marketing &amp; commerce</h3>
             <ul class="chips" data-stagger="35" data-stagger-class="reveal--pop">
               <li class="chip">Meta Ads Manager</li>
               <li class="chip">Business Suite</li>
@@ -821,7 +843,7 @@
             </ul>
           </div>
           <div class="skill-group">
-            <h4>Creative &amp; automation</h4>
+            <h3>Creative &amp; automation</h3>
             <ul class="chips" data-stagger="35" data-stagger-class="reveal--pop">
               <li class="chip">n8n</li>
               <li class="chip">Claude</li>
@@ -833,7 +855,7 @@
             </ul>
           </div>
           <div class="skill-group">
-            <h4>Technical</h4>
+            <h3>Technical</h3>
             <ul class="chips" data-stagger="35" data-stagger-class="reveal--pop">
               <li class="chip">Python</li>
               <li class="chip">HTML · CSS · JavaScript</li>
@@ -926,7 +948,7 @@
         </h3>
         <div class="faq-panel" id="faq-p-4" role="region" aria-labelledby="faq-q-4">
           <div class="faq-body">
-            <p>I work best with Shopify and marketplace brands that already have a product selling and want a tighter creative-and-ads engine behind it. I've run growth for wellness, baby care, sports nutrition, skincare and automotive brands across the Philippines, Singapore and the USA. Not sure you're a fit? Book the call and I'll tell you straight.</p>
+            <p>I work best with Shopify and marketplace brands that already have a product selling and want a tighter creative-and-ads engine behind it. I've run growth for wellness supplements, baby care, sports nutrition, nasal strips and automotive brands across the Philippines, Singapore and the USA. Not sure you're a fit? Book the call and I'll tell you straight.</p>
           </div>
         </div>
       </div>
@@ -976,7 +998,7 @@
           <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg></span>
           <span class="ci-text"><b>Résumé</b>Download CV (PDF)</span>
         </a>
-        <div class="ci-social">
+        <div class="ci-social" role="group" aria-label="Social links">
           <a href="https://www.instagram.com/crl.gbb" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16Zm0 1.44c-3.14 0-3.51.01-4.75.07-2.5.11-3.5 1.13-3.61 3.61-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.11 2.48 1.11 3.5 3.61 3.61 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c2.5-.11 3.5-1.13 3.61-3.61.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.11-2.48-1.11-3.5-3.61-3.61-1.24-.06-1.61-.07-4.75-.07Zm0 3.68a4.72 4.72 0 1 1 0 9.44 4.72 4.72 0 0 1 0-9.44Zm0 7.79a3.07 3.07 0 1 0 0-6.14 3.07 3.07 0 0 0 0 6.14Zm6.01-7.98a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg>
           </a>
@@ -986,8 +1008,8 @@
         </div>
       </div>
 
-      <form class="contact-form card reveal reveal--right" id="contactForm" novalidate>
-        <p class="cf-title">Drop a line</p>
+      <form class="contact-form card reveal reveal--right" id="contactForm" novalidate aria-labelledby="cfTitle">
+        <h3 class="cf-title" id="cfTitle">Drop a line</h3>
         <div class="cf-row">
           <label>Your name
             <input type="text" name="name" autocomplete="name" placeholder="Jane Founder" required>
@@ -1003,7 +1025,7 @@
           <textarea name="message" rows="4" placeholder="A bit about your brand, your offers, and where growth is stuck." required></textarea>
         </label>
         <button type="submit" class="btn btn--primary">Send message</button>
-        <p class="cf-note" role="status" aria-live="polite"></p>
+        <p class="cf-note" id="cfNote" role="status" aria-live="polite"></p>
       </form>
     </div>
   </div>
