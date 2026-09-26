@@ -10,8 +10,8 @@ A page marks each block like this (markers at column 0, owned by this script):
   <!-- /shell:nav -->
 Blocks: head, nav, footer. Per page:
   - the nav link whose data-nav equals <body data-page> gets aria-current="page"
-  - 404.html gets every relative href/src made absolute (/carl-gabriel-portfolio/...),
-    because GitHub Pages serves it from whatever URL was missing
+  - 404.html gets every relative href/src made root-absolute (/...),
+    because the host serves it from whatever URL was missing
 """
 import os
 import re
@@ -21,7 +21,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHELL = os.path.join(ROOT, '_tools', 'shell')
 PAGES = ['index.html', 'work.html', 'results.html', 'services.html', 'about.html', 'contact.html', '404.html']
 BLOCKS = ['head', 'nav', 'footer']
-PREFIX = '/carl-gabriel-portfolio/'
+PREFIX = '/'  # site root on carlgabriel.vercel.app
 URL_ATTR = re.compile(r'\b(href|src)="([^"]*)"')
 
 

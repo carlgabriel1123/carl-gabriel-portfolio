@@ -4,10 +4,10 @@
   python _tools/check-links.py
 
 - relative href / src / poster -> the file exists (query and fragment stripped),
-  checked case-sensitively even on case-insensitive filesystems, like GitHub Pages
+  checked case-sensitively even on case-insensitive filesystems, like Vercel
 - "#id", "page.html#id", "./#id" -> the id exists on that page
-- 404.html's hrefs/srcs must be "#..." or absolute /carl-gabriel-portfolio/...,
-  since GitHub Pages serves 404.html at whatever URL was missing
+- 404.html's hrefs/srcs must be "#..." or root-absolute (/...), since the host
+  serves 404.html at whatever URL was missing
 - http(s):, mailto:, tel:, data: are external and skipped
 - every <loc> in sitemap.xml maps to an existing page
 Exit 1 listing every broken reference.
@@ -19,8 +19,8 @@ import sys
 from urllib.parse import urlsplit, unquote
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PREFIX = '/carl-gabriel-portfolio/'
-SITE = 'https://carlgabriel1123.github.io' + PREFIX
+PREFIX = '/'  # the site is served from the domain root (carlgabriel.vercel.app)
+SITE = 'https://carlgabriel.vercel.app/'
 PAGES = ['index.html', 'work.html', 'results.html', 'services.html', 'about.html', 'contact.html', '404.html']
 EXTERNAL = re.compile(r'^(?:https?:|mailto:|tel:|data:|javascript:)', re.I)
 
@@ -71,7 +71,7 @@ def resolve(page, url):
 
 
 def exists(rel):
-    """isfile, but case-sensitive like GitHub Pages, even on Windows."""
+    """isfile, but case-sensitive like Vercel, even on Windows."""
     cur = ROOT
     for part in rel.split('/'):
         if part not in os.listdir(cur):

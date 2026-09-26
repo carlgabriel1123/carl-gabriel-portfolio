@@ -29,6 +29,9 @@ ALLOW = {
     'view work ↓',             # hero button is now "View work →" linking to work.html
     'carl g. — back to top',   # brand link label is now "Carl G. — home"
 }
+ALLOW_URLS = {
+    'https://carlgabriel1123.github.io/carl-gabriel-portfolio/',  # canonical moved to https://carlgabriel.vercel.app/
+}
 TEXT_ATTRS = ('alt', 'aria-label', 'title', 'placeholder')
 URL_ATTRS = ('src', 'href', 'poster')
 
@@ -89,7 +92,7 @@ def compare(base, page_texts, urls):
             if not any(key in pt for pt in page_texts):
                 misses.append((kind, t))
     for u in base.urls:
-        if u.startswith('#') or u in seen:
+        if u.startswith('#') or u in seen or u in ALLOW_URLS:
             continue
         seen.add(u)
         if u not in urls:
@@ -128,7 +131,7 @@ def main(argv):
         return 0 if ok else 1
 
     misses = compare(base, page_texts, urls)
-    total = len(set(t.lower() for t in base.texts + base.attrs)) + len(set(u for u in base.urls if not u.startswith('#')))
+    total = len(set(t.lower() for t in base.texts + base.attrs)) + len(set(u for u in base.urls if not u.startswith('#') and u not in ALLOW_URLS))
     for kind, v in misses:
         print('MISSING %-4s %s' % (kind, v))
     print('%s: %d baseline items checked across %d page(s), %d missing'
