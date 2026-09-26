@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Schibsted+Grotesk:wght@400;500;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
 
@@ -50,8 +50,8 @@
         <li style="--i:0"><a href="#services">Services</a></li>
         <li style="--i:1"><a href="#work">Work</a></li>
         <li style="--i:2"><a href="#proof">Results</a></li>
-        <li style="--i:3"><a href="#experience">Experience</a></li>
-        <li style="--i:4"><a href="#process">Process</a></li>
+        <li style="--i:3"><a href="#gallery">Gallery</a></li>
+        <li style="--i:4"><a href="#experience">Experience</a></li>
         <li style="--i:5"><a href="#about">About</a></li>
         <li style="--i:6"><a href="#faq">FAQ</a></li>
       </ul>
@@ -339,10 +339,11 @@
       <p class="lede reveal">UGC-style spots, TikTok-native edits and AI-assisted video — built to hook in the first second and feed the campaigns I run. No waiting on someone else's creative.</p>
     </div>
 
-    <div class="work-tabs reveal" role="group" aria-label="Filter work">
-      <button class="work-tab is-active" type="button" data-filter="all" aria-pressed="true">All work</button>
-      <button class="work-tab" type="button" data-filter="video" aria-pressed="false">Video</button>
-      <button class="work-tab" type="button" data-filter="static" aria-pressed="false">Static</button>
+    <div class="work-tabs seg reveal" role="group" aria-label="Filter work">
+      <span class="seg-ind" aria-hidden="true"></span>
+      <button class="work-tab seg-btn is-active" type="button" data-filter="all" aria-pressed="true">All work</button>
+      <button class="work-tab seg-btn" type="button" data-filter="video" aria-pressed="false">Video</button>
+      <button class="work-tab seg-btn" type="button" data-filter="static" aria-pressed="false">Static</button>
     </div>
 
     <div class="work-group" data-group="video">
@@ -425,7 +426,7 @@
     <div class="section-head">
       <p class="eyebrow reveal">Proof</p>
       <h2 class="hook" data-split>Numbers from Ads Manager, <em>not a pitch deck.</em></h2>
-      <p class="lede reveal">Selected results from the accounts I've run, followed by the raw dashboards behind them.</p>
+      <p class="lede reveal">Selected results from the stores, marketplaces and ad accounts I've run. The raw dashboards are in the gallery below.</p>
     </div>
 
     <div class="result-grid" data-stagger="100">
@@ -455,77 +456,189 @@
       </article>
     </div>
 
-    <div class="num-block">
-      <h3 class="sub-head mono-line reveal">Creator views I've helped generate</h3>
-      <div class="num-grid" data-stagger="70">
-        <article class="stat stat--hl card card--lift">
-          <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></span>
-          <span class="stat-num"><span class="val" data-count="52">52</span><span class="suf">M+</span></span>
-          <span class="stat-label">Total views<i>Across 5 platforms · accounts shown below</i></span>
-        </article>
-        <article class="stat card card--lift">
-          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07Z"/></svg></span>
-          <span class="stat-num"><span class="val" data-count="32.9">32.9</span><span class="suf">M</span></span>
-          <span class="stat-label">TikTok views<i>Short-form video</i></span>
-        </article>
-        <article class="stat card card--lift">
-          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16Zm0 1.44c-3.14 0-3.51.01-4.75.07-2.5.11-3.5 1.13-3.61 3.61-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.11 2.48 1.11 3.5 3.61 3.61 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c2.5-.11 3.5-1.13 3.61-3.61.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.11-2.48-1.11-3.5-3.61-3.61-1.24-.06-1.61-.07-4.75-.07Zm0 3.68a4.72 4.72 0 1 1 0 9.44 4.72 4.72 0 0 1 0-9.44Zm0 7.79a3.07 3.07 0 1 0 0-6.14 3.07 3.07 0 0 0 0 6.14Zm6.01-7.98a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg></span>
-          <span class="stat-num"><span class="val" data-count="15.8">15.8</span><span class="suf">M</span></span>
-          <span class="stat-label">Instagram views<i>Reels &amp; posts</i></span>
-        </article>
-        <article class="stat card card--lift">
-          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07Z"/></svg></span>
-          <span class="stat-num"><span class="val" data-count="2">2</span><span class="suf">M</span></span>
-          <span class="stat-label">Facebook views<i>Total video views</i></span>
-        </article>
-        <article class="stat card card--lift">
-          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z"/></svg></span>
-          <span class="stat-num"><span class="val" data-count="1.8">1.8</span><span class="suf">M</span></span>
-          <span class="stat-label">YouTube views<i>Long &amp; short form</i></span>
-        </article>
-        <article class="stat card card--lift">
-          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 0C5.4 0 .03 5.37.03 11.99c0 5.08 3.16 9.42 7.62 11.16-.11-.95-.2-2.4.04-3.44.22-.94 1.41-5.96 1.41-5.96s-.36-.72-.36-1.78c0-1.66.97-2.91 2.17-2.91 1.02 0 1.52.77 1.52 1.69 0 1.03-.65 2.57-.99 3.99-.29 1.19.6 2.16 1.77 2.16 2.13 0 3.77-2.24 3.77-5.49 0-2.86-2.06-4.87-5.01-4.87-3.41 0-5.41 2.56-5.41 5.2 0 1.03.39 2.14.89 2.74.1.12.11.22.08.34-.09.38-.29 1.2-.33 1.36-.05.22-.17.27-.4.16-1.5-.69-2.43-2.88-2.43-4.65 0-3.78 2.75-7.25 7.92-7.25 4.16 0 7.39 2.97 7.39 6.92 0 4.13-2.61 7.46-6.23 7.46-1.21 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15 1.12.35 2.31.53 3.57.53 6.62 0 11.99-5.37 11.99-11.99C24 5.37 18.64 0 12.02 0Z"/></svg></span>
-          <span class="stat-num"><span class="val" data-count="178">178</span><span class="suf">K</span></span>
-          <span class="stat-label">Pinterest views<i>Pins &amp; idea pins</i></span>
-        </article>
+    <div class="proof-tabs">
+      <div class="proof-tablist seg reveal" role="tablist" aria-label="Results by channel">
+        <span class="seg-ind" aria-hidden="true"></span>
+        <button class="proof-tab seg-btn is-active" type="button" role="tab" id="ptab-ecom" aria-selected="true" aria-controls="ppanel-ecom" tabindex="0">E-commerce</button>
+        <button class="proof-tab seg-btn" type="button" role="tab" id="ptab-meta" aria-selected="false" aria-controls="ppanel-meta" tabindex="-1">Meta Ads</button>
+        <button class="proof-tab seg-btn" type="button" role="tab" id="ptab-social" aria-selected="false" aria-controls="ppanel-social" tabindex="-1">Social</button>
       </div>
-      <h3 class="sub-head mono-line reveal">Straight from the analytics dashboards</h3>
-      <div class="shots shots--social" data-stagger="90" data-stagger-class="reveal--scale">
-        <figure class="shot"><img src="assets/proof/proof-tiktok-youtube.jpg" alt="TikTok and YouTube analytics — views per account" loading="lazy"><figcaption><b>TikTok &amp; YouTube</b> — views per account</figcaption></figure>
-        <figure class="shot"><img src="assets/proof/proof-instagram-pinterest.jpg" alt="Instagram and Pinterest analytics — views per account" loading="lazy"><figcaption><b>Instagram &amp; Pinterest</b> — views per account</figcaption></figure>
-        <figure class="shot"><img src="assets/proof/proof-facebook.jpg" alt="Facebook analytics — total views per page" loading="lazy"><figcaption><b>Facebook</b> — total views per page</figcaption></figure>
+      <div class="proof-panel" id="ppanel-ecom" role="tabpanel" aria-labelledby="ptab-ecom" tabindex="0">
+        <div class="proof-grid proof-grid--3">
+            <article class="stat stat--hl card card--lift">
+              <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+              <span class="stat-num"><span class="pre">$</span><span class="val" data-count="3.8">3.8</span><span class="suf">M</span></span>
+              <span class="stat-label">Shopify sales in one day<i>+268% vs. the comparison day</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2.67-1.5L9.33 22 12 20.5 14.67 22l2.66-1.5L20 22V2l-2.67 1.5L14.67 2 12 3.5 9.33 2 6.67 3.5Z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="99843">99,843</span></span>
+              <span class="stat-label">Orders in one day<i>Same Shopify store, same day</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="10.1">10.1</span><span class="suf">%</span></span>
+              <span class="stat-label">Store conversion rate<i>On the $3.8M day</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
+              <span class="stat-num"><span class="pre">$</span><span class="val" data-count="1.24">1.24</span><span class="suf">M</span></span>
+              <span class="stat-label">Shopify sales in 7 days<i>+67% vs. the previous week</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07Z"/></svg></span>
+              <span class="stat-num"><span class="pre">₱</span><span class="val" data-count="4.99">4.99</span><span class="suf">M</span></span>
+              <span class="stat-label">TikTok Shop LIVE GMV<i>5.34K items sold · 5.78% CTR</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 4.5 4h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 11.6V20h14v-8.4"/><path d="M10 20v-5h4v5"/></svg></span>
+              <span class="stat-num"><span class="pre">₱</span><span class="val" data-count="1.66">1.66</span><span class="suf">M</span></span>
+              <span class="stat-label">Shopee promo sales in a month<i>Aug 2026 · +57.7% month over month</i></span>
+            </article>
+        </div>
+        <a class="proof-to-gal" href="#gallery" data-gal-filter="ecom">See the e-commerce dashboards <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="proof-panel" id="ppanel-meta" role="tabpanel" aria-labelledby="ptab-meta" tabindex="0" hidden>
+        <div class="proof-grid proof-grid--4">
+            <article class="stat stat--hl card card--lift">
+              <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+              <span class="stat-num"><span class="pre">₱</span><span class="val" data-count="580">580</span><span class="suf">K+</span></span>
+              <span class="stat-label">Sales tracked<i>Purchase conversion value</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="216">216</span></span>
+              <span class="stat-label">Purchases driven<i>Across Meta campaigns</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="8.71">8.71</span><span class="suf">×</span></span>
+              <span class="stat-label">Peak ROAS<i>4.9× blended across all</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/><circle cx="7" cy="7" r="1.2"/></svg></span>
+              <span class="stat-num"><span class="pre">₱</span><span class="val" data-count="227">227</span></span>
+              <span class="stat-label">Lowest cost / purchase<i>Best-performing campaign</i></span>
+            </article>
+        </div>
+        <a class="proof-to-gal" href="#gallery" data-gal-filter="meta">See the Meta Ads Manager screenshots <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="proof-panel" id="ppanel-social" role="tabpanel" aria-labelledby="ptab-social" tabindex="0" hidden>
+        <div class="proof-grid proof-grid--3">
+            <article class="stat stat--hl card card--lift">
+              <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="52">52</span><span class="suf">M+</span></span>
+              <span class="stat-label">Total views<i>Across 5 platforms · dashboards in the gallery</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07Z"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="32.9">32.9</span><span class="suf">M</span></span>
+              <span class="stat-label">TikTok views<i>Short-form video</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16Zm0 1.44c-3.14 0-3.51.01-4.75.07-2.5.11-3.5 1.13-3.61 3.61-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.11 2.48 1.11 3.5 3.61 3.61 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c2.5-.11 3.5-1.13 3.61-3.61.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.11-2.48-1.11-3.5-3.61-3.61-1.24-.06-1.61-.07-4.75-.07Zm0 3.68a4.72 4.72 0 1 1 0 9.44 4.72 4.72 0 0 1 0-9.44Zm0 7.79a3.07 3.07 0 1 0 0-6.14 3.07 3.07 0 0 0 0 6.14Zm6.01-7.98a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="15.8">15.8</span><span class="suf">M</span></span>
+              <span class="stat-label">Instagram views<i>Reels &amp; posts</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07Z"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="2">2</span><span class="suf">M</span></span>
+              <span class="stat-label">Facebook views<i>Total video views</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="1.8">1.8</span><span class="suf">M</span></span>
+              <span class="stat-label">YouTube views<i>Long &amp; short form</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 0C5.4 0 .03 5.37.03 11.99c0 5.08 3.16 9.42 7.62 11.16-.11-.95-.2-2.4.04-3.44.22-.94 1.41-5.96 1.41-5.96s-.36-.72-.36-1.78c0-1.66.97-2.91 2.17-2.91 1.02 0 1.52.77 1.52 1.69 0 1.03-.65 2.57-.99 3.99-.29 1.19.6 2.16 1.77 2.16 2.13 0 3.77-2.24 3.77-5.49 0-2.86-2.06-4.87-5.01-4.87-3.41 0-5.41 2.56-5.41 5.2 0 1.03.39 2.14.89 2.74.1.12.11.22.08.34-.09.38-.29 1.2-.33 1.36-.05.22-.17.27-.4.16-1.5-.69-2.43-2.88-2.43-4.65 0-3.78 2.75-7.25 7.92-7.25 4.16 0 7.39 2.97 7.39 6.92 0 4.13-2.61 7.46-6.23 7.46-1.21 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15 1.12.35 2.31.53 3.57.53 6.62 0 11.99-5.37 11.99-11.99C24 5.37 18.64 0 12.02 0Z"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="178">178</span><span class="suf">K</span></span>
+              <span class="stat-label">Pinterest views<i>Pins &amp; idea pins</i></span>
+            </article>
+        </div>
+        <a class="proof-to-gal" href="#gallery" data-gal-filter="social">See the social analytics <span aria-hidden="true">→</span></a>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="num-block">
-      <h3 class="sub-head mono-line reveal">Meta ads I manage</h3>
-      <div class="stats-grid" data-stagger="80">
-        <article class="stat stat--hl card card--lift">
-          <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-          <span class="stat-num"><span class="pre">₱</span><span class="val" data-count="580">580</span><span class="suf">K+</span></span>
-          <span class="stat-label">Sales tracked<i>Purchase conversion value</i></span>
-        </article>
-        <article class="stat card card--lift">
-          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
-          <span class="stat-num"><span class="val" data-count="216">216</span></span>
-          <span class="stat-label">Purchases driven<i>Across Meta campaigns</i></span>
-        </article>
-        <article class="stat card card--lift">
-          <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
-          <span class="stat-num"><span class="val" data-count="8.71">8.71</span><span class="suf">×</span></span>
-          <span class="stat-label">Peak ROAS<i>4.9× blended across all</i></span>
-        </article>
-        <article class="stat card card--lift">
-          <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/><circle cx="7" cy="7" r="1.2"/></svg></span>
-          <span class="stat-num"><span class="pre">₱</span><span class="val" data-count="227">227</span></span>
-          <span class="stat-label">Lowest cost / purchase<i>Best-performing campaign</i></span>
-        </article>
+<!-- ============================================================
+     GALLERY
+     ============================================================ -->
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow reveal">Results gallery</p>
+      <h2 class="hook" data-split>The dashboards <em>behind the numbers.</em></h2>
+      <p class="lede reveal">Screenshots straight from Shopify, TikTok Shop, Shopee, Meta Ads Manager and the social analytics I report from. Store and account names are blurred for client confidentiality. Tap any screenshot to zoom in.</p>
+    </div>
+
+    <div class="gal-bar reveal">
+      <div class="gal-filters seg" role="group" aria-label="Filter screenshots">
+        <span class="seg-ind" aria-hidden="true"></span>
+        <button class="gal-filter seg-btn is-active" type="button" data-filter="all" aria-pressed="true">All <span class="gal-count">9</span></button>
+        <button class="gal-filter seg-btn" type="button" data-filter="ecom" aria-pressed="false">E-commerce <span class="gal-count">4</span></button>
+        <button class="gal-filter seg-btn" type="button" data-filter="meta" aria-pressed="false">Meta Ads <span class="gal-count">2</span></button>
+        <button class="gal-filter seg-btn" type="button" data-filter="social" aria-pressed="false">Social <span class="gal-count">3</span></button>
       </div>
-      <h3 class="sub-head mono-line reveal">Straight from Meta Ads Manager</h3>
-      <div class="shots shots--ads" data-stagger="90" data-stagger-class="reveal--scale">
-        <figure class="shot"><img src="assets/proof/proof-meta-ads-1.jpg" alt="Meta Ads Manager — sales campaigns, ₱323,075 conversion value, 6.99× average ROAS" loading="lazy"><figcaption><b>Sales campaigns</b> — ₱323,075 conversion value · 6.99× average ROAS</figcaption></figure>
-        <figure class="shot"><img src="assets/proof/proof-meta-ads-2.jpg" alt="Meta Ads Manager — messaging-to-purchase campaigns, ₱256,547, 169 purchases, 3.58× average ROAS" loading="lazy"><figcaption><b>Messaging-to-purchase</b> — ₱256,547 · 169 purchases · 3.58× average ROAS</figcaption></figure>
-      </div>
+      <p class="gal-status mono-line" aria-live="polite">Showing 9 of 9 screenshots</p>
+    </div>
+
+    <div class="gal-grid" data-stagger="70">
+        <a class="gal-item card card--lift" href="assets/proof/proof-shopify-sales-day.jpg" data-cat="ecom" data-platform="Shopify" data-title="$3.8M in one day" data-desc="Shopify · 99,843 orders · 10.1% conversion · +268%">
+          <span class="gal-thumb"><img src="assets/proof/proof-shopify-sales-day.jpg" alt="Shopify dashboard, $3.8M in one day: total sales up 268%, 99,843 orders (up 234%) and a 10.1% conversion rate" width="1100" height="1076" loading="lazy" decoding="async"></span>
+          <span class="chip chip--win gal-chip" aria-hidden="true">Shopify</span>
+          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
+          <span class="gal-cap" aria-hidden="true"><b>$3.8M in one day</b><span>Shopify · 99,843 orders · 10.1% conversion · +268%</span></span>
+        </a>
+        <a class="gal-item card card--lift" href="assets/proof/proof-shopify-sales-week.jpg" data-cat="ecom" data-platform="Shopify" data-title="$1.24M in 7 days" data-desc="Shopify · Sep 7–14, 2026 · +67% vs. the previous week">
+          <span class="gal-thumb"><img src="assets/proof/proof-shopify-sales-week.jpg" alt="Shopify analytics, $1.24M in 7 days: total sales of $1,242,548.17 for Sep 7–14, 2026, up 67% on Aug 30–Sep 6" width="1100" height="1221" loading="lazy" decoding="async"></span>
+          <span class="chip chip--win gal-chip" aria-hidden="true">Shopify</span>
+          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
+          <span class="gal-cap" aria-hidden="true"><b>$1.24M in 7 days</b><span>Shopify · Sep 7–14, 2026 · +67% vs. the previous week</span></span>
+        </a>
+        <a class="gal-item gal-item--wide card card--lift" href="assets/proof/proof-shopee-promo.jpg" data-cat="ecom" data-platform="Shopee" data-title="₱1.66M promo sales in a month" data-desc="Shopee · Aug 2026 · 1,853 orders · +57.7% month over month">
+          <span class="gal-thumb"><img src="assets/proof/proof-shopee-promo.jpg" alt="Shopee discount promotion dashboard, ₱1.66M promo sales in a month: ₱1,659,758 in sales for August 2026 (up 57.70%), 1,853 orders, 2,230 units sold and 1,649 buyers" width="1584" height="664" loading="lazy" decoding="async"></span>
+          <span class="chip chip--win gal-chip" aria-hidden="true">Shopee</span>
+          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
+          <span class="gal-cap" aria-hidden="true"><b>₱1.66M promo sales in a month</b><span>Shopee · Aug 2026 · 1,853 orders · +57.7% month over month</span></span>
+        </a>
+        <a class="gal-item card card--lift" href="assets/proof/proof-tiktok-shop-live.jpg" data-cat="ecom" data-platform="TikTok Shop" data-title="₱4.99M LIVE GMV" data-desc="TikTok Shop · 5.34K items sold · 5.78% CTR">
+          <span class="gal-thumb"><img src="assets/proof/proof-tiktok-shop-live.jpg" alt="TikTok Shop LIVE and video analytics, ₱4.99M LIVE GMV: ₱4,998,252.87 LIVE-attributed GMV, 5.32K SKU orders, 5.34K items sold and a 5.78% click-through rate" width="1100" height="1146" loading="lazy" decoding="async"></span>
+          <span class="chip chip--win gal-chip" aria-hidden="true">TikTok Shop</span>
+          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
+          <span class="gal-cap" aria-hidden="true"><b>₱4.99M LIVE GMV</b><span>TikTok Shop · 5.34K items sold · 5.78% CTR</span></span>
+        </a>
+        <a class="gal-item card card--lift" href="assets/proof/proof-tiktok-youtube.jpg" data-cat="social" data-platform="TikTok &amp; YouTube" data-title="32.9M TikTok + 1.8M YouTube views" data-desc="Creator accounts · views per account">
+          <span class="gal-thumb"><img src="assets/proof/proof-tiktok-youtube.jpg" alt="TikTok and YouTube analytics, 32.9M TikTok + 1.8M YouTube views: views listed per creator account, account names blurred" width="711" height="665" loading="lazy" decoding="async"></span>
+          <span class="chip chip--accent gal-chip" aria-hidden="true">TikTok &amp; YouTube</span>
+          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
+          <span class="gal-cap" aria-hidden="true"><b>32.9M TikTok + 1.8M YouTube views</b><span>Creator accounts · views per account</span></span>
+        </a>
+        <a class="gal-item gal-item--wide card card--lift" href="assets/proof/proof-meta-ads-1.jpg" data-cat="meta" data-platform="Meta Ads" data-title="₱323,075 conversion value" data-desc="Sales campaigns · 6.99× average ROAS · 8.71× peak">
+          <span class="gal-thumb"><img src="assets/proof/proof-meta-ads-1.jpg" alt="Meta Ads Manager sales campaigns, ₱323,075 conversion value: 47 purchases, 6.99× average purchase ROAS and an 8.71× peak" width="2036" height="772" loading="lazy" decoding="async"></span>
+          <span class="chip chip--blue gal-chip" aria-hidden="true">Meta Ads</span>
+          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
+          <span class="gal-cap" aria-hidden="true"><b>₱323,075 conversion value</b><span>Sales campaigns · 6.99× average ROAS · 8.71× peak</span></span>
+        </a>
+        <a class="gal-item gal-item--wide card card--lift" href="assets/proof/proof-meta-ads-2.jpg" data-cat="meta" data-platform="Meta Ads" data-title="₱256,547 · 169 purchases" data-desc="Messaging-to-purchase campaigns · 3.58× average ROAS">
+          <span class="gal-thumb"><img src="assets/proof/proof-meta-ads-2.jpg" alt="Meta Ads Manager messaging-to-purchase campaigns, ₱256,547 · 169 purchases: 3.58× average purchase ROAS and a ₱227.06 lowest cost per purchase" width="2132" height="738" loading="lazy" decoding="async"></span>
+          <span class="chip chip--blue gal-chip" aria-hidden="true">Meta Ads</span>
+          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
+          <span class="gal-cap" aria-hidden="true"><b>₱256,547 · 169 purchases</b><span>Messaging-to-purchase campaigns · 3.58× average ROAS</span></span>
+        </a>
+        <a class="gal-item card card--lift" href="assets/proof/proof-instagram-pinterest.jpg" data-cat="social" data-platform="Instagram &amp; Pinterest" data-title="15.8M Instagram + 178K Pinterest views" data-desc="Creator accounts · views per account">
+          <span class="gal-thumb"><img src="assets/proof/proof-instagram-pinterest.jpg" alt="Instagram and Pinterest analytics, 15.8M Instagram + 178K Pinterest views: views listed per creator account, account names blurred" width="702" height="664" loading="lazy" decoding="async"></span>
+          <span class="chip chip--accent gal-chip" aria-hidden="true">Instagram &amp; Pinterest</span>
+          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
+          <span class="gal-cap" aria-hidden="true"><b>15.8M Instagram + 178K Pinterest views</b><span>Creator accounts · views per account</span></span>
+        </a>
+        <a class="gal-item card card--lift" href="assets/proof/proof-facebook.jpg" data-cat="social" data-platform="Facebook" data-title="2M Facebook views" data-desc="Pages · total views per page">
+          <span class="gal-thumb"><img src="assets/proof/proof-facebook.jpg" alt="Facebook analytics, 2M Facebook views: total views listed per page, page names blurred" width="340" height="662" loading="lazy" decoding="async"></span>
+          <span class="chip chip--accent gal-chip" aria-hidden="true">Facebook</span>
+          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
+          <span class="gal-cap" aria-hidden="true"><b>2M Facebook views</b><span>Pages · total views per page</span></span>
+        </a>
     </div>
   </div>
 </section>
@@ -533,7 +646,7 @@
 <!-- ============================================================
      EXPERIENCE
      ============================================================ -->
-<section class="section" id="experience">
+<section class="section section--alt" id="experience">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow reveal">Experience</p>
@@ -700,7 +813,7 @@
 <!-- ============================================================
      WHY ME
      ============================================================ -->
-<section class="section section--alt" id="edge">
+<section class="section" id="edge">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow reveal">Why me</p>
@@ -771,7 +884,7 @@
 <!-- ============================================================
      PROCESS
      ============================================================ -->
-<section class="section" id="process">
+<section class="section section--alt" id="process">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow reveal">How it works</p>
@@ -807,7 +920,7 @@
 <!-- ============================================================
      ABOUT
      ============================================================ -->
-<section class="section section--alt" id="about">
+<section class="section" id="about">
   <div class="wrap">
     <div class="about-grid">
       <div class="about-photo reveal reveal--scale">
@@ -892,7 +1005,7 @@
 <!-- ============================================================
      FAQ
      ============================================================ -->
-<section class="section" id="faq">
+<section class="section section--alt" id="faq">
   <div class="wrap faq-wrap">
     <div class="section-head">
       <p class="eyebrow reveal">Before you book</p>
@@ -972,7 +1085,7 @@
 <!-- ============================================================
      CONTACT
      ============================================================ -->
-<section class="section section--alt contact" id="contact">
+<section class="section contact" id="contact">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow reveal">Let's talk</p>
@@ -1042,7 +1155,9 @@
     <ul class="footer-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#work">Work</a></li>
+      <li><a href="#gallery">Gallery</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#process">Process</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <span class="footer-note">Manila · remote · working worldwide</span>
@@ -1055,6 +1170,23 @@
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
 </button>
 
-<script src="main.js?v=8"></script>
+<dialog class="lightbox" id="lightbox" aria-labelledby="lbTitle">
+  <button class="lb-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+  <figure class="lb-figure">
+    <img class="lb-img" src="assets/proof/proof-shopify-sales-day.jpg" alt="" width="1100" height="1076" loading="lazy" decoding="async">
+    <figcaption class="lb-cap">
+      <span class="chip lb-chip"></span>
+      <b class="lb-title" id="lbTitle">Screenshot</b>
+      <span class="lb-desc"></span>
+    </figcaption>
+  </figure>
+  <div class="lb-bar">
+    <button class="lb-prev" type="button" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+    <p class="lb-count" aria-live="polite">1 / 9</p>
+    <button class="lb-next" type="button" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+  </div>
+</dialog>
+
+<script src="main.js?v=9"></script>
 </body>
 </html>
