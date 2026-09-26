@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Carl Gabriel Piramo</title>
+<meta name="description" content="Tell me about your brand. I'll come to the call with first thoughts on your funnel, your store and your creative angles.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — Carl Gabriel Piramo">
+<meta property="og:description" content="Tell me about your brand. I'll come to the call with first thoughts on your funnel, your store and your creative angles.">
+<meta property="og:url" content="https://carlgabriel1123.github.io/carl-gabriel-portfolio/contact.html">
+<meta property="og:image" content="https://carlgabriel1123.github.io/carl-gabriel-portfolio/assets/media/portrait-carl.png">
+<meta property="og:image:alt" content="Portrait of Carl Gabriel Piramo">
+<meta property="og:site_name" content="Carl Gabriel Piramo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — Carl Gabriel Piramo">
+<meta name="twitter:description" content="Tell me about your brand. I'll come to the call with first thoughts on your funnel, your store and your creative angles.">
+<meta name="twitter:image" content="https://carlgabriel1123.github.io/carl-gabriel-portfolio/assets/media/portrait-carl.png">
+<meta name="twitter:image:alt" content="Portrait of Carl Gabriel Piramo">
+<link rel="canonical" href="https://carlgabriel1123.github.io/carl-gabriel-portfolio/contact.html">
+<link rel="expect" href="#page-title" blocking="render">
+<!-- shell:head -->
+<meta name="theme-color" content="#12112A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Schibsted+Grotesk:wght@400;500;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=10">
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"selector_matches":"a[href$='.html'], a[href='./']"},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}
+</script>
+<script>
+/* Page transitions (styles.css 26): a title morphs between a Home tile and the page title heading.
+   It is named only while on screen and only when the other side of the navigation is
+   Home, and never when the navigation lands on a #section. Arriving through a
+   transition skips the banner's own load choreography (.vt-arrive). */
+(function () {
+  var TARGETS = { 'work.html': 1, 'results.html': 1, 'services.html': 1, 'contact.html': 1 };
+  function file(url) {
+    var p;
+    try { p = new URL(url, location.href).pathname; } catch (e) { return ''; }
+    return p.slice(p.lastIndexOf('/') + 1) || 'index.html';
+  }
+  function hash(url) { try { return new URL(url, location.href).hash; } catch (e) { return ''; } }
+  function visible(el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; }
+  function reset() {
+    var named = document.querySelectorAll('[data-vt]');
+    for (var i = 0; i < named.length; i++) named[i].style.viewTransitionName = '';
+  }
+  function shared(other) {
+    var here = file(location.href), there = file(other), el = null;
+    if (here === 'index.html' && TARGETS[there]) el = document.querySelector('[data-vt="vt-' + there.replace('.html', '') + '"]');
+    else if (there === 'index.html' && TARGETS[here]) el = document.querySelector('.page-hero [data-vt]');
+    return el && visible(el) ? el : null;
+  }
+  function name(other) {
+    reset();
+    var el = other ? shared(other) : null;
+    if (el) el.style.viewTransitionName = el.getAttribute('data-vt');
+  }
+  addEventListener('pageswap', function (e) {
+    if (!e.viewTransition) return;
+    var to = e.activation && e.activation.entry ? e.activation.entry.url : null;
+    name(to && !hash(to) ? to : null);
+  });
+  addEventListener('pagereveal', function (e) {
+    if (!e.viewTransition) return;
+    document.documentElement.classList.add('vt-arrive');
+    var nav = window.navigation;
+    var from = nav && nav.activation && nav.activation.from ? nav.activation.from.url : null;
+    name(location.hash ? null : from);
+  });
+})();
+</script>
+<!-- /shell:head -->
+</head>
+<body data-page="contact">
+
+<!-- shell:nav -->
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Ambient background glows (fixed, decorative) -->
+<div class="ambient" aria-hidden="true">
+  <i class="glow glow--a"></i>
+  <i class="glow glow--b"></i>
+</div>
+
+<nav class="nav" aria-label="Main">
+  <div class="nav-inner">
+    <a class="brand" href="./" aria-label="Carl G. — home">CARL<b>G.</b></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+    </button>
+    <div class="nav-menu" id="navMenu">
+      <ul class="nav-links">
+        <li class="nav-home" style="--i:0"><a href="./" data-nav="home">Home</a></li>
+        <li style="--i:1"><a href="work.html" data-nav="work">Work</a></li>
+        <li style="--i:2"><a href="results.html" data-nav="results">Results</a></li>
+        <li style="--i:3"><a href="services.html" data-nav="services">Services</a></li>
+        <li style="--i:4"><a href="about.html" data-nav="about">About</a></li>
+      </ul>
+      <a class="btn btn--primary btn--sm nav-cta" href="contact.html" data-nav="contact" aria-current="page">Book a call</a>
+    </div>
+  </div>
+  <div class="pagebar" aria-hidden="true"><i></i></div>
+</nav>
+<!-- /shell:nav -->
+
+<main id="main">
+
+<header class="page-hero" id="top">
+  <span class="hero-dots" aria-hidden="true"></span>
+  <div class="wrap">
+    <p class="eyebrow snap-in d1"><span class="ph-index">06</span><span class="ph-sep" aria-hidden="true">·</span>Let's talk</p>
+    <h1 class="hook page-title" id="page-title" data-split data-vt="vt-contact">Your next winning ad is <em>one call away.</em></h1>
+    <p class="lede snap-in d3">Tell me about your brand. I'll come to the call with first thoughts on your funnel, your store and your creative angles — not a pitch deck.</p>
+  </div>
+</header>
+
+<section class="section contact" id="contact"><div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info reveal reveal--left">
+        <a class="ci-row" href="mailto:piramocarlgabriel@gmail.com">
+          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>
+          <span class="ci-text"><b>Email</b>piramocarlgabriel@gmail.com</span>
+        </a>
+        <a class="ci-row" href="tel:+639261730117">
+          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span>
+          <span class="ci-text"><b>Phone</b>+63 926 173 0117</span>
+        </a>
+        <div class="ci-row">
+          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span class="ci-text"><b>Based in</b>Manila, Philippines · remote worldwide</span>
+        </div>
+        <a class="ci-row" href="assets/Carl-Gabriel-Piramo-CV.pdf" download>
+          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg></span>
+          <span class="ci-text"><b>Résumé</b>Download CV (PDF)</span>
+        </a>
+        <div class="ci-social" role="group" aria-label="Social links">
+          <a href="https://www.instagram.com/crl.gbb" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16Zm0 1.44c-3.14 0-3.51.01-4.75.07-2.5.11-3.5 1.13-3.61 3.61-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.11 2.48 1.11 3.5 3.61 3.61 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c2.5-.11 3.5-1.13 3.61-3.61.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.11-2.48-1.11-3.5-3.61-3.61-1.24-.06-1.61-.07-4.75-.07Zm0 3.68a4.72 4.72 0 1 1 0 9.44 4.72 4.72 0 0 1 0-9.44Zm0 7.79a3.07 3.07 0 1 0 0-6.14 3.07 3.07 0 0 0 0 6.14Zm6.01-7.98a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/carl.gabriel.piramo" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form card reveal reveal--right" id="contactForm" novalidate aria-labelledby="cfTitle">
+        <h2 class="cf-title" id="cfTitle">Drop a line</h2>
+        <div class="cf-row">
+          <label>Your name
+            <input type="text" name="name" autocomplete="name" placeholder="Jane Founder" required>
+          </label>
+          <label>Email
+            <input type="email" name="email" autocomplete="email" placeholder="jane@brand.com" required>
+          </label>
+        </div>
+        <label>Brand / website
+          <input type="text" name="store" autocomplete="organization" placeholder="yourbrand.com">
+        </label>
+        <label>What do you need?
+          <textarea name="message" rows="4" placeholder="A bit about your brand, your offers, and where growth is stuck." required></textarea>
+        </label>
+        <button type="submit" class="btn btn--primary">Send message</button>
+        <p class="cf-note" id="cfNote" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+</div></section>
+
+<section class="section section--alt" id="faq">
+  <div class="wrap faq-wrap">
+    <div class="section-head">
+      <p class="eyebrow reveal">Before you book</p>
+      <h2 class="hook" data-split>The questions founders <em>ask first.</em></h2>
+    </div>
+
+    <div class="faq reveal">
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" id="faq-q-1" aria-expanded="false" aria-controls="faq-p-1">
+            <span>Why one person instead of an agency?</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-panel" id="faq-p-1" role="region" aria-labelledby="faq-q-1">
+          <div class="faq-body">
+            <p>With an agency, your strategist, media buyer, creative team and store developer are different people — and feedback dies between them. I run the whole loop: the creative, the ads, the data and the store. Every signal from Ads Manager shapes the next creative, the next budget and the next store fix the same week. <strong>One brain, one feedback loop.</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" id="faq-q-2" aria-expanded="false" aria-controls="faq-p-2">
+            <span>What do you need from me to start?</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-panel" id="faq-p-2" role="region" aria-labelledby="faq-q-2">
+          <div class="faq-body">
+            <p>Access to your Shopify store and Meta ad account, your current offers and margins, and any brand assets you already have. If you sell on TikTok Shop, Shopee or Lazada, seller-centre access too. If you've run ads before, I'll want to see what's been tested. We cover all of it on the first call.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" id="faq-q-3" aria-expanded="false" aria-controls="faq-p-3">
+            <span>How soon can campaigns go live?</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-panel" id="faq-p-3" role="region" aria-labelledby="faq-q-3">
+          <div class="faq-body">
+            <p>The first sprint fixes tracking first — Meta Pixel and Conversions API — so nothing launches blind. In parallel I produce the first batch of short-form ads and statics around the angles we agree on. Campaigns go live with structured tests as soon as that batch is ready, usually within the first week or two.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" id="faq-q-4" aria-expanded="false" aria-controls="faq-p-4">
+            <span>Do you work with my store size or niche?</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-panel" id="faq-p-4" role="region" aria-labelledby="faq-q-4">
+          <div class="faq-body">
+            <p>I work best with Shopify and marketplace brands that already have a product selling and want a tighter creative-and-ads engine behind it. I've run growth for wellness supplements, baby care, sports nutrition, nasal strips and automotive brands across the Philippines, Singapore and the USA. Not sure you're a fit? Book the call and I'll tell you straight.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" id="faq-q-5" aria-expanded="false" aria-controls="faq-p-5">
+            <span>How does pricing work?</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-panel" id="faq-p-5" role="region" aria-labelledby="faq-q-5">
+          <div class="faq-body">
+            <p>Every engagement starts with a strategy call — no pitch deck. From there I scope the work to your stage and goals, so pricing reflects what you actually need. <strong>You'll know exactly what you're paying for before we start.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="pager wrap" aria-label="More pages">
+  <a class="pager-prev" href="about.html"><small>← 05 · Previous</small><b>About</b></a>
+</nav>
+
+</main>
+
+<!-- shell:footer -->
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="./">CARL<b>G.</b></a>
+      <p class="footer-tag">Digital Marketing &amp; E-commerce Growth Manager</p>
+      <div class="footer-social" role="group" aria-label="Social links">
+        <a href="https://www.instagram.com/crl.gbb" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16Zm0 1.44c-3.14 0-3.51.01-4.75.07-2.5.11-3.5 1.13-3.61 3.61-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.11 2.48 1.11 3.5 3.61 3.61 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c2.5-.11 3.5-1.13 3.61-3.61.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.11-2.48-1.11-3.5-3.61-3.61-1.24-.06-1.61-.07-4.75-.07Zm0 3.68a4.72 4.72 0 1 1 0 9.44 4.72 4.72 0 0 1 0-9.44Zm0 7.79a3.07 3.07 0 1 0 0-6.14 3.07 3.07 0 0 0 0 6.14Zm6.01-7.98a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/carl.gabriel.piramo" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <nav class="footer-col" aria-label="Pages">
+      <p class="footer-h">Pages</p>
+      <ul class="footer-links">
+        <li><a href="./">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="results.html">Results</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Jump to">
+      <p class="footer-h">Jump to</p>
+      <ul class="footer-links">
+        <li><a href="results.html#gallery">Gallery</a></li>
+        <li><a href="about.html#experience">Experience</a></li>
+        <li><a href="services.html#process">Process</a></li>
+        <li><a href="contact.html#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="footer-col">
+      <p class="footer-h">Contact</p>
+      <ul class="footer-contact">
+        <li><a href="mailto:piramocarlgabriel@gmail.com"><span>piramocarlgabriel@<wbr>gmail.com</span></a></li>
+        <li><a href="tel:+639261730117">+63 926 173 0117</a></li>
+        <li><a href="assets/Carl-Gabriel-Piramo-CV.pdf" download>Download CV (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-base">
+    <span class="footer-copy">© <span id="year">2026</span> Carl Gabriel Piramo</span>
+    <span class="footer-note">Manila · remote · working worldwide</span>
+  </div>
+</footer>
+
+<button class="to-top" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+</button>
+<!-- /shell:footer -->
+
+<script src="main.js?v=10"></script>
+</body>
+</html>

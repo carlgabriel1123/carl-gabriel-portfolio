@@ -8,3 +8,6 @@ desktop.ini
 node_modules/
 .vscode/
 .idea/
+
+# Python bytecode from the _tools scripts
+__pycache__/
