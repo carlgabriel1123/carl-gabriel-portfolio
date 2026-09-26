@@ -22,7 +22,7 @@
                        "stills"): FLIP zoom, prev/next, keys, swipe, swipe-down close
    15 timeline         --tl-p progress + .lit nodes
    16 faq              accordion toggles
-   17 contact form     validate + mailto
+   17 contact form     validate, POST /api/contact (Supabase), mailto fallback
    18 dock / to-top    floating UI + footer year
    19 anchors          same-page links (#id or this-page.html#id) scroll smoothly
    20 ticker           user-operable pause for the brand marquee
@@ -1373,7 +1373,17 @@
     var note = $('.cf-note', form);
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-    var FIELDS = ['name', 'email', 'message'];
+    var FIELDS = ['name', 'email', 'store', 'message'];
+    var submitBtn = $('button[type="submit"]', form);
+    var endpoint = form.getAttribute('data-endpoint'); // absent on a plain static host: mailto only
+    var shownAt = Date.now();
+    var sending = false;
+    var FIELD_MSG = {
+      name: 'Please add your name (up to 120 characters).',
+      email: 'Please add a valid email address.',
+      store: 'Please shorten the brand / website to 200 characters.',
+      message: 'Please keep the message under 5,000 characters.'
+    };
 
     function field(name) { return form.elements[name] || null; }
     function value(name) { var f = field(name); return f ? String(f.value || '').trim() : ''; }
@@ -1395,38 +1405,95 @@
       if (f) f.addEventListener('input', function () { clearInvalid(f); });
     });
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var name = value('name');
-      var email = value('email');
-      var store = value('store');
-      var message = value('message');
-
-      var problem = null;
-      if (!name) problem = { f: field('name'), msg: 'Please add your name.' };
-      else if (!email || !EMAIL_RE.test(email)) problem = { f: field('email'), msg: 'Please add a valid email address.' };
-      else if (!message) problem = { f: field('message'), msg: 'Tell me a little about what you need.' };
-
-      clearAllInvalid();
-      if (problem) {
-        if (problem.f) {
-          problem.f.setAttribute('aria-invalid', 'true');
-          if (note && note.id) problem.f.setAttribute('aria-describedby', note.id);
-        }
-        say(problem.msg, false);
-        if (problem.f && problem.f.focus) problem.f.focus();
-        return;
+    function flag(f, msg) {
+      if (f) {
+        f.setAttribute('aria-invalid', 'true');
+        if (note && note.id) f.setAttribute('aria-describedby', note.id);
       }
-
-      var subject = 'Strategy call — ' + (store || name);
+      say(msg, false);
+      if (f && f.focus) f.focus();
+    }
+    function busy(on) {
+      sending = on;
+      form.classList.toggle('is-sending', on);
+      form.setAttribute('aria-busy', on ? 'true' : 'false');
+      if (submitBtn) submitBtn.disabled = on;
+    }
+    function openMail(lead) {
+      var subject = 'Strategy call — ' + (lead.store || lead.name);
       var body = 'Hi Carl,\n\n' +
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Brand / website: ' + (store || '—') + '\n\n' +
-        message + '\n';
-      say('Opening your email app…', true);
+        'Name: ' + lead.name + '\n' +
+        'Email: ' + lead.email + '\n' +
+        'Brand / website: ' + (lead.store || '—') + '\n\n' +
+        lead.message + '\n';
       window.location.href = 'mailto:piramocarlgabriel@gmail.com?subject=' +
         encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+
+    /* POST to /api/contact (saved in Supabase). Anything but a clear answer
+       (network error, timeout, 5xx, no endpoint) falls back to the visitor's
+       email app with the message pre-filled, so a lead is never lost. */
+    function send(lead) {
+      busy(true);
+      say('Sending…', true);
+      var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+      var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 12000) : null;
+      var payload = {
+        name: lead.name, email: lead.email, store: lead.store, message: lead.message,
+        page: window.location.pathname, website: value('website'), elapsed: Date.now() - shownAt
+      };
+      function done() { if (timer) clearTimeout(timer); busy(false); }
+      function fallback() {
+        say('Couldn’t send from here, so your email app is opening with your message instead.', true);
+        openMail(lead);
+      }
+      window.fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        credentials: 'same-origin',
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (data) { return { status: r.status, data: data || {} }; });
+      }).then(function (reply) {
+        done();
+        if (reply.status === 200 && reply.data.ok) {
+          form.reset();
+          shownAt = Date.now();
+          say('Thanks, ' + lead.name.split(/\s+/)[0] + '. Your message is in, and I’ll reply to ' + lead.email + '.', true);
+          return;
+        }
+        if (reply.status === 400 && reply.data.field) {
+          flag(field(reply.data.field), FIELD_MSG[reply.data.field] || 'Please check the form and try again.');
+          return;
+        }
+        if (reply.status === 429) {
+          say('Too many messages right now. Please email me directly at piramocarlgabriel@gmail.com.', false);
+          return;
+        }
+        fallback();
+      }).catch(function () {
+        done();
+        fallback();
+      });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (sending) return;
+      var lead = { name: value('name'), email: value('email'), store: value('store'), message: value('message') };
+
+      var problem = null;
+      if (!lead.name) problem = { f: field('name'), msg: 'Please add your name.' };
+      else if (!lead.email || !EMAIL_RE.test(lead.email)) problem = { f: field('email'), msg: 'Please add a valid email address.' };
+      else if (!lead.message) problem = { f: field('message'), msg: 'Tell me a little about what you need.' };
+
+      clearAllInvalid();
+      if (problem) { flag(problem.f, problem.msg); return; }
+
+      if (endpoint && typeof window.fetch === 'function') { send(lead); return; }
+      say('Opening your email app…', true);
+      openMail(lead);
     });
   }
 

@@ -1,0 +1,5 @@
+# Never deployed to carlgabriel.vercel.app
+_tools
+.github
+*.md
+.env*

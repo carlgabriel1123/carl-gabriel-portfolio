@@ -11,3 +11,7 @@ node_modules/
 
 # Python bytecode from the _tools scripts
 __pycache__/
+
+# Local secrets (paste into Vercel, never commit)
+.env*
+.vercel

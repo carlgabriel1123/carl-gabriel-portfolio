@@ -8,16 +8,16 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Contact — Carl Gabriel Piramo">
 <meta property="og:description" content="Tell me about your brand. I'll come to the call with first thoughts on your funnel, your store and your creative angles.">
-<meta property="og:url" content="https://carlgabriel1123.github.io/carl-gabriel-portfolio/contact.html">
-<meta property="og:image" content="https://carlgabriel1123.github.io/carl-gabriel-portfolio/assets/media/portrait-carl.png">
+<meta property="og:url" content="https://carlgabriel.vercel.app/contact.html">
+<meta property="og:image" content="https://carlgabriel.vercel.app/assets/media/portrait-carl.png">
 <meta property="og:image:alt" content="Portrait of Carl Gabriel Piramo">
 <meta property="og:site_name" content="Carl Gabriel Piramo">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact — Carl Gabriel Piramo">
 <meta name="twitter:description" content="Tell me about your brand. I'll come to the call with first thoughts on your funnel, your store and your creative angles.">
-<meta name="twitter:image" content="https://carlgabriel1123.github.io/carl-gabriel-portfolio/assets/media/portrait-carl.png">
+<meta name="twitter:image" content="https://carlgabriel.vercel.app/assets/media/portrait-carl.png">
 <meta name="twitter:image:alt" content="Portrait of Carl Gabriel Piramo">
-<link rel="canonical" href="https://carlgabriel1123.github.io/carl-gabriel-portfolio/contact.html">
+<link rel="canonical" href="https://carlgabriel.vercel.app/contact.html">
 <link rel="expect" href="#page-title" blocking="render">
 <!-- shell:head -->
 <meta name="theme-color" content="#12112A">
@@ -147,22 +147,26 @@
         </div>
       </div>
 
-      <form class="contact-form card reveal reveal--right" id="contactForm" novalidate aria-labelledby="cfTitle">
+      <form class="contact-form card reveal reveal--right" id="contactForm" novalidate aria-labelledby="cfTitle" data-endpoint="/api/contact">
         <h2 class="cf-title" id="cfTitle">Drop a line</h2>
         <div class="cf-row">
           <label>Your name
-            <input type="text" name="name" autocomplete="name" placeholder="Jane Founder" required>
+            <input type="text" name="name" autocomplete="name" placeholder="Jane Founder" maxlength="120" required>
           </label>
           <label>Email
-            <input type="email" name="email" autocomplete="email" placeholder="jane@brand.com" required>
+            <input type="email" name="email" autocomplete="email" placeholder="jane@brand.com" maxlength="254" required>
           </label>
         </div>
         <label>Brand / website
-          <input type="text" name="store" autocomplete="organization" placeholder="yourbrand.com">
+          <input type="text" name="store" autocomplete="organization" placeholder="yourbrand.com" maxlength="200">
         </label>
         <label>What do you need?
-          <textarea name="message" rows="4" placeholder="A bit about your brand, your offers, and where growth is stuck." required></textarea>
+          <textarea name="message" rows="4" placeholder="A bit about your brand, your offers, and where growth is stuck." maxlength="5000" required></textarea>
         </label>
+        <!-- bot trap: people never see or reach this field; a filled one is dropped by /api/contact -->
+        <div class="cf-hp" aria-hidden="true">
+          <label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
         <button type="submit" class="btn btn--primary">Send message</button>
         <p class="cf-note" id="cfNote" role="status" aria-live="polite"></p>
       </form>

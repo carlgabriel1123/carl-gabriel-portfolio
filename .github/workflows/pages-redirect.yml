@@ -1,0 +1,76 @@
+name: Redirect GitHub Pages to Vercel
+
+# The portfolio lives at https://carlgabriel.vercel.app (Vercel deploys main).
+# This workflow replaces the old GitHub Pages copy with tiny pages that forward
+# every old link to the same place on Vercel, keeping the path, query and
+# #section: …/carl-gabriel-portfolio/work.html#x → carlgabriel.vercel.app/work.html#x.
+# 404.html catches every other old path (assets, the CV PDF, old #hash links on /).
+# Pages must be set to "GitHub Actions" (Settings → Pages → Source).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  SITE_URL: https://carlgabriel.vercel.app
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build redirect pages
+        run: |
+          mkdir -p out
+          stub() { # $1 = file to write, $2 = path on the new site (for no-JS visitors)
+            cat > "out/$1" <<HTML
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Carl Gabriel Piramo — this portfolio has moved</title>
+            <meta name="robots" content="noindex">
+            <link rel="canonical" href="${SITE_URL}$2">
+            <script>
+              (function () {
+                var path = location.pathname.replace(/^\/carl-gabriel-portfolio(?=\/|$)/, '') || '/';
+                location.replace('${SITE_URL}' + path + location.search + location.hash);
+              })();
+            </script>
+            <meta http-equiv="refresh" content="0; url=${SITE_URL}$2">
+          </head>
+          <body style="margin:0;font-family:system-ui,sans-serif;background:#12112A;color:#F4F2FC;text-align:center;padding:3rem 1rem">
+            <p>This portfolio has moved to <a style="color:#FF6674" href="${SITE_URL}$2">carlgabriel.vercel.app</a>.</p>
+          </body>
+          </html>
+          HTML
+          }
+          stub index.html /
+          for page in work results services about contact; do stub "$page.html" "/$page.html"; done
+          stub 404.html /
+          touch out/.nojekyll
+          ls -la out
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

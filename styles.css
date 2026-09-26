@@ -1335,6 +1335,8 @@ a.ci-row:hover{border-color:rgba(var(--accent-rgb),.5);background:rgba(30,28,58,
 .cf-note:empty{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .cf-note.is-error{color:var(--accent-text)}
 .cf-note.is-ok{color:var(--win)}
+.cf-hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden} /* honeypot: off-screen, not display:none (some bots skip hidden fields) */
+.contact-form.is-sending .btn{opacity:.7;cursor:progress}
 
 @media (max-width:860px){
   .contact-grid{grid-template-columns:minmax(0,1fr)}
