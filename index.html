@@ -3,9 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Old one-page links (…/#gallery, …/#faq) land on the page that now holds that section */
+(function () {
+  var map = { work: 'work.html', proof: 'results.html', gallery: 'results.html#gallery',
+    services: 'services.html', edge: 'services.html#edge', process: 'services.html#process',
+    about: 'about.html', experience: 'about.html#experience', faq: 'contact.html#faq', contact: 'contact.html' };
+  var id = location.hash.slice(1);
+  if (Object.prototype.hasOwnProperty.call(map, id)) location.replace(map[id]);
+})();
+</script>
 <title>Carl Gabriel Piramo — Digital Marketing &amp; E-commerce Growth Manager</title>
 <meta name="description" content="Digital marketing and e-commerce growth manager with 3+ years across Meta media buying, Shopify growth, UGC creator programs and AI marketing automation for brands in the Philippines, Singapore and the USA.">
-<meta name="theme-color" content="#12112A">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Carl Gabriel Piramo — Digital Marketing &amp; E-commerce Growth Manager">
 <meta property="og:description" content="Meta media buying, Shopify growth, UGC creator programs and AI marketing automation — one operator, one feedback loop. US$60M+ Facebook Ads revenue, 1B+ views, 8.71× peak ROAS.">
@@ -19,13 +28,64 @@
 <meta name="twitter:image:alt" content="Portrait of Carl Gabriel Piramo">
 <meta property="og:image:alt" content="Portrait of Carl Gabriel Piramo">
 <link rel="canonical" href="https://carlgabriel1123.github.io/carl-gabriel-portfolio/">
+<link rel="expect" href="#explore" blocking="render">
+<!-- shell:head -->
+<meta name="theme-color" content="#12112A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Schibsted+Grotesk:wght@400;500;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=9">
+<link rel="stylesheet" href="styles.css?v=10">
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"selector_matches":"a[href$='.html'], a[href='./']"},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}
+</script>
+<script>
+/* Page transitions (styles.css 26): a title morphs between a Home tile and the page title heading.
+   It is named only while on screen and only when the other side of the navigation is
+   Home, and never when the navigation lands on a #section. Arriving through a
+   transition skips the banner's own load choreography (.vt-arrive). */
+(function () {
+  var TARGETS = { 'work.html': 1, 'results.html': 1, 'services.html': 1, 'contact.html': 1 };
+  function file(url) {
+    var p;
+    try { p = new URL(url, location.href).pathname; } catch (e) { return ''; }
+    return p.slice(p.lastIndexOf('/') + 1) || 'index.html';
+  }
+  function hash(url) { try { return new URL(url, location.href).hash; } catch (e) { return ''; } }
+  function visible(el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; }
+  function reset() {
+    var named = document.querySelectorAll('[data-vt]');
+    for (var i = 0; i < named.length; i++) named[i].style.viewTransitionName = '';
+  }
+  function shared(other) {
+    var here = file(location.href), there = file(other), el = null;
+    if (here === 'index.html' && TARGETS[there]) el = document.querySelector('[data-vt="vt-' + there.replace('.html', '') + '"]');
+    else if (there === 'index.html' && TARGETS[here]) el = document.querySelector('.page-hero [data-vt]');
+    return el && visible(el) ? el : null;
+  }
+  function name(other) {
+    reset();
+    var el = other ? shared(other) : null;
+    if (el) el.style.viewTransitionName = el.getAttribute('data-vt');
+  }
+  addEventListener('pageswap', function (e) {
+    if (!e.viewTransition) return;
+    var to = e.activation && e.activation.entry ? e.activation.entry.url : null;
+    name(to && !hash(to) ? to : null);
+  });
+  addEventListener('pagereveal', function (e) {
+    if (!e.viewTransition) return;
+    document.documentElement.classList.add('vt-arrive');
+    var nav = window.navigation;
+    var from = nav && nav.activation && nav.activation.from ? nav.activation.from.url : null;
+    name(location.hash ? null : from);
+  });
+})();
+</script>
+<!-- /shell:head -->
 </head>
-<body>
+<body data-page="home">
 
+<!-- shell:nav -->
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- Ambient background glows (fixed, decorative) -->
@@ -34,12 +94,9 @@
   <i class="glow glow--b"></i>
 </div>
 
-<!-- ============================================================
-     NAV
-     ============================================================ -->
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
-    <a class="brand" href="#top" aria-label="Carl G. — back to top">CARL<b>G.</b></a>
+    <a class="brand" href="./" aria-label="Carl G. — home">CARL<b>G.</b></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
       <span class="nav-toggle-bar" aria-hidden="true"></span>
       <span class="nav-toggle-bar" aria-hidden="true"></span>
@@ -47,19 +104,18 @@
     </button>
     <div class="nav-menu" id="navMenu">
       <ul class="nav-links">
-        <li style="--i:0"><a href="#services">Services</a></li>
-        <li style="--i:1"><a href="#work">Work</a></li>
-        <li style="--i:2"><a href="#proof">Results</a></li>
-        <li style="--i:3"><a href="#gallery">Gallery</a></li>
-        <li style="--i:4"><a href="#experience">Experience</a></li>
-        <li style="--i:5"><a href="#about">About</a></li>
-        <li style="--i:6"><a href="#faq">FAQ</a></li>
+        <li class="nav-home" style="--i:0"><a href="./" data-nav="home" aria-current="page">Home</a></li>
+        <li style="--i:1"><a href="work.html" data-nav="work">Work</a></li>
+        <li style="--i:2"><a href="results.html" data-nav="results">Results</a></li>
+        <li style="--i:3"><a href="services.html" data-nav="services">Services</a></li>
+        <li style="--i:4"><a href="about.html" data-nav="about">About</a></li>
       </ul>
-      <a class="btn btn--primary btn--sm nav-cta" href="#contact">Book a call</a>
+      <a class="btn btn--primary btn--sm nav-cta" href="contact.html" data-nav="contact">Book a call</a>
     </div>
   </div>
   <div class="pagebar" aria-hidden="true"><i></i></div>
 </nav>
+<!-- /shell:nav -->
 
 <main id="main">
 
@@ -86,8 +142,8 @@
       </p>
       <p class="lede snap-in d3">3+ years growing brands across the Philippines, Singapore and the USA — paid media, Shopify stores, creator programs and the AI workflows that tie them together. <strong>One person, one feedback loop.</strong></p>
       <div class="hero-ctas snap-in d4">
-        <a class="btn btn--primary magnet" href="#contact">Book a strategy call</a>
-        <a class="btn btn--ghost magnet" href="#work">View work ↓</a>
+        <a class="btn btn--primary magnet" href="contact.html">Book a strategy call</a>
+        <a class="btn btn--ghost magnet" href="work.html">View work →</a>
         <a class="btn btn--ghost magnet" href="assets/Carl-Gabriel-Piramo-CV.pdf" download>Download CV</a>
       </div>
       <ul class="hero-meta snap-in d5">
@@ -215,978 +271,147 @@
 </section>
 
 <!-- ============================================================
-     SERVICES
+     EXPLORE — one tile per page
      ============================================================ -->
-<section class="section section--alt" id="services">
+<section class="section section--alt" id="explore">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow reveal">What I do</p>
-      <h2 class="hook" data-split>Four growth levers. <em>One operator.</em></h2>
-      <p class="lede reveal">Paid media, e-commerce, creators and AI automation — the four things a growing brand usually splits across four vendors. I run them as one system.</p>
+      <p class="eyebrow reveal">Explore</p>
+      <h2 class="hook" data-split>Everything, <em>one click away.</em></h2>
     </div>
 
-    <div class="svc-grid" data-stagger="90">
-      <article class="svc card card--lift">
+    <div class="bento" data-stagger="80">
+      <article class="tile tile--work card card--lift">
+        <div class="bento-video">
+          <video src="assets/video/reel-02-ugc-supplement.mp4" muted loop playsinline preload="none" poster="assets/video/posters/reel-02-ugc-supplement.jpg" aria-label="Preview reel: UGC-style beauty product ad"></video>
+          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause the preview reel">
+            <svg class="i-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+            <svg class="i-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10-6.5a1 1 0 0 0 0-1.72l-10-6.5A1 1 0 0 0 8 5.5Z"/></svg>
+          </button>
+          <span class="vframe-bar" aria-hidden="true"><i></i></span>
+        </div>
+        <div class="tile-body">
+          <span class="chip chip--accent">Selected work</span>
+          <h3 class="tile-title"><a class="tile-link" href="work.html"><span data-vt="vt-work">Growth needs fuel. <em>I make mine in-house.</em></span></a></h3>
+          <p class="tile-meta">8 videos · 10 static creatives</p>
+          <span class="tile-go" aria-hidden="true">See the work →</span>
+        </div>
+      </article>
+
+      <article class="tile tile--results card card--lift">
         <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
-        <span class="chip chip--accent">Paid media</span>
-        <h3 class="card-title">Meta ads that scale what wins</h3>
-        <p>Media buying, structured creative testing and retargeting. ROAS, CPA and funnel analysis guide every budget move — and Pixel + Conversions API tracking keeps delivery honest.</p>
-        <ul class="svc-tags">
-          <li>Media buying</li>
-          <li>Creative testing</li>
-          <li>Retargeting</li>
-          <li>Pixel &amp; CAPI</li>
+        <h3 class="tile-title"><a class="tile-link" href="results.html"><span data-vt="vt-results">Results</span></a></h3>
+        <p class="stat-num"><span class="pre">$</span><span class="val" data-count="3.8">3.8</span><span class="suf">M</span></p>
+        <p class="tile-label">Shopify sales in one day</p>
+        <ul class="tile-list">
+          <li><b>8.71×</b> peak Meta ROAS</li>
+          <li><b>₱4.99M</b> TikTok Shop LIVE GMV</li>
         </ul>
+        <span class="tile-go" aria-hidden="true">See the proof →</span>
       </article>
-      <article class="svc card card--lift">
-        <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-        <span class="chip chip--blue">E-commerce</span>
-        <h3 class="card-title">Shopify stores built to convert</h3>
-        <p>Store setup, theme customization, landing pages, app integrations and CRO. Plus marketplace launches and sale events on TikTok Shop, Shopee and Lazada.</p>
-        <ul class="svc-tags">
-          <li>Shopify</li>
-          <li>CRO</li>
-          <li>TikTok Shop</li>
-          <li>Shopee</li>
-          <li>Lazada</li>
+
+      <article class="tile tile--dash card card--lift">
+        <span class="tile-shot" aria-hidden="true"><img src="assets/proof/proof-shopify-sales-day.jpg" alt="" width="1100" height="1076" loading="lazy" decoding="async"></span>
+        <div class="tile-body">
+          <h3 class="tile-title"><a class="tile-link" href="results.html#gallery">Dashboards</a></h3>
+          <p class="tile-meta">9 dashboards · names blurred</p>
+          <span class="tile-go" aria-hidden="true">Open the gallery →</span>
+        </div>
+      </article>
+
+      <article class="tile tile--services card card--lift">
+        <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></svg></span>
+        <h3 class="tile-title"><a class="tile-link" href="services.html"><span data-vt="vt-services">Four growth levers. <em>One operator.</em></span></a></h3>
+        <ul class="tile-chips">
+          <li class="chip chip--accent">Paid media</li>
+          <li class="chip chip--blue">E-commerce</li>
+          <li class="chip chip--win">Social &amp; creators</li>
+          <li class="chip">AI &amp; search</li>
         </ul>
+        <span class="tile-go" aria-hidden="true">How I work →</span>
       </article>
-      <article class="svc card card--lift">
-        <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-        <span class="chip chip--win">Social &amp; creators</span>
-        <h3 class="card-title">A content engine that never runs dry</h3>
-        <p>UGC strategy and briefs, creator recruitment, short-form editing and influencer &amp; affiliate programs across TikTok, Instagram, Facebook, YouTube and Pinterest.</p>
-        <ul class="svc-tags">
-          <li>UGC strategy</li>
-          <li>Short-form</li>
-          <li>Affiliates</li>
-          <li>Community</li>
-        </ul>
+
+      <article class="tile tile--exp card card--lift">
+        <span class="chip chip--win">Current</span>
+        <h3 class="tile-title"><a class="tile-link" href="about.html#experience">Experience</a></h3>
+        <p class="tile-label">Now: Digital Marketing Manager · SKYHEGLOBAL</p>
+        <p class="tile-meta">3+ years · PH · SG · USA</p>
+        <span class="tile-go" aria-hidden="true">Where the numbers came from →</span>
       </article>
-      <article class="svc card card--lift">
-        <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></svg></span>
-        <span class="chip">AI &amp; search</span>
-        <h3 class="card-title">Automation that does the busywork</h3>
-        <p>n8n workflows, an AI SEO agent that audits and fixes stores through the Shopify Admin API, and SEO, GEO and AEO so your brand shows up in search and in AI answers.</p>
-        <ul class="svc-tags">
-          <li>n8n</li>
-          <li>AI SEO agent</li>
-          <li>SEO</li>
-          <li>GEO</li>
-          <li>AEO</li>
-          <li>AI video</li>
-        </ul>
-      </article>
-    </div>
 
-    <figure class="loop reveal">
-      <div class="loop-scroll">
-      <svg viewBox="0 0 680 160" role="img" aria-label="The growth loop: creative feeds ads, ads feed the store, store data feeds the next creative">
-        <defs>
-          <marker id="loopArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
-            <path d="M0 0L8 4L0 8z" fill="#9E99C6"/>
-          </marker>
-          <path id="loopPathA" d="M160 67 L258 67"/>
-          <path id="loopPathB" d="M375 67 L473 67"/>
-          <path id="loopPathC" d="M545 95 C545 140, 85 140, 85 95"/>
-        </defs>
-        <g class="loop-arrows" stroke="#9E99C6" fill="none" stroke-width="1.5">
-          <use class="flow" href="#loopPathA" marker-end="url(#loopArrow)"/>
-          <use class="flow" href="#loopPathB" marker-end="url(#loopArrow)"/>
-          <use class="flow flow--return" href="#loopPathC" marker-end="url(#loopArrow)"/>
-        </g>
-        <g class="loop-nodes" font-family="'Martian Mono', monospace" font-size="12" letter-spacing="2">
-          <g class="node node--creative">
-            <rect x="10" y="45" width="150" height="44" rx="22" fill="none" stroke="#FF4D5E"/>
-            <text x="85" y="72" text-anchor="middle" fill="#FF4D5E">CREATIVE</text>
-          </g>
-          <g class="node node--ads">
-            <rect x="265" y="45" width="110" height="44" rx="22" fill="none" stroke="#6C8BFF"/>
-            <text x="320" y="72" text-anchor="middle" fill="#6C8BFF">ADS</text>
-          </g>
-          <g class="node node--store">
-            <rect x="480" y="45" width="130" height="44" rx="22" fill="none" stroke="#F4F2FC"/>
-            <text x="545" y="72" text-anchor="middle" fill="#F4F2FC">STORE</text>
-          </g>
-        </g>
-        <text class="loop-label" x="315" y="150" text-anchor="middle" font-family="'Martian Mono', monospace" font-size="10" letter-spacing="2" fill="#9E99C6">DATA</text>
-        <g class="loop-packets">
-          <circle class="packet packet--a" r="3.5" fill="#FF4D5E">
-            <animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#loopPathA"/></animateMotion>
-          </circle>
-          <circle class="packet packet--b" r="3.5" fill="#6C8BFF">
-            <animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite"><mpath href="#loopPathB"/></animateMotion>
-          </circle>
-          <circle class="packet packet--c" r="3.5" fill="#F4F2FC">
-            <animateMotion dur="4.2s" begin="1.6s" repeatCount="indefinite"><mpath href="#loopPathC"/></animateMotion>
-          </circle>
-        </g>
-      </svg>
-      </div>
-      <figcaption>The loop most brands split across three vendors. <strong>I run the whole thing.</strong></figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ============================================================
-     WORK
-     ============================================================ -->
-<section class="section" id="work">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow reveal">Selected work</p>
-      <h2 class="hook" data-split>Growth needs fuel. <em>I make mine in-house.</em></h2>
-      <p class="lede reveal">UGC-style spots, TikTok-native edits and AI-assisted video — built to hook in the first second and feed the campaigns I run. No waiting on someone else's creative.</p>
-    </div>
-
-    <div class="work-tabs seg reveal" role="group" aria-label="Filter work">
-      <span class="seg-ind" aria-hidden="true"></span>
-      <button class="work-tab seg-btn is-active" type="button" data-filter="all" aria-pressed="true">All work</button>
-      <button class="work-tab seg-btn" type="button" data-filter="video" aria-pressed="false">Video</button>
-      <button class="work-tab seg-btn" type="button" data-filter="static" aria-pressed="false">Static</button>
-    </div>
-
-    <div class="work-group" data-group="video">
-      <div class="reel-track" data-stagger="70" tabindex="0" role="region" aria-label="Video reel - scrolls horizontally">
-        <figure class="vframe">
-          <span class="chip chip--accent">UGC</span>
-          <video src="assets/video/reel-02-ugc-supplement.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-02-ugc-supplement.jpg" aria-label="UGC-style beauty product ad"></video>
-          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: UGC-style beauty product ad"></button>
-          <span class="vframe-bar" aria-hidden="true"><i></i></span>
-        </figure>
-        <figure class="vframe">
-          <span class="chip chip--accent">Offer promo</span>
-          <video src="assets/video/reel-03-offer-promo.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-03-offer-promo.jpg" aria-label="New collection offer promo edit"></video>
-          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: New collection offer promo edit"></button>
-          <span class="vframe-bar" aria-hidden="true"><i></i></span>
-        </figure>
-        <figure class="vframe">
-          <span class="chip chip--accent">GRWM</span>
-          <video src="assets/video/reel-04-grwm.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-04-grwm.jpg" aria-label="Get-ready-with-me beauty video"></video>
-          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Get-ready-with-me beauty video"></button>
-          <span class="vframe-bar" aria-hidden="true"><i></i></span>
-        </figure>
-        <figure class="vframe">
-          <span class="chip chip--accent">Product demo</span>
-          <video src="assets/video/reel-05-product-demo.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-05-product-demo.jpg" aria-label="Beauty product demo close-up"></video>
-          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Beauty product demo close-up"></button>
-          <span class="vframe-bar" aria-hidden="true"><i></i></span>
-        </figure>
-        <figure class="vframe">
-          <span class="chip chip--accent">Mini vlog</span>
-          <video src="assets/video/reel-01-mini-vlog.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-01-mini-vlog.jpg" aria-label="Mini vlog lifestyle edit"></video>
-          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Mini vlog lifestyle edit"></button>
-          <span class="vframe-bar" aria-hidden="true"><i></i></span>
-        </figure>
-        <figure class="vframe">
-          <span class="chip chip--accent">Brand film</span>
-          <video src="assets/video/reel-07-brand-film.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-07-brand-film.jpg" aria-label="Fashion brand film"></video>
-          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Fashion brand film"></button>
-          <span class="vframe-bar" aria-hidden="true"><i></i></span>
-        </figure>
-        <figure class="vframe">
-          <span class="chip chip--accent">Fashion edit</span>
-          <video src="assets/video/reel-06-fashion-edit.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-06-fashion-edit.jpg" aria-label="Black and white fashion edit"></video>
-          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Black and white fashion edit"></button>
-          <span class="vframe-bar" aria-hidden="true"><i></i></span>
-        </figure>
-        <figure class="vframe">
-          <span class="chip chip--accent">Style edit</span>
-          <video src="assets/video/reel-08-style-edit.mp4" muted loop playsinline preload="metadata" poster="assets/video/posters/reel-08-style-edit.jpg" aria-label="Street style edit"></video>
-          <button type="button" class="vframe-toggle" aria-pressed="false" aria-label="Play or pause: Street style edit"></button>
-          <span class="vframe-bar" aria-hidden="true"><i></i></span>
-        </figure>
-      </div>
-    </div>
-
-    <div class="work-group stills" data-group="static">
-      <h3 class="reveal">Static creatives</h3>
-      <p class="reveal">Posts and product graphics that keep a brand's feed selling between videos.</p>
-      <div class="stills-track" data-stagger="50" data-stagger-class="reveal--pop" tabindex="0" role="region" aria-label="Static creatives - scrolls horizontally">
-        <figure class="still"><img src="assets/media/still-01.png" alt="Sunscreen ad - blue tube in a water splash with 12-hour UVA/UVB protection callouts" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-02.png" alt="Vitamin C serum product-benefits graphic - dropper bottle with revitalizing, brightening, hydrating and plumping callouts" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-03.png" alt="Skin care online shopping day ad - three bottles on a podium with 50% off pre-order offer" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-04.png" alt="Beauty skin care serum ad on orange background with tropical leaves and benefit bubbles" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-05.png" alt="New serum launch graphic - gold serum bottle on a stone with pure-ingredient callouts" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-06.png" alt="Pink serum dropper ad with zero irritants, fragrance-free, colorant-free and all-skin-types badges" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-07.png" alt="Summer sale collection ad - buy one get one on cleansing foam and beauty lotion" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-08.png" alt="Beauty skin care ad - three white cream jars on a podium with shop now button" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-09.png" alt="Product features graphic - skincare set with fast absorption, natural ingredients and non-clogging callouts" loading="lazy" width="400" height="400"></figure>
-        <figure class="still"><img src="assets/media/still-10.png" alt="Beauty skin care ad - green serum bottle on a plinth with palm leaves and benefit callouts" loading="lazy" width="400" height="400"></figure>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     PROOF
-     ============================================================ -->
-<section class="section section--alt" id="proof">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow reveal">Proof</p>
-      <h2 class="hook" data-split>Numbers from Ads Manager, <em>not a pitch deck.</em></h2>
-      <p class="lede reveal">Selected results from the stores, marketplaces and ad accounts I've run. The raw dashboards are in the gallery below.</p>
-    </div>
-
-    <div class="result-grid" data-stagger="100">
-      <article class="result card tilt">
-        <span class="chip chip--win">ROAS lift</span>
-        <span class="res-num"><span class="from">1.4× →</span><b>3.2</b><span class="suf">×</span></span>
-        <span class="res-k">Shopify rebuild + Meta restructure</span>
-        <p class="res-d">Rebuilt the store for conversion and restructured the campaigns around sales objectives. <strong>ROAS more than doubled.</strong></p>
-      </article>
-      <article class="result card tilt">
-        <span class="chip chip--accent">Peak performance</span>
-        <span class="res-num"><b>8.71</b><span class="suf">×</span></span>
-        <span class="res-k">Peak Meta ROAS · 4.9× blended</span>
-        <p class="res-d">Structured creative testing: losing hooks die fast and cheap, winners get budget the same week. <strong>Across every managed account.</strong></p>
-      </article>
-      <article class="result card tilt">
-        <span class="chip chip--blue">Tracking fix</span>
-        <span class="res-num"><span class="from">Stalled →</span><span class="suf">Live</span></span>
-        <span class="res-k">Pixel + Conversions API</span>
-        <p class="res-d">Implemented Meta Pixel and Conversions API tracking to <strong>restore delivery on stalled ad accounts</strong> — then rebuilt the campaigns around what the data showed.</p>
-      </article>
-      <article class="result card tilt">
-        <span class="chip chip--accent">Creator campaign</span>
-        <span class="res-num"><b>100</b><span class="suf">M+</span></span>
-        <span class="res-k">Views per month · by month two</span>
-        <p class="res-d">A UGC-creator campaign that hit <strong>100M+ views a month by its second month live.</strong> Right creators, right hooks, tested fast — reach compounds.</p>
-      </article>
-    </div>
-
-    <div class="proof-tabs">
-      <div class="proof-tablist seg reveal" role="tablist" aria-label="Results by channel">
-        <span class="seg-ind" aria-hidden="true"></span>
-        <button class="proof-tab seg-btn is-active" type="button" role="tab" id="ptab-ecom" aria-selected="true" aria-controls="ppanel-ecom" tabindex="0">E-commerce</button>
-        <button class="proof-tab seg-btn" type="button" role="tab" id="ptab-meta" aria-selected="false" aria-controls="ppanel-meta" tabindex="-1">Meta Ads</button>
-        <button class="proof-tab seg-btn" type="button" role="tab" id="ptab-social" aria-selected="false" aria-controls="ppanel-social" tabindex="-1">Social</button>
-      </div>
-      <div class="proof-panel" id="ppanel-ecom" role="tabpanel" aria-labelledby="ptab-ecom" tabindex="0">
-        <div class="proof-grid proof-grid--3">
-            <article class="stat stat--hl card card--lift">
-              <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-              <span class="stat-num"><span class="pre">$</span><span class="val" data-count="3.8">3.8</span><span class="suf">M</span></span>
-              <span class="stat-label">Shopify sales in one day<i>+268% vs. the comparison day</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2.67-1.5L9.33 22 12 20.5 14.67 22l2.66-1.5L20 22V2l-2.67 1.5L14.67 2 12 3.5 9.33 2 6.67 3.5Z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="99843">99,843</span></span>
-              <span class="stat-label">Orders in one day<i>Same Shopify store, same day</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="10.1">10.1</span><span class="suf">%</span></span>
-              <span class="stat-label">Store conversion rate<i>On the $3.8M day</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
-              <span class="stat-num"><span class="pre">$</span><span class="val" data-count="1.24">1.24</span><span class="suf">M</span></span>
-              <span class="stat-label">Shopify sales in 7 days<i>+67% vs. the previous week</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07Z"/></svg></span>
-              <span class="stat-num"><span class="pre">₱</span><span class="val" data-count="4.99">4.99</span><span class="suf">M</span></span>
-              <span class="stat-label">TikTok Shop LIVE GMV<i>5.34K items sold · 5.78% CTR</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 4.5 4h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 11.6V20h14v-8.4"/><path d="M10 20v-5h4v5"/></svg></span>
-              <span class="stat-num"><span class="pre">₱</span><span class="val" data-count="1.66">1.66</span><span class="suf">M</span></span>
-              <span class="stat-label">Shopee promo sales in a month<i>Aug 2026 · +57.7% month over month</i></span>
-            </article>
+      <article class="tile tile--contact card">
+        <div>
+          <p class="eyebrow">Let's talk</p>
+          <h3 class="tile-title tile-title--xl"><a class="tile-link" href="contact.html"><span data-vt="vt-contact">Your next winning ad is <em>one call away.</em></span></a></h3>
         </div>
-        <a class="proof-to-gal" href="#gallery" data-gal-filter="ecom">See the e-commerce dashboards <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="proof-panel" id="ppanel-meta" role="tabpanel" aria-labelledby="ptab-meta" tabindex="0" hidden>
-        <div class="proof-grid proof-grid--4">
-            <article class="stat stat--hl card card--lift">
-              <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-              <span class="stat-num"><span class="pre">₱</span><span class="val" data-count="580">580</span><span class="suf">K+</span></span>
-              <span class="stat-label">Sales tracked<i>Purchase conversion value</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="216">216</span></span>
-              <span class="stat-label">Purchases driven<i>Across Meta campaigns</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="8.71">8.71</span><span class="suf">×</span></span>
-              <span class="stat-label">Peak ROAS<i>4.9× blended across all</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/><circle cx="7" cy="7" r="1.2"/></svg></span>
-              <span class="stat-num"><span class="pre">₱</span><span class="val" data-count="227">227</span></span>
-              <span class="stat-label">Lowest cost / purchase<i>Best-performing campaign</i></span>
-            </article>
-        </div>
-        <a class="proof-to-gal" href="#gallery" data-gal-filter="meta">See the Meta Ads Manager screenshots <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="proof-panel" id="ppanel-social" role="tabpanel" aria-labelledby="ptab-social" tabindex="0" hidden>
-        <div class="proof-grid proof-grid--3">
-            <article class="stat stat--hl card card--lift">
-              <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="52">52</span><span class="suf">M+</span></span>
-              <span class="stat-label">Total views<i>Across 5 platforms · dashboards in the gallery</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07Z"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="32.9">32.9</span><span class="suf">M</span></span>
-              <span class="stat-label">TikTok views<i>Short-form video</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16Zm0 1.44c-3.14 0-3.51.01-4.75.07-2.5.11-3.5 1.13-3.61 3.61-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.11 2.48 1.11 3.5 3.61 3.61 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c2.5-.11 3.5-1.13 3.61-3.61.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.11-2.48-1.11-3.5-3.61-3.61-1.24-.06-1.61-.07-4.75-.07Zm0 3.68a4.72 4.72 0 1 1 0 9.44 4.72 4.72 0 0 1 0-9.44Zm0 7.79a3.07 3.07 0 1 0 0-6.14 3.07 3.07 0 0 0 0 6.14Zm6.01-7.98a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="15.8">15.8</span><span class="suf">M</span></span>
-              <span class="stat-label">Instagram views<i>Reels &amp; posts</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07Z"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="2">2</span><span class="suf">M</span></span>
-              <span class="stat-label">Facebook views<i>Total video views</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="1.8">1.8</span><span class="suf">M</span></span>
-              <span class="stat-label">YouTube views<i>Long &amp; short form</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 0C5.4 0 .03 5.37.03 11.99c0 5.08 3.16 9.42 7.62 11.16-.11-.95-.2-2.4.04-3.44.22-.94 1.41-5.96 1.41-5.96s-.36-.72-.36-1.78c0-1.66.97-2.91 2.17-2.91 1.02 0 1.52.77 1.52 1.69 0 1.03-.65 2.57-.99 3.99-.29 1.19.6 2.16 1.77 2.16 2.13 0 3.77-2.24 3.77-5.49 0-2.86-2.06-4.87-5.01-4.87-3.41 0-5.41 2.56-5.41 5.2 0 1.03.39 2.14.89 2.74.1.12.11.22.08.34-.09.38-.29 1.2-.33 1.36-.05.22-.17.27-.4.16-1.5-.69-2.43-2.88-2.43-4.65 0-3.78 2.75-7.25 7.92-7.25 4.16 0 7.39 2.97 7.39 6.92 0 4.13-2.61 7.46-6.23 7.46-1.21 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15 1.12.35 2.31.53 3.57.53 6.62 0 11.99-5.37 11.99-11.99C24 5.37 18.64 0 12.02 0Z"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="178">178</span><span class="suf">K</span></span>
-              <span class="stat-label">Pinterest views<i>Pins &amp; idea pins</i></span>
-            </article>
-        </div>
-        <a class="proof-to-gal" href="#gallery" data-gal-filter="social">See the social analytics <span aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     GALLERY
-     ============================================================ -->
-<section class="section" id="gallery">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow reveal">Results gallery</p>
-      <h2 class="hook" data-split>The dashboards <em>behind the numbers.</em></h2>
-      <p class="lede reveal">Screenshots straight from Shopify, TikTok Shop, Shopee, Meta Ads Manager and the social analytics I report from. Store and account names are blurred for client confidentiality. Tap any screenshot to zoom in.</p>
-    </div>
-
-    <div class="gal-bar reveal">
-      <div class="gal-filters seg" role="group" aria-label="Filter screenshots">
-        <span class="seg-ind" aria-hidden="true"></span>
-        <button class="gal-filter seg-btn is-active" type="button" data-filter="all" aria-pressed="true">All <span class="gal-count">9</span></button>
-        <button class="gal-filter seg-btn" type="button" data-filter="ecom" aria-pressed="false">E-commerce <span class="gal-count">4</span></button>
-        <button class="gal-filter seg-btn" type="button" data-filter="meta" aria-pressed="false">Meta Ads <span class="gal-count">2</span></button>
-        <button class="gal-filter seg-btn" type="button" data-filter="social" aria-pressed="false">Social <span class="gal-count">3</span></button>
-      </div>
-      <p class="gal-status mono-line" aria-live="polite">Showing 9 of 9 screenshots</p>
-    </div>
-
-    <div class="gal-grid" data-stagger="70">
-        <a class="gal-item card card--lift" href="assets/proof/proof-shopify-sales-day.jpg" data-cat="ecom" data-platform="Shopify" data-title="$3.8M in one day" data-desc="Shopify · 99,843 orders · 10.1% conversion · +268%">
-          <span class="gal-thumb"><img src="assets/proof/proof-shopify-sales-day.jpg" alt="Shopify dashboard, $3.8M in one day: total sales up 268%, 99,843 orders (up 234%) and a 10.1% conversion rate" width="1100" height="1076" loading="lazy" decoding="async"></span>
-          <span class="chip chip--win gal-chip" aria-hidden="true">Shopify</span>
-          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
-          <span class="gal-cap" aria-hidden="true"><b>$3.8M in one day</b><span>Shopify · 99,843 orders · 10.1% conversion · +268%</span></span>
-        </a>
-        <a class="gal-item card card--lift" href="assets/proof/proof-shopify-sales-week.jpg" data-cat="ecom" data-platform="Shopify" data-title="$1.24M in 7 days" data-desc="Shopify · Sep 7–14, 2026 · +67% vs. the previous week">
-          <span class="gal-thumb"><img src="assets/proof/proof-shopify-sales-week.jpg" alt="Shopify analytics, $1.24M in 7 days: total sales of $1,242,548.17 for Sep 7–14, 2026, up 67% on Aug 30–Sep 6" width="1100" height="1221" loading="lazy" decoding="async"></span>
-          <span class="chip chip--win gal-chip" aria-hidden="true">Shopify</span>
-          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
-          <span class="gal-cap" aria-hidden="true"><b>$1.24M in 7 days</b><span>Shopify · Sep 7–14, 2026 · +67% vs. the previous week</span></span>
-        </a>
-        <a class="gal-item gal-item--wide card card--lift" href="assets/proof/proof-shopee-promo.jpg" data-cat="ecom" data-platform="Shopee" data-title="₱1.66M promo sales in a month" data-desc="Shopee · Aug 2026 · 1,853 orders · +57.7% month over month">
-          <span class="gal-thumb"><img src="assets/proof/proof-shopee-promo.jpg" alt="Shopee discount promotion dashboard, ₱1.66M promo sales in a month: ₱1,659,758 in sales for August 2026 (up 57.70%), 1,853 orders, 2,230 units sold and 1,649 buyers" width="1584" height="664" loading="lazy" decoding="async"></span>
-          <span class="chip chip--win gal-chip" aria-hidden="true">Shopee</span>
-          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
-          <span class="gal-cap" aria-hidden="true"><b>₱1.66M promo sales in a month</b><span>Shopee · Aug 2026 · 1,853 orders · +57.7% month over month</span></span>
-        </a>
-        <a class="gal-item card card--lift" href="assets/proof/proof-tiktok-shop-live.jpg" data-cat="ecom" data-platform="TikTok Shop" data-title="₱4.99M LIVE GMV" data-desc="TikTok Shop · 5.34K items sold · 5.78% CTR">
-          <span class="gal-thumb"><img src="assets/proof/proof-tiktok-shop-live.jpg" alt="TikTok Shop LIVE and video analytics, ₱4.99M LIVE GMV: ₱4,998,252.87 LIVE-attributed GMV, 5.32K SKU orders, 5.34K items sold and a 5.78% click-through rate" width="1100" height="1146" loading="lazy" decoding="async"></span>
-          <span class="chip chip--win gal-chip" aria-hidden="true">TikTok Shop</span>
-          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
-          <span class="gal-cap" aria-hidden="true"><b>₱4.99M LIVE GMV</b><span>TikTok Shop · 5.34K items sold · 5.78% CTR</span></span>
-        </a>
-        <a class="gal-item card card--lift" href="assets/proof/proof-tiktok-youtube.jpg" data-cat="social" data-platform="TikTok &amp; YouTube" data-title="32.9M TikTok + 1.8M YouTube views" data-desc="Creator accounts · views per account">
-          <span class="gal-thumb"><img src="assets/proof/proof-tiktok-youtube.jpg" alt="TikTok and YouTube analytics, 32.9M TikTok + 1.8M YouTube views: views listed per creator account, account names blurred" width="711" height="665" loading="lazy" decoding="async"></span>
-          <span class="chip chip--accent gal-chip" aria-hidden="true">TikTok &amp; YouTube</span>
-          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
-          <span class="gal-cap" aria-hidden="true"><b>32.9M TikTok + 1.8M YouTube views</b><span>Creator accounts · views per account</span></span>
-        </a>
-        <a class="gal-item gal-item--wide card card--lift" href="assets/proof/proof-meta-ads-1.jpg" data-cat="meta" data-platform="Meta Ads" data-title="₱323,075 conversion value" data-desc="Sales campaigns · 6.99× average ROAS · 8.71× peak">
-          <span class="gal-thumb"><img src="assets/proof/proof-meta-ads-1.jpg" alt="Meta Ads Manager sales campaigns, ₱323,075 conversion value: 47 purchases, 6.99× average purchase ROAS and an 8.71× peak" width="2036" height="772" loading="lazy" decoding="async"></span>
-          <span class="chip chip--blue gal-chip" aria-hidden="true">Meta Ads</span>
-          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
-          <span class="gal-cap" aria-hidden="true"><b>₱323,075 conversion value</b><span>Sales campaigns · 6.99× average ROAS · 8.71× peak</span></span>
-        </a>
-        <a class="gal-item gal-item--wide card card--lift" href="assets/proof/proof-meta-ads-2.jpg" data-cat="meta" data-platform="Meta Ads" data-title="₱256,547 · 169 purchases" data-desc="Messaging-to-purchase campaigns · 3.58× average ROAS">
-          <span class="gal-thumb"><img src="assets/proof/proof-meta-ads-2.jpg" alt="Meta Ads Manager messaging-to-purchase campaigns, ₱256,547 · 169 purchases: 3.58× average purchase ROAS and a ₱227.06 lowest cost per purchase" width="2132" height="738" loading="lazy" decoding="async"></span>
-          <span class="chip chip--blue gal-chip" aria-hidden="true">Meta Ads</span>
-          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
-          <span class="gal-cap" aria-hidden="true"><b>₱256,547 · 169 purchases</b><span>Messaging-to-purchase campaigns · 3.58× average ROAS</span></span>
-        </a>
-        <a class="gal-item card card--lift" href="assets/proof/proof-instagram-pinterest.jpg" data-cat="social" data-platform="Instagram &amp; Pinterest" data-title="15.8M Instagram + 178K Pinterest views" data-desc="Creator accounts · views per account">
-          <span class="gal-thumb"><img src="assets/proof/proof-instagram-pinterest.jpg" alt="Instagram and Pinterest analytics, 15.8M Instagram + 178K Pinterest views: views listed per creator account, account names blurred" width="702" height="664" loading="lazy" decoding="async"></span>
-          <span class="chip chip--accent gal-chip" aria-hidden="true">Instagram &amp; Pinterest</span>
-          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
-          <span class="gal-cap" aria-hidden="true"><b>15.8M Instagram + 178K Pinterest views</b><span>Creator accounts · views per account</span></span>
-        </a>
-        <a class="gal-item card card--lift" href="assets/proof/proof-facebook.jpg" data-cat="social" data-platform="Facebook" data-title="2M Facebook views" data-desc="Pages · total views per page">
-          <span class="gal-thumb"><img src="assets/proof/proof-facebook.jpg" alt="Facebook analytics, 2M Facebook views: total views listed per page, page names blurred" width="340" height="662" loading="lazy" decoding="async"></span>
-          <span class="chip chip--accent gal-chip" aria-hidden="true">Facebook</span>
-          <span class="gal-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></span>
-          <span class="gal-cap" aria-hidden="true"><b>2M Facebook views</b><span>Pages · total views per page</span></span>
-        </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     EXPERIENCE
-     ============================================================ -->
-<section class="section section--alt" id="experience">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow reveal">Experience</p>
-      <h2 class="hook" data-split>Where the numbers <em>came from.</em></h2>
-      <p class="lede reveal">3+ years across paid media, Shopify growth and creator programs — for brands in the Philippines, Singapore and the USA.</p>
-    </div>
-
-    <div class="timeline">
-      <div class="tl-rail" aria-hidden="true"><i class="tl-progress"></i></div>
-
-      <article class="tl-item reveal reveal--left">
-        <div class="tl-meta">
-          <span class="tl-date">Jun 2026 — Present</span>
-          <span class="tl-place">Manila · reports to the CEO</span>
-          <span class="chip chip--win">Current</span>
-        </div>
-        <span class="tl-node" aria-hidden="true"></span>
-        <div class="tl-card card">
-          <header>
-            <h3 class="card-title">Digital Marketing Manager</h3>
-            <span class="chip chip--blue">Team lead</span>
-          </header>
-          <p class="tl-org">SKYHEGLOBAL, Inc.</p>
-          <ul class="tl-bullets">
-            <li>Lead digital marketing for <strong>Goli PH, Biolane PH and MaryRuth's PH</strong>, reporting to the CEO and coordinating with international brand teams.</li>
-            <li>Manage Meta media buying, creative testing and retargeting; use ROAS, cost per acquisition (CPA) and funnel analysis to guide budget decisions.</li>
-            <li>Restructured campaigns around sales objectives and implemented <strong>Meta Pixel and Conversions API</strong> tracking to restore delivery on stalled accounts.</li>
-            <li>Oversee three Shopify stores and marketplace promotions across <strong>TikTok Shop, Shopee and Lazada</strong>, including product launches and major sale events.</li>
-            <li>Lead e-commerce and affiliate teams, coordinating UGC briefs, content production, promotional calendars and performance reporting.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="tl-item reveal reveal--left">
-        <div class="tl-meta">
-          <span class="tl-date">2023 — Present</span>
-          <span class="tl-place">Independent · remote</span>
-        </div>
-        <span class="tl-node" aria-hidden="true"></span>
-        <div class="tl-card card">
-          <header>
-            <h3 class="card-title">Freelance Shopify &amp; Meta Ads Specialist</h3>
-          </header>
-          <p class="tl-org">Independent</p>
-          <ul class="tl-bullets">
-            <li>Deliver Shopify store setup, theme customization, landing pages, app integrations and <strong>conversion rate optimization</strong> (CRO) alongside Meta campaign management.</li>
-            <li>Built an <strong>AI SEO agent</strong> that audits stores, applies fixes through the Shopify Admin API and verifies that changes are live.</li>
-            <li>Research competitors and ad creatives to develop campaign angles, hooks and offers for client brands.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="tl-item reveal reveal--left">
-        <div class="tl-meta">
-          <span class="tl-date">Contract</span>
-          <span class="tl-place">Singapore · remote</span>
-        </div>
-        <span class="tl-node" aria-hidden="true"></span>
-        <div class="tl-card card">
-          <header>
-            <h3 class="card-title">Digital Marketing &amp; E-commerce</h3>
-          </header>
-          <p class="tl-org">SUPR and ONTHEGO</p>
-          <ul class="tl-bullets">
-            <li>Plan brand launches, Meta awareness campaigns and creative tests for <strong>premium nasal strips and sports nutrition</strong> products.</li>
-            <li>Develop UGC briefs and content angles; coordinate creator recruitment, Shopify preparation, offers and marketplace activity.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="tl-item reveal reveal--left">
-        <div class="tl-meta">
-          <span class="tl-date">Contract</span>
-          <span class="tl-place">Remote</span>
-        </div>
-        <span class="tl-node" aria-hidden="true"></span>
-        <div class="tl-card card">
-          <header>
-            <h3 class="card-title">E-commerce &amp; Marketing Specialist</h3>
-          </header>
-          <p class="tl-org">JP Franklin</p>
-          <ul class="tl-bullets">
-            <li>Managed growth strategy, campaign execution and marketing content for an <strong>automotive e-commerce</strong> company.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="tl-item reveal reveal--left">
-        <div class="tl-meta">
-          <span class="tl-date">Remote</span>
-          <span class="tl-place">USA · Philippines</span>
-        </div>
-        <span class="tl-node" aria-hidden="true"></span>
-        <div class="tl-card card">
-          <header>
-            <h3 class="card-title">Brand Operations &amp; Creator Support</h3>
-          </header>
-          <p class="tl-org">Goli Nutrition</p>
-          <ul class="tl-bullets">
-            <li>Supported brand, store and creator operations across <strong>Meta tools, analytics dashboards and content systems</strong>.</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-
-    <div class="earlier" data-stagger="90">
-      <div class="earlier-item">
-        <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>
-        <div class="earlier-text">
-          <span class="mono-line">Earlier · Aug 2024</span>
-          <h4>Front-End Developer Intern</h4>
-          <p>Kave Guild — built responsive interfaces from design files.</p>
-        </div>
-      </div>
-      <div class="earlier-item">
-        <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
-        <div class="earlier-text">
-          <span class="mono-line">Earlier · 2021 — 2024</span>
-          <h4>Graphic Designer</h4>
-          <p>Freelance and contract — campaign graphics and social assets.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="brands">
-      <h3 class="sub-head mono-line reveal">Brand portfolio</h3>
-      <div class="brands-grid" data-stagger="70">
-        <article class="brand-card card card--lift">
-          <h3>SUPR</h3>
-          <span class="brand-market">Singapore</span>
-          <p>Premium nasal strips</p>
-        </article>
-        <article class="brand-card card card--lift">
-          <h3>ONTHEGO</h3>
-          <span class="brand-market">Singapore</span>
-          <p>Sports nutrition</p>
-        </article>
-        <article class="brand-card card card--lift">
-          <h3>Goli Nutrition</h3>
-          <span class="brand-market">USA &amp; Philippines</span>
-          <p>Wellness supplements</p>
-        </article>
-        <article class="brand-card card card--lift">
-          <h3>Biolane</h3>
-          <span class="brand-market">Philippines</span>
-          <p>Baby care</p>
-        </article>
-        <article class="brand-card card card--lift">
-          <h3>MaryRuth's</h3>
-          <span class="brand-market">Philippines</span>
-          <p>Wellness supplements</p>
-        </article>
-        <article class="brand-card card card--lift">
-          <h3>JP Franklin</h3>
-          <span class="brand-market">Remote</span>
-          <p>Automotive e-commerce</p>
-        </article>
-      </div>
-      <p class="brands-note mono-line reveal">Additional client engagements are confidential.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     WHY ME
-     ============================================================ -->
-<section class="section" id="edge">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow reveal">Why me</p>
-      <h2 class="hook" data-split>Agencies play a telephone game. <em>You get one brain.</em></h2>
-      <p class="lede reveal">Same budget, fewer hand-offs — one person who makes the creative, runs the ads, reads the data and fixes the store, all in one feedback loop.</p>
-    </div>
-
-    <div class="edge-grid">
-      <div class="edge-copy reveal reveal--left">
-        <p>When your strategist, your media buyer, your creative team and your Shopify developer are four different vendors, feedback dies in a Slack thread. The ad account says hook #3 is winning; the next batch of creative never hears about it. The product page leaks half the traffic; nobody's job is to notice.</p>
-        <p>I've sat inside that machine — <strong>supporting brand, store and creator operations for Goli Nutrition</strong> inside a large-scale creator and performance-marketing ecosystem, and managing 300 UGC creators across campaigns that passed 1B+ views.</p>
-        <p>Now I run the whole loop myself. <strong>Every metric I see in Ads Manager shapes the next move — in the funnel, the budget, the creative and the store.</strong></p>
-        <ul class="pains" data-stagger="80">
-          <li>Your creative testing is random</li>
-          <li>Your CPA creeps up while your feed goes quiet</li>
-          <li>Your reports don't say what to make next</li>
-          <li>Your store leaks the traffic your ads pay for</li>
-        </ul>
-      </div>
-      <div class="ops-stack reveal reveal--right">
-        <figure>
-          <img src="assets/media/ops-02.png" alt="Meta Business Suite — scheduled posts queue" loading="lazy">
-          <figcaption>Real operations — content &amp; campaign systems I've run</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/media/ops-06.png" alt="Content planner spreadsheet with dates, creatives and captions" loading="lazy">
-          <figcaption>Content planning, daily</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <div class="versus" data-stagger="110">
-      <article class="vs vs--me card">
-        <header>
-          <span class="chip chip--accent">Hiring me</span>
-          <h3>One specialist, whole funnel</h3>
-        </header>
-        <ul class="vs-list vs-list--yes">
-          <li>One person owns strategy, creative, ads and the store</li>
-          <li>Every signal feeds the next test — the same week</li>
-          <li>You talk to the person doing the work, not an account manager</li>
-          <li>Short-form creative made in-house, on a schedule</li>
-          <li>One rate for the full funnel — no markup on your ad spend</li>
-        </ul>
-      </article>
-      <article class="vs vs--them card">
-        <header>
-          <span class="chip">The usual setup</span>
-          <h3>A hand-off chain</h3>
-        </header>
-        <ul class="vs-list vs-list--no">
-          <li>Strategy, creative, ads and the store split across vendors</li>
-          <li>Feedback dies between teams, so losing tests repeat</li>
-          <li>An account manager relays your notes second-hand</li>
-          <li>You wait on someone else to produce every asset</li>
-          <li>Retainers stack up and nobody owns the number</li>
-        </ul>
-      </article>
-    </div>
-
-    <div class="hire-cta reveal">
-      <a class="btn btn--primary magnet" href="#contact">Book a strategy call</a>
-      <span class="mono-line">Remote · works in your timezone · no pitch deck</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     PROCESS
-     ============================================================ -->
-<section class="section section--alt" id="process">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow reveal">How it works</p>
-      <h2 class="hook" data-split>From call to scaling <em>in four steps.</em></h2>
-    </div>
-
-    <div class="steps reveal" data-stagger="140">
-      <div class="steps-line" aria-hidden="true"><i></i></div>
-      <article class="step">
-        <span class="step-node" aria-hidden="true"></span>
-        <h3>Strategy call</h3>
-        <p>We map your store, offers, margins and what your ad account has already tried.</p>
-      </article>
-      <article class="step">
-        <span class="step-node" aria-hidden="true"></span>
-        <h3>Store &amp; creative sprint</h3>
-        <p>I fix what leaks on the store, then build the first batch of short-form ads and statics around the angles we agree on.</p>
-      </article>
-      <article class="step">
-        <span class="step-node" aria-hidden="true"></span>
-        <h3>Launch &amp; test</h3>
-        <p>Campaigns go live with structured tests and clean tracking. Weak variants die fast and cheap.</p>
-      </article>
-      <article class="step">
-        <span class="step-node" aria-hidden="true"></span>
-        <h3>Scale &amp; iterate</h3>
-        <p>Winners get budget; learnings feed the next sprint. You see everything.</p>
+        <span class="btn btn--primary" aria-hidden="true">Book a strategy call →</span>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     ABOUT
-     ============================================================ -->
-<section class="section" id="about">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-photo reveal reveal--scale">
-        <span class="chip chip--blue">The human</span>
-        <img src="assets/media/portrait-carl.png" alt="Carl Gabriel Piramo" loading="lazy" width="600" height="800">
-      </div>
-      <div class="about-copy">
-        <p class="eyebrow reveal">About</p>
-        <h2 class="hook" data-split>Carl Gabriel <em>Piramo.</em></h2>
-        <div class="about-text reveal">
-          <p>I'm a digital marketing and e-commerce manager with 3+ years across paid media, Shopify growth and creator programs for local and international brands. I lead campaign strategy, store optimization and affiliate teams, with brand experience across the Philippines, Singapore and the USA.</p>
-          <p>I came up inside large creator and performance-marketing teams, Goli Nutrition among them, and have managed 300 UGC creators across campaigns that passed 1B+ views. Today I lead digital marketing at Skyheglobal for <strong>Goli PH, Biolane PH and MaryRuth's PH</strong>, reporting directly to the CEO and running the e-commerce and affiliate teams behind three Shopify stores.</p>
-          <p>The Computer Science degree is the quiet advantage. I build n8n automations for reporting and content ops, wrote an AI SEO agent that audits and fixes stores through the Shopify Admin API, and produce AI video and imagery in-house. <strong>The marketing brain leads. The code just means I never wait on anyone to execute.</strong></p>
-        </div>
-        <ul class="about-facts mono-line reveal">
-          <li>Manila, Philippines</li>
-          <li>Remote worldwide</li>
-          <li><a href="https://carlgabriel1123.github.io/shopify-portfolio" target="_blank" rel="noopener">Shopify &amp; Meta Ads portfolio ↗</a></li>
-        </ul>
-        <div class="skills">
-          <div class="skill-group">
-            <h3>Marketing &amp; commerce</h3>
-            <ul class="chips" data-stagger="35" data-stagger-class="reveal--pop">
-              <li class="chip">Meta Ads Manager</li>
-              <li class="chip">Business Suite</li>
-              <li class="chip">Ad Library</li>
-              <li class="chip">Shopify</li>
-              <li class="chip">TikTok Ads Manager</li>
-              <li class="chip">TikTok Shop</li>
-              <li class="chip">Shopee Seller Centre</li>
-              <li class="chip">Lazada Seller Centre</li>
-              <li class="chip">Google Search Console</li>
-            </ul>
-          </div>
-          <div class="skill-group">
-            <h3>Creative &amp; automation</h3>
-            <ul class="chips" data-stagger="35" data-stagger-class="reveal--pop">
-              <li class="chip">n8n</li>
-              <li class="chip">Claude</li>
-              <li class="chip">CapCut</li>
-              <li class="chip">Canva</li>
-              <li class="chip">Higgsfield</li>
-              <li class="chip">ElevenLabs</li>
-              <li class="chip">Hootsuite</li>
-            </ul>
-          </div>
-          <div class="skill-group">
-            <h3>Technical</h3>
-            <ul class="chips" data-stagger="35" data-stagger-class="reveal--pop">
-              <li class="chip">Python</li>
-              <li class="chip">HTML · CSS · JavaScript</li>
-              <li class="chip">Node.js</li>
-              <li class="chip">Shopify Admin API</li>
-              <li class="chip">Linux VPS admin</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="edu-grid" data-stagger="120">
-      <article class="edu card card--lift">
-        <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 10v6"/></svg></span>
-        <h3 class="card-title">BS Computer Science</h3>
-        <p class="edu-meta">Notre Dame of Dadiangas University · 2021 — 2025</p>
-      </article>
-      <article class="edu card card--lift">
-        <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 13 17 22l-5-3-5 3 1.5-9"/></svg></span>
-        <h3 class="card-title">Certifications &amp; training</h3>
-        <ul class="edu-list">
-          <li>AI &amp; Natural Language Processing Capacity Building Program — National University</li>
-          <li>UI/UX Design — Google via Coursera</li>
-          <li>Instagram Marketing: Strategies &amp; Promotion — Udemy</li>
-          <li>Complete Online Marketing &amp; Advertising Course — Udemy</li>
-          <li>Prompt Engineering Pro (AI) — Udemy</li>
-        </ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     FAQ
-     ============================================================ -->
-<section class="section section--alt" id="faq">
-  <div class="wrap faq-wrap">
-    <div class="section-head">
-      <p class="eyebrow reveal">Before you book</p>
-      <h2 class="hook" data-split>The questions founders <em>ask first.</em></h2>
-    </div>
-
-    <div class="faq reveal">
-      <div class="faq-item">
-        <h3 class="faq-h">
-          <button class="faq-q" type="button" id="faq-q-1" aria-expanded="false" aria-controls="faq-p-1">
-            <span>Why one person instead of an agency?</span>
-            <span class="faq-mark" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-panel" id="faq-p-1" role="region" aria-labelledby="faq-q-1">
-          <div class="faq-body">
-            <p>With an agency, your strategist, media buyer, creative team and store developer are different people — and feedback dies between them. I run the whole loop: the creative, the ads, the data and the store. Every signal from Ads Manager shapes the next creative, the next budget and the next store fix the same week. <strong>One brain, one feedback loop.</strong></p>
-          </div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-h">
-          <button class="faq-q" type="button" id="faq-q-2" aria-expanded="false" aria-controls="faq-p-2">
-            <span>What do you need from me to start?</span>
-            <span class="faq-mark" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-panel" id="faq-p-2" role="region" aria-labelledby="faq-q-2">
-          <div class="faq-body">
-            <p>Access to your Shopify store and Meta ad account, your current offers and margins, and any brand assets you already have. If you sell on TikTok Shop, Shopee or Lazada, seller-centre access too. If you've run ads before, I'll want to see what's been tested. We cover all of it on the first call.</p>
-          </div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-h">
-          <button class="faq-q" type="button" id="faq-q-3" aria-expanded="false" aria-controls="faq-p-3">
-            <span>How soon can campaigns go live?</span>
-            <span class="faq-mark" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-panel" id="faq-p-3" role="region" aria-labelledby="faq-q-3">
-          <div class="faq-body">
-            <p>The first sprint fixes tracking first — Meta Pixel and Conversions API — so nothing launches blind. In parallel I produce the first batch of short-form ads and statics around the angles we agree on. Campaigns go live with structured tests as soon as that batch is ready, usually within the first week or two.</p>
-          </div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-h">
-          <button class="faq-q" type="button" id="faq-q-4" aria-expanded="false" aria-controls="faq-p-4">
-            <span>Do you work with my store size or niche?</span>
-            <span class="faq-mark" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-panel" id="faq-p-4" role="region" aria-labelledby="faq-q-4">
-          <div class="faq-body">
-            <p>I work best with Shopify and marketplace brands that already have a product selling and want a tighter creative-and-ads engine behind it. I've run growth for wellness supplements, baby care, sports nutrition, nasal strips and automotive brands across the Philippines, Singapore and the USA. Not sure you're a fit? Book the call and I'll tell you straight.</p>
-          </div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <h3 class="faq-h">
-          <button class="faq-q" type="button" id="faq-q-5" aria-expanded="false" aria-controls="faq-p-5">
-            <span>How does pricing work?</span>
-            <span class="faq-mark" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-panel" id="faq-p-5" role="region" aria-labelledby="faq-q-5">
-          <div class="faq-body">
-            <p>Every engagement starts with a strategy call — no pitch deck. From there I scope the work to your stage and goals, so pricing reflects what you actually need. <strong>You'll know exactly what you're paying for before we start.</strong></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CONTACT
-     ============================================================ -->
-<section class="section contact" id="contact">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow reveal">Let's talk</p>
-      <h2 class="hook" data-split>Your next winning ad is <em>one call away.</em></h2>
-      <p class="lede reveal">Tell me about your brand. I'll come to the call with first thoughts on your funnel, your store and your creative angles — not a pitch deck.</p>
-    </div>
-
-    <div class="contact-grid">
-      <div class="contact-info reveal reveal--left">
-        <a class="ci-row" href="mailto:piramocarlgabriel@gmail.com">
-          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>
-          <span class="ci-text"><b>Email</b>piramocarlgabriel@gmail.com</span>
-        </a>
-        <a class="ci-row" href="tel:+639261730117">
-          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span>
-          <span class="ci-text"><b>Phone</b>+63 926 173 0117</span>
-        </a>
-        <div class="ci-row">
-          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
-          <span class="ci-text"><b>Based in</b>Manila, Philippines · remote worldwide</span>
-        </div>
-        <a class="ci-row" href="assets/Carl-Gabriel-Piramo-CV.pdf" download>
-          <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg></span>
-          <span class="ci-text"><b>Résumé</b>Download CV (PDF)</span>
-        </a>
-        <div class="ci-social" role="group" aria-label="Social links">
-          <a href="https://www.instagram.com/crl.gbb" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16Zm0 1.44c-3.14 0-3.51.01-4.75.07-2.5.11-3.5 1.13-3.61 3.61-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.11 2.48 1.11 3.5 3.61 3.61 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c2.5-.11 3.5-1.13 3.61-3.61.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.11-2.48-1.11-3.5-3.61-3.61-1.24-.06-1.61-.07-4.75-.07Zm0 3.68a4.72 4.72 0 1 1 0 9.44 4.72 4.72 0 0 1 0-9.44Zm0 7.79a3.07 3.07 0 1 0 0-6.14 3.07 3.07 0 0 0 0 6.14Zm6.01-7.98a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg>
-          </a>
-          <a href="https://www.facebook.com/carl.gabriel.piramo" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07Z"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <form class="contact-form card reveal reveal--right" id="contactForm" novalidate aria-labelledby="cfTitle">
-        <h3 class="cf-title" id="cfTitle">Drop a line</h3>
-        <div class="cf-row">
-          <label>Your name
-            <input type="text" name="name" autocomplete="name" placeholder="Jane Founder" required>
-          </label>
-          <label>Email
-            <input type="email" name="email" autocomplete="email" placeholder="jane@brand.com" required>
-          </label>
-        </div>
-        <label>Brand / website
-          <input type="text" name="store" autocomplete="organization" placeholder="yourbrand.com">
-        </label>
-        <label>What do you need?
-          <textarea name="message" rows="4" placeholder="A bit about your brand, your offers, and where growth is stuck." required></textarea>
-        </label>
-        <button type="submit" class="btn btn--primary">Send message</button>
-        <p class="cf-note" id="cfNote" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-  </div>
-</section>
+<nav class="pager wrap" aria-label="More pages">
+  <a class="pager-next" href="work.html"><small>02 · Next →</small><b>Work</b></a>
+</nav>
 
 </main>
 
-<!-- ============================================================
-     FOOTER + FLOATING UI
-     ============================================================ -->
+<!-- shell:footer -->
 <footer class="footer">
-  <div class="wrap footer-inner">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="./">CARL<b>G.</b></a>
+      <p class="footer-tag">Digital Marketing &amp; E-commerce Growth Manager</p>
+      <div class="footer-social" role="group" aria-label="Social links">
+        <a href="https://www.instagram.com/crl.gbb" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16Zm0 1.44c-3.14 0-3.51.01-4.75.07-2.5.11-3.5 1.13-3.61 3.61-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.11 2.48 1.11 3.5 3.61 3.61 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c2.5-.11 3.5-1.13 3.61-3.61.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.11-2.48-1.11-3.5-3.61-3.61-1.24-.06-1.61-.07-4.75-.07Zm0 3.68a4.72 4.72 0 1 1 0 9.44 4.72 4.72 0 0 1 0-9.44Zm0 7.79a3.07 3.07 0 1 0 0-6.14 3.07 3.07 0 0 0 0 6.14Zm6.01-7.98a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/carl.gabriel.piramo" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <nav class="footer-col" aria-label="Pages">
+      <p class="footer-h">Pages</p>
+      <ul class="footer-links">
+        <li><a href="./">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="results.html">Results</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Jump to">
+      <p class="footer-h">Jump to</p>
+      <ul class="footer-links">
+        <li><a href="results.html#gallery">Gallery</a></li>
+        <li><a href="about.html#experience">Experience</a></li>
+        <li><a href="services.html#process">Process</a></li>
+        <li><a href="contact.html#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="footer-col">
+      <p class="footer-h">Contact</p>
+      <ul class="footer-contact">
+        <li><a href="mailto:piramocarlgabriel@gmail.com">piramocarlgabriel@gmail.com</a></li>
+        <li><a href="tel:+639261730117">+63 926 173 0117</a></li>
+        <li><a href="assets/Carl-Gabriel-Piramo-CV.pdf" download>Download CV (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-base">
     <span class="footer-copy">© <span id="year">2026</span> Carl Gabriel Piramo</span>
-    <ul class="footer-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
     <span class="footer-note">Manila · remote · working worldwide</span>
   </div>
 </footer>
 
-<a class="cta-dock" href="#contact" aria-label="Book a strategy call">Book a strategy call →</a>
-
 <button class="to-top" type="button" aria-label="Back to top">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
 </button>
+<!-- /shell:footer -->
 
-<dialog class="lightbox" id="lightbox" aria-labelledby="lbTitle">
-  <button class="lb-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-  <figure class="lb-figure">
-    <img class="lb-img" src="assets/proof/proof-shopify-sales-day.jpg" alt="" width="1100" height="1076" loading="lazy" decoding="async">
-    <figcaption class="lb-cap">
-      <span class="chip lb-chip"></span>
-      <b class="lb-title" id="lbTitle">Screenshot</b>
-      <span class="lb-desc"></span>
-    </figcaption>
-  </figure>
-  <div class="lb-bar">
-    <button class="lb-prev" type="button" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
-    <p class="lb-count" aria-live="polite">1 / 9</p>
-    <button class="lb-next" type="button" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
-  </div>
-</dialog>
-
-<script src="main.js?v=9"></script>
+<a class="cta-dock" href="contact.html" aria-label="Book a strategy call">Book a strategy call →</a>
+<script src="main.js?v=10"></script>
 </body>
 </html>
