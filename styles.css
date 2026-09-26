@@ -2,17 +2,18 @@
    Carl Gabriel Piramo — portfolio stylesheet
    Dark navy · one coral accent · Anton / Schibsted Grotesk / Martian Mono
    Sections:
-     00 Tokens            11 Proof
-     01 Base & reset      12 Gallery & lightbox
-     02 Type roles        13 Experience
-     03 Components        14 Why me
-     04 Ambient           15 Process
-     05 Nav               16 About
-     06 Hero              17 FAQ
-     07 Ticker            18 Contact
-     08 Stats             19 Footer, dock, to-top
-     09 Services & loop   20 Motion system
-     10 Work              21 Reduced motion
+     00 Tokens            11 Proof              22 Page banner
+     01 Base & reset      12 Gallery & lightbox 23 Jump-chips
+     02 Type roles        13 Experience         24 Home bento
+     03 Components        14 Why me             25 CTA band & pager
+     04 Ambient           15 Process            26 Page transitions
+     05 Nav               16 About              27 Touch & press states
+     06 Hero              17 FAQ                20 Motion system
+     07 Ticker            18 Contact            21 Reduced motion
+     08 Stats             19 Footer, dock, top
+     09 Services & loop
+     10 Work
+   22–27 sit before 20/21 so the motion and reduced-motion layers still come last.
    Rules: tokens once · one rule per concern · transform/opacity motion only
    (FAQ uses grid-template-rows, growth-loop arrows use stroke-dashoffset, and the
    segmented-control indicator animates width alongside transform, per spec)
@@ -53,6 +54,7 @@
   --ease:cubic-bezier(.2,.7,.2,1);
   --ease-out:cubic-bezier(.16,1,.3,1);
   --nav-h:66px;
+  --jump-h:61px; /* .jumpnav: 8 + 44 + 8 + 1px border */
   --wrap:1180px;
 }
 
@@ -85,6 +87,7 @@ strong,b{font-weight:700}
 ::selection{background:var(--accent);color:#fff}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 [id]{scroll-margin-top:calc(var(--nav-h) + 16px)}
+body.has-jump [id]{scroll-margin-top:calc(var(--nav-h) + var(--jump-h) + 16px)}
 [hidden]{display:none !important} /* filtered gallery items and inactive tab panels set display on their classes */
 
 .skip{
@@ -331,9 +334,11 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
   transition:transform .4s var(--ease-out);
 }
 .nav-links a:hover{color:var(--text)}
-.nav-links a.active{color:var(--text)}
-.nav-links a.active::after{transform:scaleX(1);transform-origin:left}
+.nav-links a.active,.nav-links a[aria-current="page"]{color:var(--text)}
+.nav-links a.active::after,.nav-links a[aria-current="page"]::after{transform:scaleX(1);transform-origin:left}
+.nav-home{display:none} /* Home shows only inside the mobile menu; the brand mark is Home on desktop */
 .nav-cta{margin-left:8px}
+.nav-cta[aria-current="page"]{box-shadow:0 0 0 2px rgba(244,242,252,.55),0 10px 30px rgba(var(--accent-rgb),.32)}
 
 .pagebar{position:absolute;left:0;right:0;bottom:-1px;height:2px;pointer-events:none}
 .pagebar i{
@@ -347,7 +352,7 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
   .nav-menu{
     position:absolute;top:100%;left:0;right:0;
     display:flex;flex-direction:column;
-    max-height:calc(100dvh - var(--nav-h));overflow-y:auto;
+    height:calc(100dvh - var(--nav-h));overflow-y:auto;
     padding:10px var(--pad) 24px;
     /* opaque on purpose: a backdrop-filter nested inside the nav's own backdrop-filter
        lets the hero bleed through the panel in Chromium */
@@ -358,7 +363,7 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
     transition:opacity .3s var(--ease),transform .4s var(--ease-out),visibility 0s linear .4s;
   }
   body.nav-open .nav-menu{opacity:1;visibility:visible;transform:none;transition-delay:0s}
-  body.nav-open{overflow:hidden}
+  html:has(body.nav-open){overflow:hidden} /* html carries overflow-x:clip: lock the root only; overflow on body would make it the sticky nav's scroll container */
   .nav-links{flex-direction:column;align-items:stretch;gap:0;margin:0}
   .nav-links li{
     opacity:0;transform:translateX(-14px);
@@ -366,9 +371,10 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
                transform .5s var(--ease-out) calc(var(--i,0) * 45ms + 80ms);
   }
   body.nav-open .nav-links li{opacity:1;transform:none}
-  .nav-links a{display:block;padding:14px 6px;font-size:13px;border-bottom:1px solid var(--edge-soft)}
+  .nav-links a{display:block;padding:18px 6px;font-size:15px;border-bottom:1px solid var(--edge-soft)}
   .nav-links a::after{left:6px;right:auto;width:28px;bottom:9px}
   .nav-cta{margin:16px 0 0;min-height:46px;align-self:stretch}
+  .nav-home{display:block}
 }
 
 
@@ -728,7 +734,7 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
 }
 
 .stills{margin-top:clamp(48px,7vw,72px)}
-.stills h3{
+.stills h2{
   font-family:var(--hook);font-weight:400;text-transform:uppercase;
   font-size:clamp(20px,2.4vw,28px);margin-bottom:8px;
 }
@@ -746,6 +752,18 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
 }
 .still img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease-out)}
 .still:hover img{transform:scale(1.05)}
+a.still{display:block;position:relative;color:var(--text)}
+a.still:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.still-zoom{
+  position:absolute;right:8px;bottom:8px;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:50%;
+  color:var(--text);background:rgba(18,17,42,.88);border:1px solid var(--edge);
+  opacity:0;transform:scale(.8);
+  transition:opacity .3s var(--ease),transform .4s var(--ease-out);
+}
+a.still:hover .still-zoom,a.still:focus-visible .still-zoom{opacity:1;transform:none}
+@media (hover:none){.still-zoom{opacity:1;transform:none}} /* touch: keep the zoom cue visible */
 
 
 /* ============================================================
@@ -812,8 +830,9 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
 }
 .seg-btn[aria-pressed="true"] .gal-count{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.28);color:#fff}
 
-/* grid: singles 4:3, wides span both columns at ~2.7:1 so every row has the same height */
-.gal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+/* grid: singles 4:3 (3 per row ≥1000px, 2 below), wides span the full row at ~2.7:1 */
+.gal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row dense;gap:18px}
+@media (min-width:1000px){.gal-grid{grid-template-columns:repeat(3,minmax(0,1fr))}} /* wides still span the full row */
 .gal-item{
   display:block;overflow:hidden;border-radius:var(--r-lg);
   text-decoration:none;color:var(--text);background:var(--panel);
@@ -1030,6 +1049,12 @@ html:has(.lightbox[open]),body.lb-open{overflow:hidden} /* scroll lock (html car
 }
 .brand-card p{color:var(--mute);font-size:15px}
 .brands-note{display:block;margin-top:20px}
+
+/* about.html: brands, skills and education are three blocks in one section */
+.brands:first-child{margin-top:0}
+.about-skills,.about-edu{margin-top:clamp(52px,7vw,84px)}
+.about-skills .skills{margin-top:0}
+.about-edu .edu-grid{margin-top:0}
 
 @media (max-width:860px){
   .timeline{--rail-x:14px}
@@ -1262,13 +1287,13 @@ a.ci-row:hover{border-color:rgba(var(--accent-rgb),.5);background:rgba(30,28,58,
   margin-bottom:3px;
 }
 .ci-social{display:flex;gap:10px;margin-top:6px}
-.ci-social a{
+.ci-social a,.footer-social a{
   display:inline-flex;align-items:center;justify-content:center;
   width:44px;height:44px;border-radius:50%;
   border:1px solid var(--edge);color:var(--mute);background:rgba(244,242,252,.03);
   transition:color .25s var(--ease),border-color .25s var(--ease),transform .3s var(--ease-out);
 }
-.ci-social a:hover{color:var(--text);border-color:var(--accent);transform:translateY(-3px)}
+.ci-social a:hover,.footer-social a:hover{color:var(--text);border-color:var(--accent);transform:translateY(-3px)}
 
 .contact-form{display:grid;gap:16px;padding:clamp(22px,3vw,32px)}
 .cf-title{font-family:var(--hook);font-weight:400;text-transform:uppercase;font-size:26px;line-height:1;margin-bottom:4px}
@@ -1306,18 +1331,35 @@ a.ci-row:hover{border-color:rgba(var(--accent-rgb),.5);background:rgba(30,28,58,
 /* ============================================================
    19 · FOOTER · DOCK · TO-TOP
    ============================================================ */
-.footer{border-top:1px solid var(--edge-soft);padding:32px 0 calc(76px + env(safe-area-inset-bottom))} /* content ends above the 66px to-top column */
-.footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px}
+.footer{border-top:1px solid var(--edge-soft);padding:48px 0 calc(76px + env(safe-area-inset-bottom))} /* content ends above the 66px to-top column */
+.footer-grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px 24px}
+.footer-brand{display:grid;gap:12px;align-content:start;justify-items:start}
+.footer-tag{color:var(--mute);font-size:14px;max-width:30ch}
+.footer-social{display:flex;gap:10px}
+.footer-h{
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);
+  margin-bottom:6px;
+}
+.footer-links,.footer-contact{display:grid}
+.footer-links a,.footer-contact a{
+  display:inline-flex;align-items:center;min-height:44px;padding:9px 0;
+  color:var(--mute);text-decoration:none;transition:color .25s var(--ease);
+}
+.footer-links a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.footer-contact a{font-size:14px;word-break:break-word}
+.footer-links a:hover,.footer-contact a:hover{color:var(--text)}
+@media (pointer:fine){.footer-links a,.footer-contact a{min-height:34px;padding:5px 0}}
+.footer-base{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;
+  margin-top:36px;padding-top:20px;border-top:1px solid var(--edge-soft);
+}
 .footer-copy,.footer-note{
   font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);
 }
-.footer-links{display:flex;flex-wrap:wrap;gap:0 20px}
-.footer-links a{
-  display:inline-flex;align-items:center;min-height:44px;padding:9px 0;
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--mute);text-decoration:none;transition:color .25s var(--ease);
+@media (max-width:860px){
+  .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .footer-brand{grid-column:1 / -1}
 }
-.footer-links a:hover{color:var(--text)}
 
 .cta-dock{
   position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;
@@ -1348,9 +1390,223 @@ a.ci-row:hover{border-color:rgba(var(--accent-rgb),.5);background:rgba(30,28,58,
   .cta-dock{display:flex}
   html{scroll-padding-bottom:calc(84px + env(safe-area-inset-bottom))} /* focused elements land above the dock */
   .to-top{right:16px;bottom:calc(84px + env(safe-area-inset-bottom))}
-  .footer-inner{flex-direction:column;align-items:flex-start;padding-bottom:64px}
+  .footer-base{flex-direction:column;align-items:flex-start;padding-bottom:64px}
   /* phones: drop per-frame backdrop re-blur under the drifting glows; card fill is already .42-.5 alpha over flat navy */
   .card,.float-pill{backdrop-filter:none;-webkit-backdrop-filter:none}
+}
+
+
+/* ============================================================
+   22 · PAGE BANNER — inner-page header: index · h1 · lede
+   ============================================================ */
+.page-hero{
+  position:relative;overflow:clip;
+  padding:clamp(40px,6.5vw,92px) 0 clamp(36px,5vw,60px);
+  border-bottom:1px solid var(--edge-soft);
+}
+.page-hero .wrap{position:relative}
+.page-hero .eyebrow{margin-bottom:20px}
+.ph-index{color:var(--accent);font-weight:600}
+.ph-sep{color:var(--dim)}
+.page-title{font-size:clamp(40px,6.2vw,80px);line-height:.98;max-width:18ch}
+.page-hero .lede{margin-top:20px}
+.page-hero .hero-ctas{margin:28px 0 0}
+/* the first section under a banner (or its chips) needs less top padding */
+.page-hero + .section,.jumpnav + .section{padding-top:clamp(40px,6vw,76px)}
+
+
+/* ============================================================
+   23 · JUMP-CHIPS — sticky in-page navigation (Results, Services, About)
+   ============================================================ */
+.jumpnav{
+  position:sticky;top:var(--nav-h);z-index:45;
+  background:rgba(18,17,42,.9);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--edge-soft);
+}
+/* the nav slides away on scroll-down (05): the chips follow it up to the top edge.
+   `top` only takes effect once the element is stuck, so this must move the sticky
+   offset rather than translate the box (a translate would apply in normal flow too,
+   before the chips reach their sticky top, and shift them out of their slot). */
+.nav--hidden ~ main .jumpnav{top:0}
+.jumpnav-list{
+  display:flex;align-items:center;gap:8px;
+  width:100%;max-width:var(--wrap);margin-inline:auto;padding:8px var(--pad);
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;scroll-padding-inline:var(--pad);scrollbar-width:none;
+}
+.jumpnav-list::-webkit-scrollbar{display:none}
+.jumpnav-list li{flex:none;scroll-snap-align:start}
+.jumpnav a{
+  display:inline-flex;align-items:center;min-height:44px;padding:10px 16px;border-radius:999px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;
+  color:var(--mute);text-decoration:none;
+  background:rgba(244,242,252,.03);border:1px solid var(--edge);
+  transition:color .25s var(--ease),border-color .25s var(--ease),background-color .25s var(--ease),box-shadow .25s var(--ease);
+}
+.jumpnav a:hover{color:var(--text);border-color:var(--mute)}
+.jumpnav a[aria-current="location"]{
+  color:#fff;border-color:transparent;
+  background:linear-gradient(135deg,var(--accent-btn),var(--accent-btn-deep));
+  box-shadow:0 8px 22px rgba(var(--accent-rgb),.3);
+}
+@media (max-width:760px){
+  /* phones: fade the right edge so a clipped chip reads as "swipe for more" */
+  .jumpnav-list{
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);
+            mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);
+  }
+}
+
+
+/* ============================================================
+   24 · HOME BENTO — "Explore" tiles, one per page
+   Each tile is a .card whose heading link stretches over the whole tile
+   (::after, z-index 2), so the tile is one tap target; the reel's pause
+   button (z-index 3) stays operable on top of it.
+   ============================================================ */
+.bento{
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-auto-rows:minmax(210px,auto);gap:18px;
+}
+.tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-width:0;padding:24px;overflow:hidden}
+.tile--work{grid-column:span 6;grid-row:span 2;justify-content:flex-end;min-height:440px;padding:0}
+.tile--results,.tile--dash,.tile--services,.tile--exp{grid-column:span 3}
+.tile--contact{
+  grid-column:1 / -1;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:18px 32px;padding:32px clamp(24px,4vw,44px);
+  border-color:rgba(var(--accent-rgb),.42);
+  background:linear-gradient(135deg,rgba(var(--accent-rgb),.26),rgba(30,28,58,.55) 70%);
+}
+.tile-title{font-family:var(--hook);font-weight:400;text-transform:uppercase;font-size:clamp(22px,2.2vw,28px);line-height:1.08;letter-spacing:.01em}
+.tile-title em{font-style:normal;color:var(--accent)}
+.tile--work .tile-title,.tile-title--xl{font-size:clamp(28px,3.4vw,44px)}
+.tile-link{color:inherit;text-decoration:none}
+.tile-link::after{content:'';position:absolute;inset:0;z-index:2;border-radius:inherit}
+.tile-link:focus-visible{outline:none}
+.tile:has(.tile-link:focus-visible){outline:2px solid var(--accent);outline-offset:4px}
+.tile-link [data-vt]{display:block} /* a named view-transition element must never fragment across lines */
+.tile-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.tile-label{font-size:15px;font-weight:500;line-height:1.4;color:var(--text)}
+.tile-list{display:grid;gap:6px;font-size:14px;color:var(--mute)}
+.tile-list b{font-weight:700;color:var(--text)}
+.tile-chips{display:flex;flex-wrap:wrap;gap:6px}
+.tile-go{
+  margin-top:auto;display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);
+  transition:transform .35s var(--ease-out),color .25s var(--ease);
+}
+.tile:hover .tile-go,.tile:has(.tile-link:focus-visible) .tile-go{transform:translateX(5px);color:var(--text)}
+.tile-body{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;padding:26px 26px 24px}
+/* work and dashboards tiles: stretch the body over the whole tile so .tile-link::after (which
+   takes .tile-body as its containing block) covers the full tap target, not just the copy strip */
+.tile--work .tile-body,.tile--dash .tile-body{flex:1 0 auto;align-self:stretch;justify-content:flex-end}
+/* work tile: the reel fills the tile, the copy sits on a gradient at the bottom */
+.bento-video{position:absolute;inset:0;z-index:auto;background:var(--panel)}
+.bento-video video{width:100%;height:100%;object-fit:cover}
+.bento-video::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(12,11,30,.05) 30%,rgba(12,11,30,.92))}
+.bento-video .vframe-toggle{
+  inset:auto;top:16px;right:16px;z-index:3;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:50%;
+  color:var(--text);background:rgba(18,17,42,.82);border:1px solid var(--edge);
+}
+.bento-video .vframe-toggle:focus-visible{outline-offset:2px;border-radius:50%}
+.bento-video .i-play,.bento-video [aria-pressed="false"] .i-pause{display:none}
+.bento-video [aria-pressed="false"] .i-play{display:block}
+.tile--work .tile-go{margin-top:6px}
+/* dashboards tile: a cropped screenshot behind the copy */
+.tile--dash{justify-content:flex-end;padding:0}
+.tile-shot{position:absolute;inset:0;z-index:0;overflow:hidden;background:var(--bg-2)}
+.tile-shot img{width:100%;height:100%;object-fit:cover;object-position:top left;transform-origin:30% 20%;opacity:.85;transition:transform .7s var(--ease-out)}
+.tile-shot::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,11,30,.1) 20%,rgba(12,11,30,.94))}
+.tile--dash:hover .tile-shot img{transform:scale(1.06)}
+.tile--dash .tile-body{padding:22px}
+.tile--dash .tile-go{margin-top:0} /* .tile-go's margin-top:auto would otherwise push the title to the top of the stretched body */
+/* contact tile: the visual button is decoration, the whole tile is the link */
+.tile--contact .eyebrow{margin-bottom:10px}
+.tile--contact .tile-title{max-width:22ch}
+.tile--contact .btn{position:relative;z-index:1;pointer-events:none}
+.tile--contact:hover .btn{box-shadow:0 16px 40px rgba(var(--accent-rgb),.48),inset 0 1px 0 rgba(255,255,255,.25)}
+
+@media (max-width:1000px){
+  .bento{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .tile--work{grid-column:1 / -1;grid-row:auto;min-height:400px}
+}
+@media (max-width:560px){
+  .bento{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto;gap:14px}
+  .tile--work,.tile--results,.tile--dash,.tile--services,.tile--exp{grid-column:1 / -1}
+  .tile--work{min-height:360px}
+  .tile--dash{min-height:220px}
+  .tile--contact{flex-direction:column;align-items:flex-start}
+  .tile--contact .btn{align-self:stretch}
+}
+
+
+/* ============================================================
+   25 · CTA BAND & PAGER — the end of every page
+   ============================================================ */
+.cta-band{
+  padding-block:clamp(56px,8vw,100px);text-align:center;
+  border-top:1px solid var(--edge-soft);
+  background:radial-gradient(60% 120% at 50% 110%,rgba(var(--accent-rgb),.16),transparent 70%);
+}
+.cta-band-inner{display:flex;flex-direction:column;align-items:center;gap:16px}
+.cta-band .eyebrow{margin-bottom:0}
+.cta-band .hook{font-size:clamp(30px,4.4vw,54px);max-width:18ch}
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding-block:28px 44px}
+.pager a{
+  display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-height:44px;
+  padding:18px 22px;border-radius:var(--r);
+  background:rgba(30,28,58,.5);border:1px solid var(--edge-soft);
+  color:var(--text);text-decoration:none;
+  transition:border-color .3s var(--ease),background-color .3s var(--ease),transform .35s var(--ease-out);
+}
+.pager a:hover{border-color:rgba(var(--accent-rgb),.5);background:rgba(30,28,58,.8)}
+.pager a.pager-next{grid-column:2;align-items:flex-end;text-align:right}
+.pager small{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.pager b{font-family:var(--hook);font-weight:400;font-size:clamp(20px,2.4vw,28px);letter-spacing:.01em;line-height:1.1;text-transform:uppercase}
+.pager-prev:hover{transform:translateX(-4px)}
+.pager-next:hover{transform:translateX(4px)}
+@media (max-width:520px){
+  .pager{grid-template-columns:minmax(0,1fr);gap:12px}
+  .pager a.pager-next{grid-column:1}
+}
+
+
+/* ============================================================
+   26 · PAGE TRANSITIONS — cross-document View Transitions
+   Chrome/Edge 126+ and Safari 18.2+ animate same-origin navigations; others
+   navigate normally. The nav holds still; the page slides up and in; a
+   Home tile title and its page <h1> morph (named by the <head> script).
+   ============================================================ */
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+}
+.nav{view-transition-name:site-nav}
+::view-transition-group(*){animation-duration:.45s;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+::view-transition-old(root){animation:vt-out .2s cubic-bezier(.4,0,1,1) both}
+::view-transition-new(root){animation:vt-in .36s cubic-bezier(.16,1,.3,1) both}
+@keyframes vt-out{to{opacity:0;transform:translateY(-12px)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(24px)}}
+
+
+/* ============================================================
+   27 · TOUCH & PRESS STATES
+   ============================================================ */
+html{-webkit-tap-highlight-color:transparent} /* replaced by the :active states below */
+@media (hover:none){
+  /* touch: a tap must not leave a sticky hover lift behind */
+  .card--lift:hover,.card--lift.in:hover,.vframe:hover,.vframe.in:hover,.still:hover img,a.ci-row:hover,
+  .hero-social a:hover,.ci-social a:hover,.footer-social a:hover,.pager-prev:hover,.pager-next:hover,
+  .tile:hover .tile-go,.tile--dash:hover .tile-shot img{transform:none}
+}
+/* press feedback, touch and mouse alike (iOS needs the no-op touchstart in main.js 22) */
+.btn:active,.seg-btn:active,.jumpnav a:active,.pager a:active,a.ci-row:active,.faq-q:active,
+.nav-links a:active,.footer-links a:active,.gal-item:active,a.still:active,.vframe:active,
+.tile:has(.tile-link:active){
+  scale:.97 !important; /* the separate `scale` property composes with any transform (magnet offset, hover lift) instead of replacing it */
+  transition:scale .12s var(--ease) !important;
 }
 
 
@@ -1380,12 +1636,19 @@ body.loaded .d5{transition-delay:.5s}
 .reveal--scale{transform:scale(.92)}
 .reveal--pop{transform:translateY(10px) scale(.9)}
 .reveal.in{opacity:1;transform:none}
-.card--lift.in:hover,.vframe.in:hover{transform:translateY(-6px)} /* hover lift must outrank .reveal.in */
+/* hover:hover keeps this from ever outranking the touch reset in 27 (same specificity, but 27 loses on source order otherwise) */
+@media (hover:hover){
+  .card--lift.in:hover,.vframe.in:hover{transform:translateY(-6px)} /* hover lift must outrank .reveal.in */
+}
 
 /* split-word headings */
 .is-split .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .04em .12em;margin:0 -.04em -.12em}
 .is-split .wi{display:inline-block;transform:translateY(112%);transition:transform .9s var(--ease-out)}
 .is-split.in .wi{transform:none}
+
+/* arriving through a page transition: the banner is already in place, skip its load choreography */
+.vt-arrive :is(.hero,.page-hero) .snap-in{opacity:1;transform:none;transition:none}
+.vt-arrive :is(.hero,.page-hero) .is-split .wi{transform:none;transition:none}
 
 /* keyframes */
 @keyframes drift-a{from{transform:translate(0,0)}to{transform:translate(-8vmax,10vmax)}}
@@ -1422,4 +1685,7 @@ body.loaded .d5{transition-delay:.5s}
   .card.tilt,.magnet,.float,.hv-stage{transform:none !important}
   .faq-body p{opacity:1;transform:none}
   .glow{opacity:.1}
+  .still-zoom,a.still:hover .still-zoom,.pager-prev:hover,.pager-next:hover,.tile:hover .tile-go,.tile--dash:hover .tile-shot img{transform:none}
+  :is(.btn,.seg-btn,.jumpnav a,.pager a,a.ci-row,.faq-q,.nav-links a,.footer-links a,.gal-item,a.still,.vframe):active,
+  .tile:has(.tile-link:active){transition:none !important}
 }
