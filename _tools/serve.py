@@ -93,7 +93,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if path == '/api/contact' and method == 'POST':
             length = int(self.headers.get('Content-Length') or 0)
             try:
-                body = json.loads(self.rfile.read(min(length, 12000)) or b'{}')
+                body = json.loads(self.rfile.read(min(length, 40000)) or b"{}")
             except ValueError:
                 return self._json(400, {'ok': False, 'error': 'invalid'})
             msg = str(body.get('message', ''))

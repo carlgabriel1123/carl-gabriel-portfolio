@@ -1,6 +1,6 @@
 'use strict';
 /* Tests for api/contact.js and api/health.js (node:test, no dependencies).
-   Run: node --test _tools/tests/
+   Run: node --test "_tools/tests/*.test.js"
    Supabase is never called: global fetch is replaced per test. */
 const test = require('node:test');
 const assert = require('node:assert/strict');
@@ -116,8 +116,24 @@ test('rejects a cross-site or missing Origin with 403', () => withEnv(ENV, async
 test('rejects non-JSON content types with 415 and oversized bodies with 413', () => withEnv(ENV, async () => {
   const h = load('contact.js');
   assert.equal((await run(h, { headers: { 'content-type': 'text/plain' } })).statusCode, 415);
-  const big = JSON.stringify(validBody({ message: 'x'.repeat(20000) }));
+  const big = JSON.stringify(validBody({ message: 'x'.repeat(50000) }));
   assert.equal((await run(h, { body: big })).statusCode, 413);
+  assert.equal((await run(h, { body: '', parsedBody: validBody({ message: 'x'.repeat(50000) }) })).statusCode, 413);
+}));
+
+test('saves the longest message the form allows, even in a 3-byte script', () => withEnv(ENV, async () => {
+  const calls = stubFetch(200, 'id');
+  const h = load('contact.js');
+  const longest = validBody({ name: '山'.repeat(120), store: '店'.repeat(200), message: '日'.repeat(5000) });
+  assert.ok(Buffer.byteLength(JSON.stringify(longest)) > 12000); // what the old limit wrongly refused
+  assert.equal((await run(h, { body: JSON.stringify(longest), ip: '10.0.2.1' })).statusCode, 200);
+  assert.equal((await run(h, { body: '', parsedBody: longest, ip: '10.0.2.2' })).statusCode, 200);
+  assert.equal(calls.length, 2);
+  assert.equal(JSON.parse(calls[0].init.body).p_message, '日'.repeat(5000));
+  // worst case: every character JSON-escaped to 6 bytes (\u0001) still fits
+  const escaped = validBody({ name: 'J' + '\u0001'.repeat(119), store: '\u0001'.repeat(200), message: 'M' + '\u0001'.repeat(4999) });
+  assert.ok(Buffer.byteLength(JSON.stringify(escaped)) > 30000);
+  assert.equal((await run(h, { body: JSON.stringify(escaped), ip: '10.0.2.3' })).statusCode, 200);
 }));
 
 test('rejects malformed JSON with 400', () => withEnv(ENV, async () => {

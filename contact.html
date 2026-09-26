@@ -163,9 +163,11 @@
         <label>What do you need?
           <textarea name="message" rows="4" placeholder="A bit about your brand, your offers, and where growth is stuck." maxlength="5000" required></textarea>
         </label>
-        <!-- bot trap: people never see or reach this field; a filled one is dropped by /api/contact -->
+        <!-- bot trap: people never see or reach this field; a filled one is dropped by /api/contact.
+             The DOM name must not match any autofill field (website, url, email, name, phone, company),
+             and the data-* opt-outs keep password managers from filling it. main.js sends it as "website". -->
         <div class="cf-hp" aria-hidden="true">
-          <label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          <label>Leave this field empty<input type="text" name="cf_extra" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true" data-bwignore data-form-type="other" data-protonpass-ignore></label>
         </div>
         <button type="submit" class="btn btn--primary">Send message</button>
         <p class="cf-note" id="cfNote" role="status" aria-live="polite"></p>

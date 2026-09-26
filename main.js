@@ -1376,7 +1376,11 @@
     var FIELDS = ['name', 'email', 'store', 'message'];
     var submitBtn = $('button[type="submit"]', form);
     var endpoint = form.getAttribute('data-endpoint'); // absent on a plain static host: mailto only
-    var shownAt = Date.now();
+    // monotonic where available, so a device clock change can't skew elapsed
+    var now = (window.performance && typeof performance.now === 'function')
+      ? function () { return performance.now(); } : Date.now;
+    var MIN_FILL = 1600;   // server drops elapsed < 1500 as a bot (api/contact.js MIN_FILL_MS)
+    var shownAt = now();
     var sending = false;
     var FIELD_MSG = {
       name: 'Please add your name (up to 120 characters).',
@@ -1417,7 +1421,12 @@
       sending = on;
       form.classList.toggle('is-sending', on);
       form.setAttribute('aria-busy', on ? 'true' : 'false');
-      if (submitBtn) submitBtn.disabled = on;
+      // aria-disabled, not disabled: disabling the focused button drops focus to <body>;
+      // the `sending` guard in the submit handler is what blocks a second send
+      if (submitBtn) {
+        if (on) submitBtn.setAttribute('aria-disabled', 'true');
+        else submitBtn.removeAttribute('aria-disabled');
+      }
     }
     function openMail(lead) {
       var subject = 'Strategy call — ' + (lead.store || lead.name);
@@ -1432,15 +1441,24 @@
 
     /* POST to /api/contact (saved in Supabase). Anything but a clear answer
        (network error, timeout, 5xx, no endpoint) falls back to the visitor's
-       email app with the message pre-filled, so a lead is never lost. */
+       email app with the message pre-filled, so a lead is never lost.
+       A person must never trip the server's fill-time trap (for example text the
+       browser restored after a reload, then an instant Send), so wait out the
+       rest of the window first. The wait is capped at MIN_FILL so it can't hang. */
     function send(lead) {
-      busy(true);
+      busy(true);   // stays set during the wait, so double submits are still blocked
       say('Sending…', true);
+      var wait = Math.min(MIN_FILL, MIN_FILL - (now() - shownAt));
+      if (wait > 0) { setTimeout(function () { post(lead); }, wait); return; }
+      post(lead);
+    }
+    function post(lead) {
       var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
       var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 12000) : null;
       var payload = {
         name: lead.name, email: lead.email, store: lead.store, message: lead.message,
-        page: window.location.pathname, website: value('website'), elapsed: Date.now() - shownAt
+        page: window.location.pathname, website: value('cf_extra'), // bot trap (contact.html .cf-hp)
+        elapsed: Math.max(0, Math.round(now() - shownAt))
       };
       function done() { if (timer) clearTimeout(timer); busy(false); }
       function fallback() {
@@ -1459,7 +1477,7 @@
         done();
         if (reply.status === 200 && reply.data.ok) {
           form.reset();
-          shownAt = Date.now();
+          shownAt = now();
           say('Thanks, ' + lead.name.split(/\s+/)[0] + '. Your message is in, and I’ll reply to ' + lead.email + '.', true);
           return;
         }
@@ -1467,10 +1485,8 @@
           flag(field(reply.data.field), FIELD_MSG[reply.data.field] || 'Please check the form and try again.');
           return;
         }
-        if (reply.status === 429) {
-          say('Too many messages right now. Please email me directly at piramocarlgabriel@gmail.com.', false);
-          return;
-        }
+        // 429 (rate limit or the site-wide flood cap), 5xx, anything unexpected:
+        // hand the message to the visitor's email app so the lead still arrives
         fallback();
       }).catch(function () {
         done();

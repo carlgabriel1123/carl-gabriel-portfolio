@@ -12,8 +12,11 @@
  *   200 {ok:true}                          saved (or a bot quietly dropped)
  *   400 {ok:false,error:'invalid',field}   fix that field and resend
  *   403 / 405 / 413 / 415                  not a same-site JSON POST
- *   429 {ok:false,error:'rate_limited'}    too many messages, show the email
- *   5xx                                    temporary: the form opens the visitor's email app instead
+ *   429 {ok:false,error:'rate_limited'}    per-IP limit or the site-wide database cap
+ *   5xx                                    temporary
+ * On a 429 or 5xx the form opens the visitor's email app with the message
+ * filled in, so a tripped cap never loses a lead. The database cap
+ * (20 per 10 minutes) stays as the storage backstop.
  *
  * Environment (Vercel → carlgabriel → Settings → Environment Variables):
  *   SUPABASE_URL              https://<ref>.supabase.co
@@ -22,7 +25,10 @@
  */
 const { send } = require('./_respond');
 
-const MAX_BODY_BYTES = 12000;
+// Only an abuse guard; validate() enforces the per-field lengths. The longest
+// valid payload is about 5,774 characters across the fields, and JSON escapes a
+// control character to 6 bytes, so the worst valid body is about 35 KB.
+const MAX_BODY_BYTES = 40000;
 const MIN_FILL_MS = 1500;          // people take longer than this to fill the form
 const WINDOW_MS = 10 * 60 * 1000;  // best-effort, per server instance: 5 messages
 const MAX_PER_WINDOW = 5;          //   per 10 minutes per IP (the database caps the whole site too)
