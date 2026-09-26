@@ -7,22 +7,27 @@
    03 reveal observer  .reveal / [data-split] / [data-stagger] parents
    04 counters         .val[data-count] ease-out count-up (en-US grouping),
                        runCounters(root) restarts a tab panel's counters
-   05 nav              page bar, hide/show, scrolled, scrollspy, mobile menu
+   05 nav              page bar, hide/show, scrolled, mobile menu
+                       (the current page is aria-current in the HTML)
    06 rotator          .rotator .rot-item cycling
    07 hero parallax    [data-depth] layers follow the pointer
    08 cards            spotlight vars, 3D tilt, magnetic buttons
-   09 videos           play while visible, progress bar, tap/keyboard toggle
+   09 videos           .vframe and .bento-video: play while visible,
+                       progress bar, tap/keyboard toggle
    10 segmented ctrls  .seg > .seg-ind slides under the active .seg-btn
    11 work tabs        filter .work-group by data-filter
    12 proof tabs       WAI-ARIA tabs for #proof panels, staggered cards + counters
    13 gallery          .gal-filter FLIP filtering, counts, status, deep links
-   14 lightbox         dialog#lightbox: FLIP zoom, prev/next, keys, swipe
+   14 lightbox         dialog#lightbox for a[data-lb-group] groups ("gallery",
+                       "stills"): FLIP zoom, prev/next, keys, swipe, swipe-down close
    15 timeline         --tl-p progress + .lit nodes
    16 faq              accordion toggles
    17 contact form     validate + mailto
    18 dock / to-top    floating UI + footer year
-   19 anchors          same-page links scroll smoothly (reduced-motion aware)
+   19 anchors          same-page links (#id or this-page.html#id) scroll smoothly
    20 ticker           user-operable pause for the brand marquee
+   21 jump-chips       sticky .jumpnav scrollspy (aria-current="location")
+   22 touch            no-op touchstart so iOS applies the CSS :active states
    All features are guarded: a missing element never throws.
    ============================================================ */
 (function () {
@@ -119,7 +124,7 @@
     var timeout = new Promise(function (resolve) { setTimeout(resolve, 800); });
     function go() {
       document.body.classList.add('loaded');
-      $$('.hero [data-split]').forEach(function (el) { el.classList.add('in'); });
+      $$('.hero [data-split], .page-hero [data-split]').forEach(function (el) { el.classList.add('in'); });
     }
     Promise.race([fontsReady, timeout]).then(function () { raf(go); }).catch(go);
   }
@@ -200,7 +205,7 @@
       return false;
     };
     var targets = $$('.reveal, [data-split]').filter(function (el) {
-      return !el.closest('.hero') && !inTrack(el);
+      return !el.closest('.hero, .page-hero') && !inTrack(el);
     });
     if (!targets.length && !tracks.length) return;
 
@@ -418,31 +423,6 @@
       lastY = y;
     });
 
-    // Scrollspy
-    var links = $$('.nav-links a', nav);
-    if (links.length && hasIO) {
-      var byId = {};
-      var sections = [];
-      links.forEach(function (a) {
-        var id = (a.getAttribute('href') || '').replace(/^#/, '');
-        if (!id) return;
-        var sec = document.getElementById(id);
-        if (!sec) return;
-        byId[id] = a;
-        sections.push(sec);
-      });
-      if (sections.length) {
-        var spy = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            var id = entry.target.id;
-            links.forEach(function (a) { a.classList.toggle('active', byId[id] === a); });
-          });
-        }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-        sections.forEach(function (sec) { spy.observe(sec); });
-      }
-    }
-
     // Mobile menu
     var toggle = $('.nav-toggle', nav);
     var menu = $('.nav-menu', nav) || $('#navMenu');
@@ -609,7 +589,7 @@
      09 VIDEOS
      ------------------------------------------------------------ */
   function initVideos() {
-    var videos = $$('.vframe video');
+    var videos = $$('.vframe video, .bento-video video');
     if (!videos.length) return;
 
     function play(v) {
@@ -629,7 +609,7 @@
     }
 
     videos.forEach(function (v) {
-      var frame = v.closest ? v.closest('.vframe') : v.parentElement;
+      var frame = v.closest ? v.closest('.vframe, .bento-video') : v.parentElement;
       var bar = frame ? $('.vframe-bar i', frame) : null;
       if (bar) {
         v.addEventListener('timeupdate', function () {
@@ -1014,18 +994,19 @@
 
   /* ------------------------------------------------------------
      14 LIGHTBOX
-     Native <dialog>.showModal() (focus containment, Esc, ::backdrop). Opens
-     from a .gal-item click with the currently filtered items; prev/next,
-     ←/→, swipe (|dx| > 50px), backdrop click and Esc (cancel → animated
-     close). FLIP "shared element" zoom from the thumbnail (scale-fade when
-     the thumbnail is off-screen), slide/cross-fade on navigation, body
-     scroll locked via body.lb-open, focus returns to the opener. Without
-     HTMLDialogElement the links simply open the full image.
+     Native <dialog>.showModal() (focus containment, Esc, ::backdrop). Any
+     a[data-lb-group] opens it; prev/next stay inside the clicked link's
+     group ("gallery" follows the active filter via gallery.visible(),
+     "stills" is every static creative). ←/→, horizontal swipe, swipe-down
+     on the image, backdrop click and Esc (cancel → animated close). FLIP
+     "shared element" zoom from the thumbnail (scale-fade when off-screen),
+     slide/cross-fade on navigation, body scroll locked via body.lb-open,
+     focus returns to the opener. Without HTMLDialogElement the links simply
+     open the full image.
      ------------------------------------------------------------ */
   function initLightbox() {
     var dlg = $('#lightbox');
-    var grid = $('.gal-grid');
-    if (!dlg || !grid) return;
+    if (!dlg || !$('a[data-lb-group]')) return;
     if (typeof window.HTMLDialogElement !== 'function' || typeof dlg.showModal !== 'function') return;
     var img = $('.lb-img', dlg);
     if (!img) return;
@@ -1048,13 +1029,26 @@
     var saved = null;
     var preloaded = {};
 
-    dlg.style.touchAction = 'pan-y pinch-zoom'; // horizontal swipes stay with the page script
+    // horizontal swipes stay with the page script; while the visual viewport is pinch-zoomed,
+    // hand touch back to the browser so one-finger panning still works (low-vision users rely on it)
+    function zoomed() { return !!(window.visualViewport && window.visualViewport.scale > 1.01); }
+    function syncTouch() {
+      var z = zoomed();
+      dlg.style.touchAction = z ? 'auto' : 'pan-y pinch-zoom';
+      img.style.touchAction = z ? 'auto' : 'pinch-zoom';
+    }
+    syncTouch();
+    if (window.visualViewport) window.visualViewport.addEventListener('resize', syncTouch);
 
     function thumbImg(it) { return $('.gal-thumb img', it) || $('img', it); }
     function thumbFrame(it) { return $('.gal-thumb', it) || thumbImg(it); }
-    function visibleItems() {
-      if (gallery) return gallery.visible();
-      return $$('.gal-item', grid).filter(function (it) { return !it.hidden; });
+    function groupOf(it) { return (it && it.getAttribute('data-lb-group')) || ''; }
+    function visibleItems(it) {
+      var g = groupOf(it);
+      if (g === 'gallery' && gallery) return gallery.visible();
+      return $$('a[data-lb-group]').filter(function (x) {
+        return groupOf(x) === g && !(x.closest && x.closest('[hidden], .is-hidden'));
+      });
     }
     function onScreen(r) {
       return !!r && r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 &&
@@ -1167,7 +1161,7 @@
 
     function open(it) {
       if (dlg.open) return;
-      list = visibleItems();
+      list = visibleItems(it);
       index = list.indexOf(it);
       if (index === -1) { list = [it]; index = 0; }
       opener = it;
@@ -1273,10 +1267,10 @@
       }, 140);
     }
 
-    grid.addEventListener('click', function (e) {
+    document.addEventListener('click', function (e) {
       if (e.defaultPrevented || modified(e)) return;
-      var it = e.target.closest ? e.target.closest('.gal-item') : null;
-      if (!it || !grid.contains(it)) return;
+      var it = e.target.closest ? e.target.closest('a[data-lb-group]') : null;
+      if (!it) return;
       e.preventDefault();
       open(it);
     });
@@ -1290,10 +1284,10 @@
       else if (e.key === 'ArrowLeft' || e.key === 'Left') { e.preventDefault(); nav(-1); }
     });
 
-    // Swipe (touch / pen): |dx| > 50px and more horizontal than vertical
+    // Swipe (touch / pen): |dx| > 50px horizontal → prev/next; dy > 80px down → close
     var sx = null, sy = 0, sid = null, swipedAt = 0;
     dlg.addEventListener('pointerdown', function (e) {
-      if (e.pointerType === 'mouse') return;
+      if (e.pointerType === 'mouse' || zoomed()) return;
       sx = e.clientX; sy = e.clientY; sid = e.pointerId;
     });
     dlg.addEventListener('pointerup', function (e) {
@@ -1303,6 +1297,9 @@
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
         swipedAt = Date.now();
         nav(dx < 0 ? 1 : -1);
+      } else if (dy > 80 && dy > Math.abs(dx) * 1.2) {
+        swipedAt = Date.now();
+        requestClose();
       }
     });
     dlg.addEventListener('pointercancel', function () { sx = null; });
@@ -1432,30 +1429,30 @@
      18 DOCK, TO-TOP, FOOTER YEAR
      ------------------------------------------------------------ */
   function initFloatingUi() {
+    // hidden while a hero / page banner is on screen, and while a CTA that does
+    // the same job (#contact, .cta-band) is visible; contact.html has no dock at all
     var dock = $('.cta-dock');
-    var hero = $('#top');
-    var contact = $('#contact');
-    if (dock && hero) {
-      // hidden while the hero is on screen, and while the user is already inside #contact (its own target)
-      var heroOn = true, contactOn = false;
-      var sync = function () { dock.classList.toggle('show', !heroOn && !contactOn); };
-      if (hasIO) {
-        new IntersectionObserver(function (entries) {
-          heroOn = entries[entries.length - 1].isIntersecting; sync();
-        }, { threshold: 0 }).observe(hero);
-        if (contact) {
-          new IntersectionObserver(function (entries) {
-            contactOn = entries[entries.length - 1].isIntersecting; sync();
-          }, { threshold: 0.15 }).observe(contact);
-        }
+    var hiders = $$('.hero, .page-hero, #contact, .cta-band');
+    if (dock) {
+      if (!hiders.length) {
+        dock.classList.add('show');
+      } else if (hasIO) {
+        var onScreen = hiders.map(function () { return false; });
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var k = hiders.indexOf(entry.target);
+            if (k !== -1) onScreen[k] = entry.isIntersecting;
+          });
+          dock.classList.toggle('show', onScreen.indexOf(true) === -1);
+        }, { threshold: 0 });
+        hiders.forEach(function (h) { io.observe(h); });
       } else {
         scrollBus.add(function () {
-          heroOn = hero.getBoundingClientRect().bottom > 0;
-          if (contact) {
-            var r = contact.getBoundingClientRect();
-            contactOn = r.top < window.innerHeight * 0.85 && r.bottom > window.innerHeight * 0.15;
-          }
-          sync();
+          var any = hiders.some(function (h) {
+            var r = h.getBoundingClientRect();
+            return r.bottom > 0 && r.top < window.innerHeight;
+          });
+          dock.classList.toggle('show', !any);
         });
       }
     }
@@ -1478,16 +1475,19 @@
 
   /* ------------------------------------------------------------
      19 IN-PAGE ANCHORS
-     Smooth-scroll same-page links from JS so the motion respects
+     Smooth-scroll same-page links (#id, or this-page.html#id from the footer) from JS so the motion
      prefers-reduced-motion even if the stylesheet's scroll-behavior
      is left at its default; focus moves to the target for keyboard users.
      ------------------------------------------------------------ */
   function initAnchors() {
     document.addEventListener('click', function (e) {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
-      if (!a) return;
-      var id = (a.getAttribute('href') || '').slice(1);
+      var a = e.target.closest ? e.target.closest('a[href*="#"]') : null;
+      if (!a || a.hasAttribute('download') || (a.target && a.target !== '_self')) return;
+      var url;
+      try { url = new URL(a.href, window.location.href); } catch (err) { return; }
+      if (url.origin !== window.location.origin || url.pathname !== window.location.pathname) return;
+      var id = decodeURIComponent(url.hash.slice(1));
       if (!id) return;
       var target = document.getElementById(id);
       if (!target) return;
@@ -1519,6 +1519,64 @@
   }
 
   /* ------------------------------------------------------------
+     21 JUMP-CHIPS
+     .jumpnav a[href^="#"] → sections. The chip for the section under the
+     sticky bars gets aria-current="location"; none while the banner is in
+     view. At the very bottom the last visible section wins (short final
+     blocks never reach the line). On narrow screens the active chip is
+     scrolled into view inside its row, never the page.
+     ------------------------------------------------------------ */
+  function initJumpnav() {
+    var bar = $('.jumpnav');
+    if (!bar) return;
+    var row = $('.jumpnav-list', bar) || bar;
+    var items = $$('a[href^="#"]', bar).map(function (a) {
+      return { a: a, sec: document.getElementById(decodeURIComponent((a.getAttribute('href') || '').slice(1))) };
+    }).filter(function (it) { return it.sec; });
+    if (!items.length) return;
+
+    var current = null;
+    function setActive(it) {
+      if (it === current) return;
+      current = it;
+      items.forEach(function (x) {
+        if (x === it) x.a.setAttribute('aria-current', 'location');
+        else x.a.removeAttribute('aria-current');
+      });
+      if (!it || row.scrollWidth <= row.clientWidth + 1) return;
+      var rr = row.getBoundingClientRect();
+      var ar = it.a.getBoundingClientRect();
+      if (ar.left >= rr.left + 8 && ar.right <= rr.right - 8) return;
+      var left = row.scrollLeft + (ar.left - rr.left) - (rr.width - ar.width) / 2;
+      try { row.scrollTo({ left: left, behavior: reduceMotion ? 'instant' : 'smooth' }); } catch (err) { row.scrollLeft = left; }
+    }
+
+    scrollBus.add(function (y) {
+      // the sticky slot, not the box: .nav--hidden slides the chips up (styles.css 23)
+      // but scroll-margin-top still parks targets under nav + chips
+      var line = (parseFloat(window.getComputedStyle(bar).top) || 0) + bar.offsetHeight + 24;
+      var active = null;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].sec.getBoundingClientRect().top <= line) active = items[i];
+      }
+      if (y + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+        var last = items[items.length - 1];
+        if (last.sec.getBoundingClientRect().top < window.innerHeight) active = last;
+      }
+      setActive(active);
+    });
+  }
+
+  /* ------------------------------------------------------------
+     22 TOUCH :ACTIVE
+     iOS Safari applies :active (styles.css 27 press states) only when a
+     touchstart listener exists; a passive no-op is enough.
+     ------------------------------------------------------------ */
+  function initTouch() {
+    document.addEventListener('touchstart', function () {}, { passive: true });
+  }
+
+  /* ------------------------------------------------------------
      BOOT
      ------------------------------------------------------------ */
   function init() {
@@ -1527,6 +1585,7 @@
     feature('reveal', initReveal);
     feature('counters', initCounters);
     feature('nav', initNav);
+    feature('jumpnav', initJumpnav);
     feature('rotator', initRotator);
     feature('parallax', initParallax);
     feature('cards', initCards);
@@ -1542,6 +1601,7 @@
     feature('floatingUi', initFloatingUi);
     feature('anchors', initAnchors);
     feature('ticker', initTicker);
+    feature('touch', initTouch);
     scrollBus.request();
   }
 
