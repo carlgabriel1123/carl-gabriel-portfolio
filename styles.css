@@ -13,7 +13,8 @@
      08 Stats             19 Footer, dock, top
      09 Services & loop
      10 Work
-   22–27 sit before 20/21 so the motion and reduced-motion layers still come last.
+   22–28 sit before 20/21 so the motion and reduced-motion layers still come last.
+   28 Answer blocks: question-led sections (.qa), page-hero follow-up lede, footer date
    Rules: tokens once · one rule per concern · transform/opacity motion only
    (FAQ uses grid-template-rows, growth-loop arrows use stroke-dashoffset, and the
    segmented-control indicator animates width alongside transform, per spec)
@@ -1641,6 +1642,23 @@ html{-webkit-tap-highlight-color:transparent} /* replaced by the :active states 
 }
 /* its own rule: in the list above, an engine without :has() would drop every press state */
 .tile:has(.tile-link:active){scale:.97 !important;transition:scale .12s var(--ease) !important}
+
+
+/* ============================================================
+   28 · ANSWER BLOCKS: question-led sections, follow-up lede, footer date
+   One question per .qa-item, answered in the paragraph right under it, so a
+   reader (or an answer engine) gets the whole answer in one passage.
+   ============================================================ */
+.section.qa{padding-block:clamp(44px,6vw,84px)}
+.qa-wrap{max-width:calc(820px + var(--pad) * 2)}
+.qa-item + .qa-item{margin-top:clamp(28px,4vw,40px)}
+.qa-q{
+  font-family:var(--hook);font-weight:400;text-transform:uppercase;text-wrap:balance;
+  font-size:clamp(24px,3.2vw,36px);line-height:1.06;letter-spacing:.005em;margin-bottom:12px;
+}
+.qa-a{color:var(--mute);max-width:64ch;font-size:clamp(16px,1.4vw,18px);line-height:1.6}
+.page-hero .lede-more{margin-top:12px}
+.footer-updated{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 
 
 /* ============================================================

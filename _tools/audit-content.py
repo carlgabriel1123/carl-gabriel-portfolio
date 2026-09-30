@@ -17,6 +17,7 @@ Rules:
     check-links.py verifies every anchor)
   - ALLOW holds the intentional changes; everything else missing fails (exit 1)
 """
+import hashlib
 import html.parser
 import os
 import re
@@ -28,6 +29,25 @@ PAGES = ['index.html', 'work.html', 'results.html', 'services.html', 'about.html
 ALLOW = {
     'view work ↓',             # hero button is now "View work →" linking to work.html
     'carl g. — back to top',   # brand link label is now "Carl G. — home"
+    'carl gabriel piramo — digital marketing & e-commerce growth manager',  # SEO pass 2026-09-30: keyword title
+    # SEO pass 2026-09-30: em dashes out of copy that now feeds FAQPage schema (same words, commas instead)
+    'media buying, structured creative testing and retargeting. roas, cpa and funnel analysis guide every budget '
+    'move — and pixel + conversions api tracking keeps delivery honest.',
+    'with an agency, your strategist, media buyer, creative team and store developer are different people — and '
+    'feedback dies between them. i run the whole loop: the creative, the ads, the data and the store. every signal '
+    'from ads manager shapes the next creative, the next budget and the next store fix the same week.',
+    'the first sprint fixes tracking first — meta pixel and conversions api — so nothing launches blind. in parallel '
+    'i produce the first batch of short-form ads and statics around the angles we agree on. campaigns go live with '
+    'structured tests as soon as that batch is ready, usually within the first week or two.',
+    'every engagement starts with a strategy call — no pitch deck. from there i scope the work to your stage and '
+    'goals, so pricing reflects what you actually need.',
+}
+# Intentional removals whose text is confidential (the employer's name, kept off the public site in the
+# SEO pass 2026-09-30). This repo is public, so they are listed as sha256 of the lowercased text.
+ALLOW_SHA256 = {
+    'c094b0603abf4ad19badc439ab4b3458ad91d934c847acc049c80bb07aec0ea3',  # ticker item
+    '062e9f969c5e6ae3f722ee025946ab0eded1af9b302cb6fdd6667cf4716103fe',  # timeline org
+    '52635521bc87c6f4c5660a3e81814aa2d76db5e5efc5bda68eb964e3b0fb2cab',  # about bio sentence
 }
 ALLOW_URLS = {
     'https://carlgabriel1123.github.io/carl-gabriel-portfolio/',  # canonical moved to https://carlgabriel.vercel.app/
@@ -86,7 +106,7 @@ def compare(base, page_texts, urls):
     for kind, items in (('text', base.texts), ('attr', base.attrs)):
         for t in items:
             key = t.lower()
-            if key in seen or key in ALLOW:
+            if key in seen or key in ALLOW or hashlib.sha256(key.encode('utf-8')).hexdigest() in ALLOW_SHA256:
                 continue
             seen.add(key)
             if not any(key in pt for pt in page_texts):

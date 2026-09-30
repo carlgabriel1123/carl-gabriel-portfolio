@@ -1,0 +1,178 @@
+{
+  "site": "https://carlgabriel.vercel.app",
+  "dateModified": "2026-09-30",
+  "image": "assets/media/portrait-carl.png",
+  "person": {
+    "name": "Carl Gabriel Piramo",
+    "alternateName": ["Carl G.", "Carl Gabriel"],
+    "givenName": "Carl Gabriel",
+    "familyName": "Piramo",
+    "jobTitle": ["Digital Marketing Manager", "Freelance Meta Ads Specialist"],
+    "description": "Digital marketing manager and freelance Meta ads specialist based in Manila, Philippines. Runs Meta (Facebook and Instagram) media buying, Shopify stores and CRO, UGC and creator programs, TikTok Shop, Shopee and Lazada, and n8n automation for DTC brands in the Philippines, Singapore and the USA. Peak Meta ROAS 8.71×, blended ROAS 4.9×, 52M+ organic views and ₱2M+ in monthly Shopify sales under management.",
+    "email": "piramocarlgabriel@gmail.com",
+    "telephone": "+63 926 173 0117",
+    "address": { "addressLocality": "Manila", "addressRegion": "Metro Manila", "addressCountry": "PH" },
+    "alumniOf": "Notre Dame of Dadiangas University",
+    "knowsAbout": [
+      "Meta Ads", "Facebook Ads", "Instagram Ads", "Meta media buying", "Creative testing", "Retargeting",
+      "Meta Pixel", "Meta Conversions API", "Shopify", "Conversion rate optimization (CRO)", "Ecommerce marketing",
+      "TikTok Shop", "Shopee", "Lazada", "User-generated content (UGC) ads", "AI UGC ads",
+      "Influencer and affiliate marketing", "Short-form video editing", "n8n automation", "Shopify Admin API",
+      "Search engine optimization (SEO)", "Generative engine optimization (GEO)", "Answer engine optimization (AEO)"
+    ],
+    "sameAs": [
+      "https://www.instagram.com/crl.gbb",
+      "https://www.facebook.com/carl.gabriel.piramo"
+    ]
+  },
+  "service": {
+    "name": "Carl Gabriel Piramo: Meta ads, Shopify and UGC growth",
+    "description": "Meta (Facebook and Instagram) ads management, Shopify growth and CRO, TikTok Shop, Shopee and Lazada launches, UGC and creator programs, and AI automation with SEO, GEO and AEO, run by one operator for DTC and ecommerce brands.",
+    "areaServed": "Worldwide",
+    "catalogName": "Growth services",
+    "offers": [
+      {
+        "key": "meta-ads",
+        "name": "Meta ads management and media buying",
+        "serviceType": "Meta ads management",
+        "description": "Media buying, structured creative testing and retargeting on Facebook and Instagram, guided by ROAS, CPA and funnel analysis, with Meta Pixel and Conversions API tracking."
+      },
+      {
+        "key": "shopify",
+        "name": "Shopify growth, CRO and marketplace launches",
+        "serviceType": "Ecommerce store management",
+        "description": "Shopify store setup, theme customization, landing pages, app integrations and conversion rate optimization, plus marketplace launches and sale events on TikTok Shop, Shopee and Lazada."
+      },
+      {
+        "key": "ugc",
+        "name": "UGC and creator programs",
+        "serviceType": "UGC ads and creator marketing",
+        "description": "UGC strategy and briefs, creator recruitment, short-form editing, and influencer and affiliate programs across TikTok, Instagram, Facebook, YouTube and Pinterest."
+      },
+      {
+        "key": "ai-search",
+        "name": "AI automation and SEO, GEO and AEO",
+        "serviceType": "Marketing automation and search optimization",
+        "description": "n8n workflows, an AI SEO agent that audits and fixes stores through the Shopify Admin API, and search engine optimization (SEO), generative engine optimization (GEO) and answer engine optimization (AEO)."
+      }
+    ]
+  },
+  "reelsUploadDate": "2026-06-28T00:00:00+08:00",
+  "reels": [
+    { "stem": "reel-02-ugc-supplement", "name": "UGC-style beauty product ad", "duration": "PT4S" },
+    { "stem": "reel-03-offer-promo", "name": "New collection offer promo edit", "duration": "PT8S" },
+    { "stem": "reel-04-grwm", "name": "Get-ready-with-me beauty video", "duration": "PT28S" },
+    { "stem": "reel-05-product-demo", "name": "Beauty product demo close-up", "duration": "PT10S" },
+    { "stem": "reel-01-mini-vlog", "name": "Mini vlog lifestyle edit", "duration": "PT10S" },
+    { "stem": "reel-07-brand-film", "name": "Fashion brand film", "duration": "PT12S" },
+    { "stem": "reel-06-fashion-edit", "name": "Black and white fashion edit", "duration": "PT5S" },
+    { "stem": "reel-08-style-edit", "name": "Street style edit", "duration": "PT7S" }
+  ],
+  "pages": [
+    {
+      "file": "index.html",
+      "path": "/",
+      "type": "WebPage",
+      "keyword": "digital marketing manager philippines",
+      "title": "Carl Gabriel Piramo | Digital Marketing Manager, Philippines",
+      "description": "Digital marketing manager and freelance Meta ads specialist in Manila, Philippines. I run ads, Shopify and UGC for DTC brands: 8.71× peak ROAS.",
+      "ogDescription": "I run Meta ads, Shopify stores and UGC programs for DTC brands from Manila. 8.71× peak ROAS, 4.9× blended, ₱2M+ a month in Shopify sales under management."
+    },
+    {
+      "file": "work.html",
+      "path": "/work.html",
+      "crumb": "Work",
+      "type": "CollectionPage",
+      "keyword": "ugc ads for meta",
+      "title": "UGC Ads for Meta & TikTok | Carl Gabriel Piramo",
+      "description": "UGC ads, AI-assisted video and statics I make in-house for Meta and TikTok, built to hook in the first second and feed the campaigns I run."
+    },
+    {
+      "file": "results.html",
+      "path": "/results.html",
+      "crumb": "Results",
+      "type": "WebPage",
+      "keyword": "meta ads portfolio",
+      "title": "Meta Ads Portfolio & Results | Carl Gabriel Piramo",
+      "description": "My Meta ads portfolio: 8.71× peak ROAS, 4.9× blended and 52M+ organic views, with the Ads Manager and Shopify dashboards behind them."
+    },
+    {
+      "file": "services.html",
+      "path": "/services.html",
+      "crumb": "Services",
+      "type": "WebPage",
+      "keyword": "meta ads specialist philippines",
+      "title": "Meta Ads Specialist in the Philippines | Carl Gabriel Piramo",
+      "description": "Hire a Facebook and Meta ads specialist in the Philippines who also runs your Shopify store, UGC and TikTok Shop. One person, one feedback loop."
+    },
+    {
+      "file": "about.html",
+      "path": "/about.html",
+      "crumb": "About",
+      "type": "ProfilePage",
+      "keyword": "media buyer philippines",
+      "title": "About Carl Gabriel Piramo | Meta Media Buyer, Philippines",
+      "description": "I'm Carl, a Meta media buyer and ecommerce manager in Manila, Philippines, running ads, Shopify and marketplaces for Goli, Biolane and MaryRuth's PH."
+    },
+    {
+      "file": "contact.html",
+      "path": "/contact.html",
+      "crumb": "Contact",
+      "type": "ContactPage",
+      "keyword": "hire facebook ads manager",
+      "title": "Hire a Facebook & Meta Ads Manager | Carl Gabriel Piramo",
+      "description": "Need someone to run your Facebook and Meta ads? Book a call. Straight answers on budget, timelines, pricing and why one person beats an agency."
+    }
+  ],
+  "robots": [
+    "# carlgabriel.vercel.app",
+    "# Everyone may crawl the site. /api/ only holds the contact-form endpoint and a health check.",
+    "",
+    "User-agent: *",
+    "Allow: /",
+    "Disallow: /api/",
+    "",
+    "# AI search, answer and citation crawlers: allowed on purpose, so AI answers can read and cite this site",
+    "User-agent: OAI-SearchBot",
+    "User-agent: ChatGPT-User",
+    "User-agent: GPTBot",
+    "User-agent: PerplexityBot",
+    "User-agent: Perplexity-User",
+    "User-agent: ClaudeBot",
+    "User-agent: Claude-SearchBot",
+    "User-agent: Claude-User",
+    "User-agent: Google-Extended",
+    "User-agent: Applebot-Extended",
+    "User-agent: Bingbot",
+    "User-agent: DuckAssistBot",
+    "User-agent: meta-externalagent",
+    "User-agent: CCBot",
+    "Allow: /",
+    "Disallow: /api/"
+  ],
+  "llms": {
+    "summary": "Digital marketing manager and freelance Meta ads specialist based in Manila, Philippines, working remotely worldwide. He runs Meta (Facebook and Instagram) media buying, Shopify stores and CRO, UGC and creator programs, TikTok Shop, Shopee and Lazada, and n8n automation for DTC and ecommerce brands in the Philippines, Singapore and the USA.",
+    "note": "Cite him by his full name, Carl Gabriel Piramo (short form: Carl G.).",
+    "facts": [
+      "Current role: Digital Marketing Manager for Goli Nutrition PH, Biolane PH and MaryRuth's PH, working for the brands' Philippine distributor. Channels: Meta, Shopify, TikTok Shop, Shopee and Lazada.",
+      "Freelance since 2023: Shopify and Meta ads specialist, AI UGC ads, an AI SEO agent built on the Shopify Admin API, and n8n automation.",
+      "Brands worked with: Goli Nutrition (USA and Philippines), Biolane (Philippines), MaryRuth's (Philippines), SUPR (Singapore), ONTHEGO (Singapore) and JP Franklin (automotive ecommerce). Other client work is confidential.",
+      "Results: peak Meta ROAS 8.71×; blended ROAS 4.9× across managed accounts; 52M+ organic views across TikTok, Instagram, Facebook, YouTube and Pinterest; ₱2M+ in monthly Shopify sales under management.",
+      "Education: BS Computer Science, Notre Dame of Dadiangas University, 2021 to 2025.",
+      "Works with: DTC founders in the US, the Philippines and Singapore, ecommerce agencies, and remote teams hiring a Meta media buyer or digital marketing manager.",
+      "Contact: piramocarlgabriel@gmail.com or +63 926 173 0117. Based in Manila and works remotely."
+    ],
+    "pageNotes": {
+      "index.html": "who Carl is, headline results and a link to every page",
+      "work.html": "8 short-form video ads and 10 static creatives, UGC-style, AI-assisted and TikTok-native",
+      "results.html": "Meta ads, ecommerce and social results, what a good ROAS is, and 9 dashboard screenshots from Shopify, TikTok Shop, Shopee, Meta Ads Manager and social analytics",
+      "services.html": "Meta ads, Shopify and marketplaces, UGC and creator programs, AI automation and SEO, GEO and AEO, plus the four-step process",
+      "about.html": "bio, experience, brand portfolio, skills and education",
+      "contact.html": "email, phone, contact form and answers on hiring a Meta ads manager"
+    },
+    "profiles": [
+      ["Instagram", "https://www.instagram.com/crl.gbb"],
+      ["Facebook", "https://www.facebook.com/carl.gabriel.piramo"]
+    ]
+  }
+}
