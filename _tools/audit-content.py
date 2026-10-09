@@ -72,6 +72,39 @@ ALLOW = {
     '4.9× blended across all',  # the By-channel Meta card now shows the 6.99× average from the gallery; peak + blended stay on the Highlights card
     'now i run the whole loop myself.',  # "Now" lost its before-state when the CV paragraph went
     'remote · works in your timezone · no pitch deck',  # "no pitch deck" lives in the Results headline only
+    # 2026-10-10 human-voice pass: every em/en dash rewritten, generic lines made specific (Frameworks/Human Voice Copy Rules in the vault)
+    '3+ years growing brands across the philippines, singapore and the usa — paid media, shopify stores, creator programs and the ai workflows that tie them together.',
+    'across all clients, incl. confidential',
+    'across creator campaigns',
+    'paid media, e-commerce, creators and ai automation — the four things a growing brand usually splits across four vendors. i run them as one system.',
+    'a content engine that never runs dry',
+    '— then rebuilt the campaigns around what the data showed.',
+    'right creators, right hooks, tested fast — reach compounds.',
+    'shopify · sep 7–14, 2026 · +67% vs. the previous week',
+    'jun 2026 — present',
+    '2023 — present',
+    'kave guild — built responsive interfaces from design files.',
+    'earlier · 2021 — 2024',
+    'freelance and contract — campaign graphics and social assets.',
+    'additional client engagements are confidential.',
+    'same budget, fewer hand-offs — one person who makes the creative, runs the ads, reads the data and fixes the store, all in one feedback loop.',
+    'every metric i see in ads manager shapes the next move — in the funnel, the budget, the creative and the store.',
+    'your cpa creeps up while your feed goes quiet',
+    "your reports don't say what to make next",
+    "real operations — content & campaign systems i've run",
+    'every signal feeds the next test — the same week',
+    'one rate for the full funnel — no markup on your ad spend',
+    'winners get budget; learnings feed the next sprint. you see everything.',
+    ', reporting directly to the ceo and running the e-commerce and affiliate teams behind three shopify stores.',
+    'notre dame of dadiangas university · 2021 — 2025',
+    'ai & natural language processing capacity building program — national university',
+    'ui/ux design — google via coursera',
+    'instagram marketing: strategies & promotion — udemy',
+    'complete online marketing & advertising course — udemy',
+    'prompt engineering pro (ai) — udemy',
+    "access to your shopify store and meta ad account, your current offers and margins, and any brand assets you already have. if you sell on tiktok shop, shopee or lazada, seller-centre access too. if you've run ads before, i'll want to see what's been tested. we cover all of it on the first call.",
+    'shopify analytics, $1.24m in 7 days: total sales of $1,242,548.17 for sep 7–14, 2026, up 67% on aug 30–sep 6',
+    'meta business suite — scheduled posts queue',
 }
 # Intentional removals whose text is confidential (the employer's name, kept off the public site in the
 # SEO pass 2026-09-30). This repo is public, so they are listed as sha256 of the lowercased text.
