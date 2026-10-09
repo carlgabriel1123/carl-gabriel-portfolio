@@ -41,6 +41,11 @@ ALLOW = {
     'structured tests as soon as that batch is ready, usually within the first week or two.',
     'every engagement starts with a strategy call — no pitch deck. from there i scope the work to your stage and '
     'goals, so pricing reflects what you actually need.',
+    # 2026-10-10: the Work tile and page header now name what the page holds (ad creatives), not "work" in general
+    'selected work',
+    'growth needs fuel.',
+    'i make mine in-house.',
+    'all work',                # Work page filter tab is now just "All", like the Results gallery filter
 }
 # Intentional removals whose text is confidential (the employer's name, kept off the public site in the
 # SEO pass 2026-09-30). This repo is public, so they are listed as sha256 of the lowercased text.
