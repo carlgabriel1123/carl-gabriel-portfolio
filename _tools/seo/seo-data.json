@@ -7,7 +7,7 @@
     "alternateName": ["Carl G.", "Carl Gabriel"],
     "givenName": "Carl Gabriel",
     "familyName": "Piramo",
-    "jobTitle": ["Digital Marketing Manager", "Freelance Meta Ads Specialist"],
+    "jobTitle": ["Digital Marketing Manager", "E-commerce Growth Specialist", "AI Specialist", "Freelance Meta Ads Specialist"],
     "description": "Digital marketing manager and freelance Meta ads specialist based in Manila, Philippines. Runs Meta (Facebook and Instagram) media buying, Shopify stores and CRO, UGC and creator programs, TikTok Shop, Shopee and Lazada, and n8n automation for DTC brands in the Philippines, Singapore and the USA. Peak Meta ROAS 8.71×, blended ROAS 4.9×, 52M+ organic views and ₱2M+ in monthly Shopify sales under management.",
     "email": "piramocarlgabriel@gmail.com",
     "telephone": "+63 926 173 0117",
@@ -81,11 +81,11 @@
     {
       "file": "work.html",
       "path": "/work.html",
-      "crumb": "Creatives",
+      "crumb": "Work",
       "type": "CollectionPage",
       "keyword": "ugc ads for meta",
       "title": "UGC Ads for Meta & TikTok | Carl Gabriel Piramo",
-      "description": "UGC ads, AI-assisted video and statics I make in-house for Meta and TikTok, built to hook in the first second and feed the campaigns I run."
+      "description": "UGC ads, AI-assisted video and statics I make in-house for Meta and TikTok, plus the n8n automations that run the busywork behind the ads and the store."
     },
     {
       "file": "results.html",
@@ -164,7 +164,7 @@
     ],
     "pageNotes": {
       "index.html": "who Carl is, headline results and a link to every page",
-      "work.html": "8 short-form videos and 10 static creatives, UGC-style, AI-assisted and TikTok-native",
+      "work.html": "8 short-form videos and 10 static creatives, UGC-style, AI-assisted and TikTok-native, plus 3 n8n automations: a Messenger and Instagram DM bot, a packing-list to inventory intake, and a cold email agent",
       "results.html": "Meta ads, ecommerce and social results, what a good ROAS is, and 9 dashboard screenshots from Shopify, TikTok Shop, Shopee, Meta Ads Manager and social analytics",
       "services.html": "Meta ads, Shopify and marketplaces, UGC and creator programs, AI automation and SEO, GEO and AEO, plus the four-step process",
       "about.html": "bio, experience, brand portfolio, skills and education",

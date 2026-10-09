@@ -749,6 +749,23 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
   font-size:clamp(20px,2.4vw,28px);margin-bottom:8px;
 }
 .work-group > p{color:var(--mute);max-width:520px;margin-bottom:24px}
+
+/* Automations: three n8n canvases, each a card with the screenshot (opens the lightbox),
+   what it does in plain words, and the stack it runs on */
+.autos{margin-top:clamp(48px,7vw,72px)}
+.autos-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.auto{display:flex;flex-direction:column;padding:0;overflow:hidden}
+.auto-shot{position:relative;display:block;aspect-ratio:2/1;overflow:hidden;background:var(--bg-2);border-bottom:1px solid var(--edge)}
+.auto-shot img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .7s var(--ease-out)}
+.auto:hover .auto-shot img,.auto-shot:focus-visible img{transform:scale(1.05)}
+.auto-shot:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
+.auto:hover .gal-zoom,.auto-shot:focus-visible .gal-zoom{opacity:1;transform:none;border-color:rgba(var(--accent-rgb),.6)}
+.auto-body{display:flex;flex-direction:column;gap:12px;padding:20px 22px 24px}
+.auto-body p{color:var(--mute);font-size:15px;line-height:1.55}
+.auto-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+@media (max-width:999px){.autos-grid{grid-template-columns:minmax(0,1fr)}}
+/* four tabs (All, Video, Static, Automation) must fit a 375px phone inside the pill */
+@media (max-width:480px){.work-tabs .seg-btn{padding-inline:11px;letter-spacing:.08em}}
 .stills-track{
   display:grid;grid-auto-flow:column;grid-auto-columns:clamp(150px,18vw,200px);gap:14px;
   overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;

@@ -195,7 +195,7 @@ function sitemapXml(data) {
 /* llmstxt.org layout: H1, blockquote summary, free text (the facts), then H2 sections of link lists */
 function llmsTxt(data) {
   const L = data.llms;
-  const names = { 'index.html': 'Home', 'work.html': 'Creatives', 'results.html': 'Results', 'services.html': 'Services', 'about.html': 'About', 'contact.html': 'Contact' };
+  const names = { 'index.html': 'Home', 'work.html': 'Work', 'results.html': 'Results', 'services.html': 'Services', 'about.html': 'About', 'contact.html': 'Contact' };
   return [
     '# ' + data.person.name, '', '> ' + L.summary, '', L.note, '',
     'Facts, last updated ' + data.dateModified + ':', '',
