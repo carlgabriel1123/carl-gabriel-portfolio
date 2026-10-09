@@ -507,7 +507,6 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
 @media (min-width:861px){
   .float--a{bottom:calc(100% + 26px);left:-6%}   /* above, top-left */
   .float--b{top:calc(100% + 30px);right:-8%}     /* below, bottom-right */
-  .float--c{top:calc(100% + 30px);left:0}        /* below, bottom-left */
 }
 .float-pill{
   display:inline-flex;align-items:center;gap:8px;
@@ -523,7 +522,6 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
 .float--a .float-pill b{color:var(--accent)}
 .float--b .float-pill{animation-delay:-1.8s}
 .float--b .float-pill b{color:var(--blue)}
-.float--c .float-pill{animation-delay:-3.4s;color:var(--text)}
 
 /* social rail */
 .hero-social{display:flex;flex-direction:column;align-items:center;gap:14px;justify-self:end}
@@ -735,13 +733,22 @@ body.nav-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45
   transform:scaleX(0);transform-origin:0 50%;
   transition:transform .28s linear; /* timeupdate fires ~4×/s: slide between ticks instead of stepping */
 }
+/* short caption inside the frame, above the progress bar; clicks fall through to the toggle.
+   The band darkens early and the text carries its own shadow because posters have burned-in titles there. */
+.vframe-cap{
+  position:absolute;left:0;right:0;bottom:3px;z-index:2;margin:0;
+  padding:56px 12px 11px;pointer-events:none;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;line-height:1.45;text-transform:uppercase;color:var(--text);
+  text-shadow:0 1px 2px rgba(12,11,30,.9);
+  background:linear-gradient(180deg,transparent,rgba(12,11,30,.75) 45%,rgba(12,11,30,.94));
+}
 
 .stills{margin-top:clamp(48px,7vw,72px)}
-.stills h2{
+.work-group h2{
   font-family:var(--hook);font-weight:400;text-transform:uppercase;
   font-size:clamp(20px,2.4vw,28px);margin-bottom:8px;
 }
-.stills p{color:var(--mute);max-width:520px;margin-bottom:24px}
+.work-group > p{color:var(--mute);max-width:520px;margin-bottom:24px}
 .stills-track{
   display:grid;grid-auto-flow:column;grid-auto-columns:clamp(150px,18vw,200px);gap:14px;
   overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
@@ -1090,7 +1097,7 @@ html:has(.lightbox[open]),body.lb-open{overflow:hidden} /* scroll lock (html car
 
 
 /* ============================================================
-   14 · WHY ME — edge · pains · ops · versus · hire-cta
+   14 · WHY ME — edge · pains · ops · versus
    ============================================================ */
 .edge-grid{
   display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
@@ -1139,11 +1146,6 @@ html:has(.lightbox[open]),body.lb-open{overflow:hidden} /* scroll lock (html car
 .vs-list--yes li{color:var(--text)}
 .vs-list--yes li::before{content:'\2713';content:'\2713' / '';color:var(--win);background:rgba(var(--win-rgb),.14);border:1px solid rgba(var(--win-rgb),.4)}
 .vs-list--no li::before{content:'\2715';content:'\2715' / '';color:var(--mute);background:rgba(244,242,252,.04);border:1px solid var(--edge)}
-
-.hire-cta{
-  display:flex;flex-direction:column;align-items:center;gap:14px;
-  margin-top:clamp(40px,5vw,56px);text-align:center;
-}
 
 @media (max-width:860px){
   .edge-grid{grid-template-columns:minmax(0,1fr)}

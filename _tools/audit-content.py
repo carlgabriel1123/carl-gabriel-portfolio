@@ -46,6 +46,32 @@ ALLOW = {
     'growth needs fuel.',
     'i make mine in-house.',
     'all work',                # Work page filter tab is now just "All", like the Results gallery filter
+    # 2026-10-10 declutter: repeats removed so each fact and intro is said once (spec: vault Tech Stack/Specs/2026-10-10-portfolio-declutter-design.md)
+    'open to new brands',      # hero already says "Available for new brands"
+    'the loop most brands split across three vendors.',
+    'i run the whole thing.',
+    "ugc-style spots, tiktok-native edits and ai-assisted video — built to hook in the first second and feed the campaigns i run. no waiting on someone else's creative.",
+    'structured creative testing: losing hooks die fast and cheap, winners get budget the same week.',  # said once, on the Creatives page
+    'across every managed account.',
+    '3+ years across paid media, shopify growth and creator programs — for brands in the philippines, singapore and the usa.',  # About bio says it
+    "i've sat inside that machine —",  # CV paragraph; the facts live on About and the Home stats band
+    'supporting brand, store and creator operations for goli nutrition',
+    'inside a large-scale creator and performance-marketing ecosystem, and managing 300 ugc creators across campaigns that passed 1b+ views.',
+    'from call to scaling',    # process heading is now the question "How do we get from a call to scaling?"
+    'in four steps.',
+    "i'm a digital marketing and e-commerce manager with 3+ years across paid media, shopify growth and creator programs for local and international brands. "
+    'i lead campaign strategy, store optimization and affiliate teams, with brand experience across the philippines, singapore and the usa.',  # restated the About hero
+    'the questions founders',  # contact FAQ heading is now the question "What do founders ask before they book?"
+    'ask first.',
+    'do you work with my store size or niche?',  # merged with the country question
+    'i work best with shopify and marketplace brands that already have a product selling and want a tighter creative-and-ads engine behind it. '
+    "i've run growth for wellness supplements, baby care, sports nutrition, nasal strips and automotive brands across the philippines, singapore and the usa. "
+    "not sure you're a fit? book the call and i'll tell you straight.",
+    "tell me about your brand. i'll come to the call with first thoughts on your funnel, your store and your creative angles — not a pitch deck.",  # now the H1 + a shorter lede
+    'n8n workflows, an ai seo agent that audits and fixes stores through the shopify admin api, and seo, geo and aeo so your brand shows up in search and in ai answers.',  # GEO and AEO spelt out once
+    '4.9× blended across all',  # the By-channel Meta card now shows the 6.99× average from the gallery; peak + blended stay on the Highlights card
+    'now i run the whole loop myself.',  # "Now" lost its before-state when the CV paragraph went
+    'remote · works in your timezone · no pitch deck',  # "no pitch deck" lives in the Results headline only
 }
 # Intentional removals whose text is confidential (the employer's name, kept off the public site in the
 # SEO pass 2026-09-30). This repo is public, so they are listed as sha256 of the lowercased text.
