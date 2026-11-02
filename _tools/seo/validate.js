@@ -76,7 +76,7 @@ function validate(data) {
     if (p.keyword && !(t + ' ' + d).toLowerCase().includes(p.keyword.split(' ')[0])) err(`${p.file}: title/description never mention its keyword "${p.keyword}"`);
     if (p.path !== '/' && !p.crumb) err(`${p.file}: inner page needs a breadcrumb name`);
   }
-  if ((data.pages || []).length !== 6) err('expected the 6 public pages');
+  if ((data.pages || []).length !== 7) err('expected the 7 public pages');
 
   const sameAs = (data.person && data.person.sameAs) || [];
   if (sameAs.length < MIN_SAME_AS) err(`person.sameAs needs ${MIN_SAME_AS}+ profiles`);

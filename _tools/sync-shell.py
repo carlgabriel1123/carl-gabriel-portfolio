@@ -19,7 +19,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHELL = os.path.join(ROOT, '_tools', 'shell')
-PAGES = ['index.html', 'work.html', 'results.html', 'services.html', 'about.html', 'contact.html', '404.html']
+PAGES = ['index.html', 'work.html', 'ama-holdings.html', 'results.html', 'services.html', 'about.html', 'contact.html', '404.html']
 BLOCKS = ['head', 'nav', 'footer']
 PREFIX = '/'  # site root on carlgabriel.vercel.app
 URL_ATTR = re.compile(r'\b(href|src)="([^"]*)"')

@@ -2,7 +2,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Schibsted+Grotesk:wght@400;500;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=15">
+<link rel="stylesheet" href="styles.css?v=16">
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"selector_matches":"a[href$='.html'], a[href='./']"},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}
 </script>
@@ -12,7 +12,7 @@
    Home, and never when the navigation lands on a #section. Arriving through a
    transition skips the banner's own load choreography (.vt-arrive). */
 (function () {
-  var TARGETS = { 'work.html': 1, 'results.html': 1, 'services.html': 1, 'contact.html': 1 };
+  var TARGETS = { 'work.html': 1, 'ama-holdings.html': 1, 'results.html': 1, 'services.html': 1, 'contact.html': 1 };
   function file(url) {
     var p;
     try { p = new URL(url, location.href).pathname; } catch (e) { return ''; }

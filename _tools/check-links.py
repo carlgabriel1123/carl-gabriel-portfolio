@@ -21,7 +21,7 @@ from urllib.parse import urlsplit, unquote
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PREFIX = '/'  # the site is served from the domain root (carlgabriel.vercel.app)
 SITE = 'https://carlgabriel.vercel.app/'
-PAGES = ['index.html', 'work.html', 'results.html', 'services.html', 'about.html', 'contact.html', '404.html']
+PAGES = ['index.html', 'work.html', 'ama-holdings.html', 'results.html', 'services.html', 'about.html', 'contact.html', '404.html']
 EXTERNAL = re.compile(r'^(?:https?:|mailto:|tel:|data:|javascript:)', re.I)
 
 

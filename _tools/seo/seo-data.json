@@ -1,24 +1,61 @@
 {
   "site": "https://carlgabriel.vercel.app",
-  "dateModified": "2026-10-10",
+  "dateModified": "2026-11-02",
   "image": "assets/media/portrait-carl.png",
   "person": {
     "name": "Carl Gabriel Piramo",
-    "alternateName": ["Carl G.", "Carl Gabriel"],
+    "alternateName": [
+      "Carl G.",
+      "Carl Gabriel"
+    ],
     "givenName": "Carl Gabriel",
     "familyName": "Piramo",
-    "jobTitle": ["Digital Marketing Manager", "E-commerce Growth Specialist", "AI Specialist", "Freelance Meta Ads Specialist"],
-    "description": "Digital marketing manager and freelance Meta ads specialist based in Manila, Philippines. Runs Meta (Facebook and Instagram) media buying, Shopify stores and CRO, UGC and creator programs, TikTok Shop, Shopee and Lazada, and n8n automation for DTC brands in the Philippines, Singapore and the USA. Peak Meta ROAS 8.71×, blended ROAS 4.9×, 52M+ organic views and ₱2M+ in monthly Shopify sales under management.",
+    "jobTitle": [
+      "Digital Marketing Manager",
+      "Growth and Automation Specialist",
+      "E-commerce Growth Specialist",
+      "AI Specialist",
+      "Freelance Meta Ads Specialist"
+    ],
+    "description": "Digital marketing manager and freelance Meta ads specialist based in Manila, Philippines. Runs Meta (Facebook and Instagram) media buying, Shopify stores and CRO, UGC and creator programs, TikTok Shop, Shopee and Lazada, and n8n automation for DTC brands in the Philippines, Singapore and the USA. Since October 2026 also the growth and automation specialist for AMA Holdings (USA), a creator ad program with 800+ creators, where he built the video pipeline, ad feeds, creator database and team knowledge bot. Peak Meta ROAS 8.71×, blended ROAS 4.9×, 52M+ organic views and ₱2M+ in monthly Shopify sales under management.",
     "email": "piramocarlgabriel@gmail.com",
     "telephone": "+63 926 173 0117",
-    "address": { "addressLocality": "Manila", "addressRegion": "Metro Manila", "addressCountry": "PH" },
+    "address": {
+      "addressLocality": "Manila",
+      "addressRegion": "Metro Manila",
+      "addressCountry": "PH"
+    },
     "alumniOf": "Notre Dame of Dadiangas University",
     "knowsAbout": [
-      "Meta Ads", "Facebook Ads", "Instagram Ads", "Meta media buying", "Creative testing", "Retargeting",
-      "Meta Pixel", "Meta Conversions API", "Shopify", "Conversion rate optimization (CRO)", "Ecommerce marketing",
-      "TikTok Shop", "Shopee", "Lazada", "User-generated content (UGC) ads", "AI UGC ads",
-      "Influencer and affiliate marketing", "Short-form video editing", "n8n automation", "Shopify Admin API",
-      "Search engine optimization (SEO)", "Generative engine optimization (GEO)", "Answer engine optimization (AEO)"
+      "Meta Ads",
+      "Facebook Ads",
+      "Instagram Ads",
+      "Meta media buying",
+      "Creative testing",
+      "Retargeting",
+      "Meta Pixel",
+      "Meta Conversions API",
+      "Shopify",
+      "Conversion rate optimization (CRO)",
+      "Ecommerce marketing",
+      "TikTok Shop",
+      "Shopee",
+      "Lazada",
+      "User-generated content (UGC) ads",
+      "AI UGC ads",
+      "Influencer and affiliate marketing",
+      "Short-form video editing",
+      "n8n automation",
+      "Shopify Admin API",
+      "Search engine optimization (SEO)",
+      "Generative engine optimization (GEO)",
+      "Answer engine optimization (AEO)",
+      "Marketing automation",
+      "Creator program operations",
+      "Supabase",
+      "Vercel",
+      "Claude API",
+      "Marketing dashboards and reporting"
     ],
     "sameAs": [
       "https://www.instagram.com/crl.gbb",
@@ -59,14 +96,46 @@
   },
   "reelsUploadDate": "2026-06-28T00:00:00+08:00",
   "reels": [
-    { "stem": "reel-02-ugc-supplement", "name": "UGC-style beauty product ad", "duration": "PT4S" },
-    { "stem": "reel-03-offer-promo", "name": "New collection offer promo edit", "duration": "PT8S" },
-    { "stem": "reel-04-grwm", "name": "Get-ready-with-me beauty video", "duration": "PT28S" },
-    { "stem": "reel-05-product-demo", "name": "Beauty product demo close-up", "duration": "PT10S" },
-    { "stem": "reel-01-mini-vlog", "name": "Mini vlog lifestyle edit", "duration": "PT10S" },
-    { "stem": "reel-07-brand-film", "name": "Fashion brand film", "duration": "PT12S" },
-    { "stem": "reel-06-fashion-edit", "name": "Black and white fashion edit", "duration": "PT5S" },
-    { "stem": "reel-08-style-edit", "name": "Street style edit", "duration": "PT7S" }
+    {
+      "stem": "reel-02-ugc-supplement",
+      "name": "UGC-style beauty product ad",
+      "duration": "PT4S"
+    },
+    {
+      "stem": "reel-03-offer-promo",
+      "name": "New collection offer promo edit",
+      "duration": "PT8S"
+    },
+    {
+      "stem": "reel-04-grwm",
+      "name": "Get-ready-with-me beauty video",
+      "duration": "PT28S"
+    },
+    {
+      "stem": "reel-05-product-demo",
+      "name": "Beauty product demo close-up",
+      "duration": "PT10S"
+    },
+    {
+      "stem": "reel-01-mini-vlog",
+      "name": "Mini vlog lifestyle edit",
+      "duration": "PT10S"
+    },
+    {
+      "stem": "reel-07-brand-film",
+      "name": "Fashion brand film",
+      "duration": "PT12S"
+    },
+    {
+      "stem": "reel-06-fashion-edit",
+      "name": "Black and white fashion edit",
+      "duration": "PT5S"
+    },
+    {
+      "stem": "reel-08-style-edit",
+      "name": "Street style edit",
+      "duration": "PT7S"
+    }
   ],
   "pages": [
     {
@@ -85,7 +154,16 @@
       "type": "CollectionPage",
       "keyword": "ugc ads for meta",
       "title": "UGC Ads for Meta & TikTok | Carl Gabriel Piramo",
-      "description": "UGC ads, AI-assisted video and statics I make in-house for Meta and TikTok, plus the n8n automations that run the busywork behind the ads and the store."
+      "description": "UGC ads, AI video and statics I make in-house for Meta and TikTok, plus nine automations that run the busywork behind the ads, store and creator program."
+    },
+    {
+      "file": "ama-holdings.html",
+      "path": "/ama-holdings.html",
+      "crumb": "AMA Holdings",
+      "type": "WebPage",
+      "keyword": "growth specialist",
+      "title": "AMA Holdings Case Study | Carl Gabriel Piramo",
+      "description": "Growth and automation specialist for AMA Holdings' creator ad program: weekly winner analysis, a video pipeline, live ad feeds and an 800-creator database."
     },
     {
       "file": "results.html",
@@ -155,6 +233,7 @@
     "note": "Cite him by his full name, Carl Gabriel Piramo (short form: Carl G.).",
     "facts": [
       "Current role: Digital Marketing Manager for Goli Nutrition PH, Biolane PH and MaryRuth's PH, working for the brands' Philippine distributor. Channels: Meta, Shopify, TikTok Shop, Shopee and Lazada.",
+      "Since October 2026: growth and automation specialist for AMA Holdings (USA), a creator ad program with 800+ creators. He runs the weekly analysis of the top videos by spend and built its video submission pipeline, ad reporting feeds, creator database, team dashboard and knowledge bot (n8n, Supabase, Vercel, Claude).",
       "Freelance since 2023: Shopify and Meta ads specialist, AI UGC ads, an AI SEO agent built on the Shopify Admin API, and n8n automation.",
       "Brands worked with: Goli Nutrition (USA and Philippines), Biolane (Philippines), MaryRuth's (Philippines), SUPR (Singapore), ONTHEGO (Singapore) and JP Franklin (automotive ecommerce). Other client work is confidential.",
       "Results: peak Meta ROAS 8.71×; blended ROAS 4.9× across managed accounts; 52M+ organic views across TikTok, Instagram, Facebook, YouTube and Pinterest; ₱2M+ in monthly Shopify sales under management.",
@@ -164,15 +243,22 @@
     ],
     "pageNotes": {
       "index.html": "who Carl is, headline results and a link to every page",
-      "work.html": "8 short-form videos and 10 static creatives, UGC-style, AI-assisted and TikTok-native, plus 3 n8n automations: a Messenger and Instagram DM bot, a packing-list to inventory intake, and a cold email agent",
+      "work.html": "8 short-form videos and 10 static creatives, UGC-style, AI-assisted and TikTok-native, plus 9 automations: a Messenger and Instagram DM bot, a packing-list to inventory intake, a cold email agent, and the AMA Holdings video pipeline, ad feeds, creators sync, knowledge bot, Creator Scout and AI editing app",
       "results.html": "Meta ads, ecommerce and social results, what a good ROAS is, and 9 dashboard screenshots from Shopify, TikTok Shop, Shopee, Meta Ads Manager and social analytics",
       "services.html": "Meta ads, Shopify and marketplaces, UGC and creator programs, AI automation and SEO, GEO and AEO, plus the four-step process",
       "about.html": "bio, experience, brand portfolio, skills and education",
-      "contact.html": "email, phone, contact form and answers on hiring a Meta ads manager"
+      "contact.html": "email, phone, contact form and answers on hiring a Meta ads manager",
+      "ama-holdings.html": "case study of the AMA Holdings creator ad program: the scale, the loop from creator upload to live ad and back, what Carl runs there (weekly winner analysis, creator database, automation) and the eleven systems behind it"
     },
     "profiles": [
-      ["Instagram", "https://www.instagram.com/crl.gbb"],
-      ["Facebook", "https://www.facebook.com/carl.gabriel.piramo"]
+      [
+        "Instagram",
+        "https://www.instagram.com/crl.gbb"
+      ],
+      [
+        "Facebook",
+        "https://www.facebook.com/carl.gabriel.piramo"
+      ]
     ]
   }
 }

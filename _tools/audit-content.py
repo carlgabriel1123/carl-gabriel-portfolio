@@ -25,7 +25,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASELINE = os.path.join(ROOT, '_tools', 'baseline-index.html')
-PAGES = ['index.html', 'work.html', 'results.html', 'services.html', 'about.html', 'contact.html']
+PAGES = ['index.html', 'work.html', 'ama-holdings.html', 'results.html', 'services.html', 'about.html', 'contact.html']
 ALLOW = {
     'view work ↓',             # hero button is now "View work →" linking to work.html
     'carl g. — back to top',   # brand link label is now "Carl G. — home"
@@ -105,6 +105,11 @@ ALLOW = {
     "access to your shopify store and meta ad account, your current offers and margins, and any brand assets you already have. if you sell on tiktok shop, shopee or lazada, seller-centre access too. if you've run ads before, i'll want to see what's been tested. we cover all of it on the first call.",
     'shopify analytics, $1.24m in 7 days: total sales of $1,242,548.17 for sep 7–14, 2026, up 67% on aug 30–sep 6',
     'meta business suite — scheduled posts queue',
+    # 2026-11-02 AMA Holdings pass: the Home stats band now shows six numbers (the 300-creator tile became the
+    # 833-creator database), and the About bio names the second job before the Computer Science paragraph
+    'ugc creators managed',
+    'recruited · briefed · tracked',
+    'the computer science degree is the quiet advantage. i build n8n automations for reporting and content ops, wrote an ai seo agent that audits and fixes stores through the shopify admin api, and produce ai video and imagery in-house.',
 }
 # Intentional removals whose text is confidential (the employer's name, kept off the public site in the
 # SEO pass 2026-09-30). This repo is public, so they are listed as sha256 of the lowercased text.

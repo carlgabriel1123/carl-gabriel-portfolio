@@ -12,7 +12,7 @@ const { validate, namesEmployer } = require('../seo/validate');
 const { build, faqFromHtml } = require('../seo/build-seo');
 
 const data = () => JSON.parse(fs.readFileSync(path.join(ROOT, '_tools', 'seo', 'seo-data.json'), 'utf8'));
-const PAGES = ['index.html', 'work.html', 'results.html', 'services.html', 'about.html', 'contact.html'];
+const PAGES = ['index.html', 'work.html', 'ama-holdings.html', 'results.html', 'services.html', 'about.html', 'contact.html'];
 // the confidential employer name, base64 so this public repo never spells it out
 const EMPLOYER = Buffer.from('U2t5aGVHbG9iYWw=', 'base64').toString('utf8');
 
@@ -57,9 +57,10 @@ test('validator blocks the confidential employer, dashes, Google Ads, banned wor
 
 test('validator enforces title and description lengths, uniqueness and the name', () => {
   const d = data();
-  d.pages[1].title = 'Short';
-  d.pages[2].description = d.pages[3].description;
-  d.pages[4].title = 'About me and my media buying work in the Philippines';
+  const by = (file) => d.pages.find(p => p.file === file); // by name, so a new page can join the list anywhere
+  by('work.html').title = 'Short';
+  by('results.html').description = by('services.html').description;
+  by('about.html').title = 'About me and my media buying work in the Philippines';
   const errs = validate(d).join('\n');
   assert.match(errs, /work\.html: title is 5 chars/);
   assert.match(errs, /duplicate description/);

@@ -15,6 +15,7 @@
      10 Work
    22–28 sit before 20/21 so the motion and reduced-motion layers still come last.
    28 Answer blocks: question-led sections (.qa), page-hero follow-up lede, footer date
+   29 Case study (ama-holdings.html), the Home case tile and the Work flow cards
    Rules: tokens once · one rule per concern · transform/opacity motion only
    (FAQ uses grid-template-rows, growth-loop arrows use stroke-dashoffset, and the
    segmented-control indicator animates width alongside transform, per spec)
@@ -1706,6 +1707,171 @@ html{-webkit-tap-highlight-color:transparent} /* replaced by the :active states 
 
 
 /* ============================================================
+   29 · CASE STUDY (ama-holdings.html), HOME CASE TILE, WORK FLOW CARDS
+   grain · six-up stats · spend tape · ops map · run cards · systems register · stack
+   Rules as above: tokens only, transform/opacity motion, SVG text in the mono face.
+   ============================================================ */
+/* film grain over the glows: one 160px noise tile, blended so it reads as paper, not dirt */
+.grain{
+  position:absolute;inset:0;opacity:.08;mix-blend-mode:soft-light;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* six headline numbers: three up, then the 08 grid's own 2-up and 1-up breakpoints take over */
+.stats-grid--6{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1000px){.stats-grid--6{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.stats-grid--6{grid-template-columns:minmax(0,1fr)}}
+
+/* home: the case-study tile mirrors the reel tile, data instead of video */
+.tile--case{grid-column:span 6;grid-row:span 2;justify-content:flex-end;min-height:440px;padding:0}
+.tile--case .tile-body{flex:1 0 auto;align-self:stretch;justify-content:flex-end;padding:26px 26px 24px}
+.tile--case .tile-go{margin-top:6px}
+.tile-chip{position:absolute;top:16px;left:16px;z-index:1;background:rgba(18,17,42,.88)}
+.tape{position:absolute;inset:0;z-index:0;overflow:hidden;background:var(--bg-2)}
+.tape svg{position:absolute;left:24px;right:24px;top:52px;width:calc(100% - 48px);height:auto;display:block;overflow:visible}
+.tape::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,11,30,.05) 28%,rgba(12,11,30,.93) 66%)}
+.tape rect{fill:var(--accent);opacity:.78;transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);transition:transform .9s var(--ease-out) calc(var(--i,0) * 40ms)}
+.tape rect:last-child{opacity:1}
+.tile--case.in .tape rect{transform:none}
+.tape text{font-family:var(--mono);font-size:9px;letter-spacing:.12em;fill:var(--mute)}
+@media (max-width:1000px){.tile--case{grid-column:1 / -1;grid-row:auto;min-height:380px}}
+@media (max-width:560px){.tile--case{grid-column:1 / -1;min-height:340px}}
+
+/* spend tape: 13 real weeks, one series, thin bars with a rounded data end, hairline grid, hover tips */
+.spend{margin-top:clamp(40px,5vw,56px);padding:clamp(20px,3vw,30px) clamp(18px,3vw,30px) 16px}
+.spend-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;margin-bottom:18px}
+.spend-head h3{font-family:var(--hook);font-weight:400;text-transform:uppercase;font-size:clamp(18px,2vw,22px);letter-spacing:.01em;line-height:1.15}
+.spend-head h3 b{font-weight:400;color:var(--accent)}
+.spend svg{display:block;width:100%;height:auto;overflow:visible;font-family:var(--mono)}
+.spend .grid line{stroke:var(--edge-soft);stroke-width:1}
+.spend .axis text{fill:var(--mute);font-size:11px;letter-spacing:.06em}
+.spend .bar{outline:none}
+.spend .bar .hit{fill:transparent}
+.spend .bar path{
+  fill:var(--accent);opacity:.82;
+  transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);
+  transition:transform .9s var(--ease-out) calc(var(--i,0) * 45ms),opacity .25s var(--ease);
+}
+.spend.in .bar path{transform:none}
+.spend .bar:hover path,.spend .bar:focus-visible path{opacity:1}
+.spend .bar:focus-visible .hit{stroke:var(--accent);stroke-width:2;stroke-dasharray:4 3}
+.spend .lab{fill:var(--text);font-size:11px;letter-spacing:.06em;text-anchor:middle}
+.spend .tip{opacity:0;transition:opacity .2s var(--ease);pointer-events:none}
+.spend .tip rect{fill:#0C0B1E;stroke:var(--edge);stroke-width:1}
+.spend .tip text{fill:var(--text);font-size:11px;letter-spacing:.04em;text-anchor:middle}
+.spend .tip .tip-k{fill:var(--mute);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
+.spend-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:14px}
+.spend-table{margin-top:14px}
+.spend-table summary{
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;list-style:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);
+}
+.spend-table summary::-webkit-details-marker{display:none}
+.spend-table summary::after{content:'+';font-size:14px;color:var(--mute)}
+.spend-table[open] summary::after{content:'\2212'}
+.spend-table table{width:100%;margin-top:6px;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.spend-table th,.spend-table td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--edge-soft);color:var(--mute)}
+.spend-table th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:400;color:var(--blue)}
+.spend-table td:nth-child(n+2),.spend-table th:nth-child(n+2){text-align:right}
+.spend-table td:first-child{color:var(--text)}
+@media (max-width:560px){
+  .spend svg{min-width:640px}
+  .spend-scroll{overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--edge) transparent}
+  .spend-scroll::-webkit-scrollbar{height:4px}
+  .spend-scroll::-webkit-scrollbar-thumb{background:var(--edge);border-radius:99px}
+  .spend-scroll::-webkit-scrollbar-track{background:transparent}
+}
+
+/* operations map: the services loop's vocabulary (pill nodes, flowing dashes, packets) at system size */
+.opsmap{margin:0}
+.opsmap svg{display:block;width:100%;max-width:860px;height:auto;margin-inline:auto;overflow:visible}
+.opsmap figcaption{margin-top:16px;text-align:center;color:var(--mute);font-size:15px}
+.opsmap figcaption strong{color:var(--text);font-weight:500}
+.ops-node rect{stroke-width:1.5;fill:rgba(18,17,42,.72)}
+.ops-node .t{font-weight:600}
+.ops-caps text{font-weight:400}
+@media (max-width:760px){
+  .ops-scroll{overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--edge) transparent}
+  .ops-scroll::-webkit-scrollbar{height:4px}
+  .ops-scroll::-webkit-scrollbar-thumb{background:var(--edge);border-radius:99px}
+  .ops-scroll::-webkit-scrollbar-track{background:transparent}
+  .opsmap svg{min-width:760px}
+  .opsmap figcaption::before{content:'Swipe the map \2192';display:block;margin-bottom:6px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+}
+.ops-legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(28px,4vw,40px)}
+.ops-legend li{padding:18px 20px;border-radius:var(--r);background:rgba(18,17,42,.6);border:1px solid var(--edge-soft)}
+.ops-legend b{display:block;margin-bottom:8px;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.ops-legend p{color:var(--mute);font-size:14.5px;line-height:1.5}
+@media (max-width:860px){.ops-legend{grid-template-columns:minmax(0,1fr)}}
+
+/* what I run: three cards with a bullet list each */
+.run-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.run{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:28px 26px 28px}
+.run .card-title{margin-top:2px}
+.run > p{color:var(--mute);font-size:15px;line-height:1.55}
+.run-list{list-style:disc;padding-left:18px;display:grid;gap:9px}
+.run-list li{color:var(--mute);font-size:14.5px;line-height:1.5}
+.run-list li::marker{color:var(--accent)}
+@media (max-width:1000px){.run-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* systems register: one hairline-ruled row per system (same ledger idea as the About skills) */
+.register{border-top:1px solid var(--edge-soft)}
+.reg{
+  display:grid;grid-template-columns:minmax(190px,260px) minmax(0,1fr) minmax(150px,210px);gap:14px 40px;align-items:start;
+  padding:clamp(20px,2.6vw,28px) 0;border-bottom:1px solid var(--edge-soft);
+}
+.reg-name{font-family:var(--hook);font-weight:400;text-transform:uppercase;font-size:clamp(19px,1.9vw,22px);line-height:1.12;letter-spacing:.01em}
+.reg-when{display:block;margin-top:8px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);line-height:1.6}
+.reg p{color:var(--mute);font-size:15px;line-height:1.55;max-width:66ch}
+.reg-stack{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;justify-content:flex-end}
+.reg-stack li{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text);padding:5px 9px 4px;border-radius:8px;
+  background:rgba(244,242,252,.05);border:1px solid var(--edge-soft);
+}
+@media (max-width:860px){
+  .reg{grid-template-columns:minmax(0,1fr);gap:10px}
+  .reg-stack{justify-content:flex-start}
+}
+
+/* stack chips reuse the About .tools; a note under them */
+.tools--stack{margin-top:0}
+.stack-note{display:block;margin-top:22px;max-width:60ch;line-height:1.7;text-transform:none;letter-spacing:.04em;font-size:12px}
+
+/* work: automation cards without a screenshot carry a step strip on a dotted canvas */
+.auto-flow{
+  display:flex;align-items:center;padding:18px 20px;
+  background-color:var(--bg-2);
+  background-image:radial-gradient(circle,rgba(244,242,252,.14) 1px,transparent 1.6px);background-size:18px 18px;
+}
+.flow-steps{display:flex;flex-wrap:wrap;align-items:center;gap:8px 6px}
+.flow-steps li{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text)}
+.flow-steps li span{padding:7px 10px 6px;border-radius:8px;background:rgba(18,17,42,.9);border:1px solid var(--edge)}
+.flow-steps li + li::before{content:'\2192';content:'\2192' / '';color:var(--accent);font-size:13px;line-height:1}
+.flow-steps li:first-child span{border-color:rgba(var(--accent-rgb),.5);color:var(--accent-text)}
+.flow-steps li:last-child span{border-color:rgba(var(--win-rgb),.5);color:var(--win)}
+
+/* about: the AMA Holdings brand card spans two columns and carries one fact */
+.brand-card--wide{grid-column:span 2}
+.brand-fact{display:block;margin-top:12px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text)}
+@media (max-width:520px){.brand-card--wide{grid-column:auto}}
+/* the hovered or focused column shows its own tip (tips are painted after every column) */
+.spend svg:has(.bar.b0:hover,.bar.b0:focus-visible) .tip.t0{opacity:1}
+.spend svg:has(.bar.b1:hover,.bar.b1:focus-visible) .tip.t1{opacity:1}
+.spend svg:has(.bar.b2:hover,.bar.b2:focus-visible) .tip.t2{opacity:1}
+.spend svg:has(.bar.b3:hover,.bar.b3:focus-visible) .tip.t3{opacity:1}
+.spend svg:has(.bar.b4:hover,.bar.b4:focus-visible) .tip.t4{opacity:1}
+.spend svg:has(.bar.b5:hover,.bar.b5:focus-visible) .tip.t5{opacity:1}
+.spend svg:has(.bar.b6:hover,.bar.b6:focus-visible) .tip.t6{opacity:1}
+.spend svg:has(.bar.b7:hover,.bar.b7:focus-visible) .tip.t7{opacity:1}
+.spend svg:has(.bar.b8:hover,.bar.b8:focus-visible) .tip.t8{opacity:1}
+.spend svg:has(.bar.b9:hover,.bar.b9:focus-visible) .tip.t9{opacity:1}
+.spend svg:has(.bar.b10:hover,.bar.b10:focus-visible) .tip.t10{opacity:1}
+.spend svg:has(.bar.b11:hover,.bar.b11:focus-visible) .tip.t11{opacity:1}
+.spend svg:has(.bar.b12:hover,.bar.b12:focus-visible) .tip.t12{opacity:1}
+
+
+/* ============================================================
    20 · MOTION SYSTEM — snap-in · reveal · split words · keyframes
    ============================================================ */
 /* hero load choreography */
@@ -1770,6 +1936,8 @@ body.loaded .d5{transition-delay:.5s}
   .rot-item:not(.is-on){visibility:hidden}
   .packet{display:none}
   .flow{stroke-dasharray:none}
+  .spend .bar path,.tape rect{transform:none}
+  .spend .bar:focus-visible .hit{stroke-dasharray:none}
   .steps-line i{transform:scaleX(1)}
   .step-node{transform:scale(1)}
   .card--lift:hover,.card--lift.in:hover,.vframe:hover,.vframe.in:hover,.still:hover img,a.ci-row:hover,.hero-social a:hover,.ci-social a:hover{transform:none}

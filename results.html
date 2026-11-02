@@ -19,7 +19,7 @@
 <meta name="twitter:image:alt" content="Portrait of Carl Gabriel Piramo">
 <link rel="canonical" href="https://carlgabriel.vercel.app/results.html">
 <!-- seo:jsonld -->
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://carlgabriel.vercel.app/#person","name":"Carl Gabriel Piramo","url":"https://carlgabriel.vercel.app/"},{"@type":"WebPage","@id":"https://carlgabriel.vercel.app/results.html#webpage","url":"https://carlgabriel.vercel.app/results.html","name":"Meta Ads Portfolio & Results | Carl Gabriel Piramo","description":"My Meta ads portfolio: 8.71× peak ROAS, 4.9× blended and 52M+ organic views, with the Ads Manager and Shopify dashboards behind them.","isPartOf":{"@id":"https://carlgabriel.vercel.app/#website"},"about":{"@id":"https://carlgabriel.vercel.app/#person"},"inLanguage":"en","dateModified":"2026-10-10","breadcrumb":{"@id":"https://carlgabriel.vercel.app/results.html#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://carlgabriel.vercel.app/results.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://carlgabriel.vercel.app/"},{"@type":"ListItem","position":2,"name":"Results","item":"https://carlgabriel.vercel.app/results.html"}]},{"@type":"FAQPage","@id":"https://carlgabriel.vercel.app/results.html#faq","url":"https://carlgabriel.vercel.app/results.html","isPartOf":{"@id":"https://carlgabriel.vercel.app/results.html#webpage"},"mainEntity":[{"@type":"Question","name":"What is a good ROAS for Meta ads?","acceptedAnswer":{"@type":"Answer","text":"It depends on your margin. Break-even ROAS is 1 divided by your gross margin, so a product with a 50% margin breaks even at 2× and a 25% margin needs 4×. Anything above that is profit after ad spend. When someone quotes a ROAS, ask whether it is one campaign's peak or the blended figure across everything they spent."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://carlgabriel.vercel.app/#person","name":"Carl Gabriel Piramo","url":"https://carlgabriel.vercel.app/"},{"@type":"WebPage","@id":"https://carlgabriel.vercel.app/results.html#webpage","url":"https://carlgabriel.vercel.app/results.html","name":"Meta Ads Portfolio & Results | Carl Gabriel Piramo","description":"My Meta ads portfolio: 8.71× peak ROAS, 4.9× blended and 52M+ organic views, with the Ads Manager and Shopify dashboards behind them.","isPartOf":{"@id":"https://carlgabriel.vercel.app/#website"},"about":{"@id":"https://carlgabriel.vercel.app/#person"},"inLanguage":"en","dateModified":"2026-11-02","breadcrumb":{"@id":"https://carlgabriel.vercel.app/results.html#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://carlgabriel.vercel.app/results.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://carlgabriel.vercel.app/"},{"@type":"ListItem","position":2,"name":"Results","item":"https://carlgabriel.vercel.app/results.html"}]},{"@type":"FAQPage","@id":"https://carlgabriel.vercel.app/results.html#faq","url":"https://carlgabriel.vercel.app/results.html","isPartOf":{"@id":"https://carlgabriel.vercel.app/results.html#webpage"},"mainEntity":[{"@type":"Question","name":"What is a good ROAS for Meta ads?","acceptedAnswer":{"@type":"Answer","text":"It depends on your margin. Break-even ROAS is 1 divided by your gross margin, so a product with a 50% margin breaks even at 2× and a 25% margin needs 4×. Anything above that is profit after ad spend. When someone quotes a ROAS, ask whether it is one campaign's peak or the blended figure across everything they spent."}}]}]}</script>
 <!-- /seo:jsonld -->
 <link rel="expect" href="#page-title" blocking="render">
 <!-- shell:head -->
@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Schibsted+Grotesk:wght@400;500;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=15">
+<link rel="stylesheet" href="styles.css?v=16">
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"selector_matches":"a[href$='.html'], a[href='./']"},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}
 </script>
@@ -37,7 +37,7 @@
    Home, and never when the navigation lands on a #section. Arriving through a
    transition skips the banner's own load choreography (.vt-arrive). */
 (function () {
-  var TARGETS = { 'work.html': 1, 'results.html': 1, 'services.html': 1, 'contact.html': 1 };
+  var TARGETS = { 'work.html': 1, 'ama-holdings.html': 1, 'results.html': 1, 'services.html': 1, 'contact.html': 1 };
   function file(url) {
     var p;
     try { p = new URL(url, location.href).pathname; } catch (e) { return ''; }
@@ -85,6 +85,7 @@
 <div class="ambient" aria-hidden="true">
   <i class="glow glow--a"></i>
   <i class="glow glow--b"></i>
+  <i class="grain"></i>
 </div>
 
 <nav class="nav" aria-label="Main">
@@ -99,9 +100,10 @@
       <ul class="nav-links">
         <li class="nav-home" style="--i:0"><a href="./" data-nav="home">Home</a></li>
         <li style="--i:1"><a href="work.html" data-nav="work">Work</a></li>
-        <li style="--i:2"><a href="results.html" data-nav="results" aria-current="page">Results</a></li>
-        <li style="--i:3"><a href="services.html" data-nav="services">Services</a></li>
-        <li style="--i:4"><a href="about.html" data-nav="about">About</a></li>
+        <li style="--i:2"><a href="ama-holdings.html" data-nav="ama">Case study</a></li>
+        <li style="--i:3"><a href="results.html" data-nav="results" aria-current="page">Results</a></li>
+        <li style="--i:4"><a href="services.html" data-nav="services">Services</a></li>
+        <li style="--i:5"><a href="about.html" data-nav="about">About</a></li>
       </ul>
       <a class="btn btn--primary btn--sm nav-cta" href="contact.html" data-nav="contact">Book a call</a>
     </div>
@@ -114,10 +116,10 @@
 <header class="page-hero" id="top">
   <span class="hero-dots" aria-hidden="true"></span>
   <div class="wrap">
-    <p class="eyebrow snap-in d1"><span class="ph-index">03</span><span class="ph-sep" aria-hidden="true">·</span>Proof</p>
+    <p class="eyebrow snap-in d1"><span class="ph-index">04</span><span class="ph-sep" aria-hidden="true">·</span>Proof</p>
     <h1 class="hook page-title" id="page-title" data-split data-vt="vt-results">Numbers from Ads Manager, <em>not a pitch deck.</em></h1>
     <p class="lede snap-in d3">Selected results from the stores, marketplaces and ad accounts I've run. The raw dashboards are in the gallery below.</p>
-    <p class="lede lede-more snap-in d3">Right now that includes ₱2M+ a month in Shopify sales under management. I've also worked inside ad accounts that did US$60M+ in Facebook Ads revenue and creator campaigns that passed 1B+ views. Team and client scale, not mine alone.</p>
+    <p class="lede lede-more snap-in d3">Right now that includes ₱2M+ a month in Shopify sales under management in the Philippines, and the creator ad program at <a href="ama-holdings.html">AMA Holdings</a> in the US: US$44M+ of ad spend tracked, US$13.9M of it in the last 30 days, with 239 winning videos in that month. I've also worked inside ad accounts that did US$60M+ in Facebook Ads revenue and creator campaigns that passed 1B+ views. Team and client scale, not mine alone.</p>
   </div>
 </header>
 
@@ -165,6 +167,7 @@
         <button class="proof-tab seg-btn is-active" type="button" role="tab" id="ptab-ecom" aria-selected="true" aria-controls="ppanel-ecom" tabindex="0">E-commerce</button>
         <button class="proof-tab seg-btn" type="button" role="tab" id="ptab-meta" aria-selected="false" aria-controls="ppanel-meta" tabindex="-1">Meta Ads</button>
         <button class="proof-tab seg-btn" type="button" role="tab" id="ptab-social" aria-selected="false" aria-controls="ppanel-social" tabindex="-1">Social</button>
+        <button class="proof-tab seg-btn" type="button" role="tab" id="ptab-creator" aria-selected="false" aria-controls="ppanel-creator" tabindex="-1">Creator ads</button>
       </div>
       <div class="proof-panel" id="ppanel-ecom" role="tabpanel" aria-labelledby="ptab-ecom" tabindex="0">
         <div class="proof-grid proof-grid--3">
@@ -260,6 +263,31 @@
             </article>
         </div>
         <a class="proof-to-gal" href="#gallery" data-gal-filter="social">See the social analytics <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="proof-panel" id="ppanel-creator" role="tabpanel" aria-labelledby="ptab-creator" tabindex="0" hidden>
+        <div class="proof-grid proof-grid--4">
+            <article class="stat stat--hl card card--lift">
+              <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
+              <span class="stat-num"><span class="pre">US$</span><span class="val" data-count="44.2">44.2</span><span class="suf">M</span></span>
+              <span class="stat-label">Creator ad spend, all time<i>AMA Holdings · Apr to Nov 2026 · 1.56× blended</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+              <span class="stat-num"><span class="pre">US$</span><span class="val" data-count="13.9">13.9</span><span class="suf">M</span></span>
+              <span class="stat-label">Ad spend in the last 30 days<i>1.47× blended ROAS · to Nov 2, 2026</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="239">239</span></span>
+              <span class="stat-label">Winning videos in 30 days<i>Of 2,013 judged · ROAS 1.4× and CPA $26 or better</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="833">833</span></span>
+              <span class="stat-label">Creators in the database<i>429 whitelisted and set up</i></span>
+            </article>
+        </div>
+        <a class="proof-to-gal" href="ama-holdings.html">Read the AMA Holdings case study <span aria-hidden="true">→</span></a>
       </div>
     </div>
 </div></section>
@@ -362,8 +390,8 @@
 </section>
 
 <nav class="pager wrap" aria-label="More pages">
-  <a class="pager-prev" href="work.html"><small>← 02 · Previous</small><b>Work</b></a>
-  <a class="pager-next" href="services.html"><small>04 · Next →</small><b>Services</b></a>
+  <a class="pager-prev" href="ama-holdings.html"><small>← 03 · Previous</small><b>AMA Holdings</b></a>
+  <a class="pager-next" href="services.html"><small>05 · Next →</small><b>Services</b></a>
 </nav>
 </main>
 
@@ -387,6 +415,7 @@
       <ul class="footer-links">
         <li><a href="./">Home</a></li>
         <li><a href="work.html">Work</a></li>
+        <li><a href="ama-holdings.html">AMA Holdings</a></li>
         <li><a href="results.html">Results</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="about.html">About</a></li>
@@ -396,6 +425,7 @@
     <nav class="footer-col" aria-label="Jump to">
       <p class="footer-h">Jump to</p>
       <ul class="footer-links">
+        <li><a href="ama-holdings.html#automations">Systems</a></li>
         <li><a href="results.html#gallery">Gallery</a></li>
         <li><a href="about.html#experience">Experience</a></li>
         <li><a href="services.html#process">Process</a></li>
@@ -414,7 +444,7 @@
   <div class="wrap footer-base">
     <span class="footer-copy">© <span id="year">2026</span> Carl Gabriel Piramo</span>
     <span class="footer-note">Manila · remote · working worldwide</span>
-    <span class="footer-updated">Last updated <time datetime="2026-10-10">10 October 2026</time></span>
+    <span class="footer-updated">Last updated <time datetime="2026-11-02">2 November 2026</time></span>
   </div>
 </footer>
 
