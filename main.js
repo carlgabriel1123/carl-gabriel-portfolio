@@ -669,8 +669,12 @@
     s.setProperty('--ind-x', x + 'px');
     s.setProperty('--ind-w', w + 'px');
     seg.classList.add('seg--ready');
-    if (!instant && btn.scrollIntoView) {
-      try { btn.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (err) { /* older engines take a boolean */ }
+    // bring the chosen tab into a sideways-scrolling strip, and only then: never move the page itself
+    if (!instant && btn.scrollIntoView && seg.scrollWidth > seg.clientWidth + 1) {
+      var r = seg.getBoundingClientRect();
+      if (r.top >= 0 && r.bottom <= window.innerHeight) {
+        try { btn.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (err) { /* older engines take a boolean */ }
+      }
     }
     if (instant) {
       void ind.offsetWidth; // commit the jump before transitions come back
@@ -896,17 +900,17 @@
         if (matches(it, f)) showItem(it); else it.hidden = true;
       });
     }
-    function setButtons(f) {
+    function setButtons(f, instant) {
       filters.forEach(function (btn) {
         var on = (btn.getAttribute('data-filter') || 'all') === f;
         btn.classList.toggle('is-active', on);
         btn.setAttribute('aria-pressed', on ? 'true' : 'false');
       });
-      if (seg) segUpdate(seg);
+      if (seg) segUpdate(seg, instant);
     }
 
     snap(current);
-    setButtons(current);
+    setButtons(current, true); // first paint: no transition and no scrollIntoView (it dragged the page to the gallery on load)
     setStatus(countFor(current));
 
     var anims = [];
