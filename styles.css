@@ -782,6 +782,7 @@ a.still:hover .still-zoom,a.still:focus-visible .still-zoom{border-color:var(--e
   display:grid;gap:1px;
   background:var(--bg);border:1px solid var(--edge-soft);border-radius:var(--r-lg);overflow:hidden;
 }
+.proof-grid--2{grid-template-columns:repeat(2,minmax(0,1fr))} /* 2026-11-03: the creator panel keeps two cards after the trim */
 .proof-grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .proof-grid--4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .proof-grid > .card{background:var(--bg);border:0;border-radius:0;outline:1px solid var(--edge-soft);outline-offset:0}

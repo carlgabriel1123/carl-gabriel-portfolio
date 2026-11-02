@@ -27,6 +27,41 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASELINE = os.path.join(ROOT, '_tools', 'baseline-index.html')
 PAGES = ['index.html', 'work.html', 'ama-holdings.html', 'results.html', 'services.html', 'about.html', 'contact.html']
 ALLOW = {
+    # 2026-11-03 number simplification (Carl: "make the numbers simple, only the important words and numbers"):
+    # stat sublabels, long result descriptions and gallery caption details removed; the figures themselves stay.
+    'rebuilt the store for conversion and restructured the campaigns around sales objectives.',
+    'roas more than doubled.',
+    'peak meta roas · 4.9× blended',
+    'restore delivery on stalled ad accounts',
+    'views per month · by month two',
+    'a ugc-creator campaign that hit',
+    '100m+ views a month by its second month live.',
+    '+268% vs. the comparison day',
+    'same shopify store, same day',
+    'on the $3.8m day',
+    '+67% vs. the previous week',
+    '5.34k items sold · 5.78% ctr',
+    'aug 2026 · +57.7% month over month',
+    'purchase conversion value',
+    'across meta campaigns',
+    'best-performing campaign',
+    'across 5 platforms · dashboards in the gallery',
+    'short-form video',
+    'reels & posts',
+    'total video views',
+    'long & short form',
+    'pins & idea pins',
+    'shopify · 99,843 orders · 10.1% conversion · +268%',
+    'shopee · aug 2026 · 1,853 orders · +57.7% month over month',
+    'tiktok shop · 5.34k items sold · 5.78% ctr',
+    'creator accounts · views per account',
+    'sales campaigns · 6.99× average roas · 8.71× peak',
+    'messaging-to-purchase campaigns · 3.58× average roas',
+    'pages · total views per page',
+    # 2026-11-03 figure trim (Carl: too many numbers): the About bio now says "hundreds of UGC creators" and
+    # "a billion views" instead of the bare counts; the rest of the trim only changed sublabels and tile metas.
+    '300',
+    '1b+',
     'view work ↓',             # hero button is now "View work →" linking to work.html
     'carl g. — back to top',   # brand link label is now "Carl G. — home"
     'carl gabriel piramo — digital marketing & e-commerce growth manager',  # SEO pass 2026-09-30: keyword title
