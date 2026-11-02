@@ -44,7 +44,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Schibsted+Grotesk:wght@400;500;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=16">
+<link rel="stylesheet" href="styles.css?v=18">
+<noscript><style>.snap-in,.reveal,.is-split .wi,.tape rect,.spend .bar path,.step-node,.steps-line i{opacity:1;transform:none}</style></noscript>
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"selector_matches":"a[href$='.html'], a[href='./']"},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}
 </script>
@@ -98,16 +99,10 @@
 <!-- shell:nav -->
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- Ambient background glows (fixed, decorative) -->
-<div class="ambient" aria-hidden="true">
-  <i class="glow glow--a"></i>
-  <i class="glow glow--b"></i>
-  <i class="grain"></i>
-</div>
-
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
     <a class="brand" href="./" aria-label="Carl G. home">CARL<b>G.</b></a>
+    <a class="btn btn--primary btn--sm nav-cta" href="contact.html" data-nav="contact">Book a call</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
       <span class="nav-toggle-bar" aria-hidden="true"></span>
       <span class="nav-toggle-bar" aria-hidden="true"></span>
@@ -122,7 +117,6 @@
         <li style="--i:4"><a href="services.html" data-nav="services">Services</a></li>
         <li style="--i:5"><a href="about.html" data-nav="about">About</a></li>
       </ul>
-      <a class="btn btn--primary btn--sm nav-cta" href="contact.html" data-nav="contact">Book a call</a>
     </div>
   </div>
   <div class="pagebar" aria-hidden="true"><i></i></div>
@@ -135,30 +129,28 @@
      HERO
      ============================================================ -->
 <header class="hero" id="top">
-  <span class="hero-dots" aria-hidden="true"></span>
   <div class="wrap hero-grid">
 
     <div class="hero-copy">
       <p class="welcome snap-in d1"><i class="pulse-dot" aria-hidden="true"></i>Available for new brands</p>
       <h1 class="hero-name snap-in d1" data-split>Carl Gabriel <span class="ac">Piramo</span></h1>
       <p class="hero-role snap-in d2">Digital Marketing Manager · <span>E-commerce Growth Specialist</span> · AI Specialist</p>
-      <p class="hero-run snap-in d2"><b>I run</b>
-        <span class="sr-only">Meta media buying, Shopify growth &amp; CRO, UGC &amp; creator programs, AI marketing automation and marketplace launches</span>
-        <span class="rotator" aria-hidden="true">
-          <span class="rot-item is-on">Meta media buying</span>
-          <span class="rot-item">Shopify growth &amp; CRO</span>
-          <span class="rot-item">UGC &amp; creator programs</span>
-          <span class="rot-item">AI marketing automation</span>
-          <span class="rot-item">Marketplace launches</span>
-        </span>
-      </p>
-      <p class="lede snap-in d3">3+ years of paid media, Shopify stores and creator programs for brands in the Philippines, Singapore and the USA. Right now: growth and automation at <a href="ama-holdings.html">AMA Holdings</a>, the US owner of The Loaded Teashop and Goli Nutrition, where a creator ad program spends US$13M+ a month, and digital marketing for three brands in the Philippines. <strong>One person, one feedback loop.</strong></p>
+      <p class="hero-hook snap-in d2">Ads, store and creators for DTC brands. <em>4.9× blended ROAS, one operator.</em></p>
+      <ul class="hero-proof-list snap-in d3" aria-label="Headline proof">
+        <li><b><i>US$</i>44<i>M+</i></b> ad spend tracked</li>
+        <li><b>8.71<i>×</i></b> peak ROAS</li>
+        <li><b>833</b> creators, one database</li>
+      </ul>
+      <p class="lede snap-in d3">Right now: growth and automation for <a href="ama-holdings.html" title="AMA Holdings: The Loaded Teashop and Goli Nutrition">AMA Holdings</a> (US) and three brands in PH.</p>
       <div class="hero-ctas snap-in d4">
-        <a class="btn btn--primary magnet" href="contact.html">Book a strategy call</a>
-        <a class="btn btn--ghost magnet" href="work.html">See the work →</a>
-        <a class="btn btn--ghost magnet" href="assets/Carl-Gabriel-Piramo-CV.pdf" download>Download CV</a>
+        <a class="btn btn--primary" href="contact.html">Book a call</a>
+        <a class="btn--link" href="work.html">See the work →</a>
       </div>
-      <ul class="hero-meta snap-in d5">
+    </div>
+
+    <div class="hero-visual hero-proof snap-in d3">
+      <div class="hv-photo"><img src="assets/media/portrait-carl.png" alt="Carl Gabriel Piramo" width="400" height="400" fetchpriority="high"></div>
+      <ul class="hero-meta">
         <li>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
           Manila, Philippines
@@ -172,29 +164,6 @@
           Works in your timezone
         </li>
       </ul>
-    </div>
-
-    <div class="hero-visual snap-in d3">
-      <div class="hv-stage" data-depth=".12">
-        <span class="hv-ring" aria-hidden="true"></span>
-        <span class="hv-spin" aria-hidden="true"></span>
-        <span class="hv-circle" aria-hidden="true"></span>
-        <div class="hv-photo">
-          <img src="assets/media/portrait-carl.png" alt="Carl Gabriel Piramo" width="400" height="400" fetchpriority="high">
-        </div>
-        <span class="orbit" aria-hidden="true">
-          <i>ADS</i>
-          <i>SHOP</i>
-          <i>UGC</i>
-          <i>AI</i>
-        </span>
-      </div>
-      <div class="float float--a" data-depth=".55">
-        <span class="float-pill"><b>8.71×</b> peak ROAS</span>
-      </div>
-      <div class="float float--b" data-depth=".4">
-        <span class="float-pill"><b>US$44M+</b> ad spend</span>
-      </div>
     </div>
 
     <div class="hero-social snap-in d5" role="group" aria-labelledby="hsLabel">
@@ -212,14 +181,51 @@
     </div>
 
   </div>
-
-  <a class="scroll-cue" href="#results" aria-label="Scroll to results">
-    <span class="mouse" aria-hidden="true"><i></i></span>
-  </a>
 </header>
 
 <!-- ============================================================
-     BRAND TICKER
+     HEADLINE RESULTS
+     ============================================================ -->
+<section class="stats" id="results" aria-labelledby="resultsTitle">
+  <div class="wrap">
+    <h2 class="sub-head mono-line reveal" id="resultsTitle">Headline results</h2>
+    <div class="stats-grid stats-grid--6" data-stagger="90">
+      <article class="stat stat--hl card card--lift">
+        <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
+        <span class="stat-num"><span class="pre">US$</span><span class="val" data-count="44">44</span><span class="suf">M+</span></span>
+        <span class="stat-label">Creator ad spend tracked<i>The Loaded Teashop · Apr to Nov 2026</i></span>
+      </article>
+      <article class="stat stat--hl card card--lift">
+        <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+        <span class="stat-num"><span class="val" data-count="8.71">8.71</span><span class="suf">×</span></span>
+        <span class="stat-label">Peak Meta ROAS<i>4.9× blended</i></span>
+      </article>
+      <article class="stat card card--lift">
+        <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.9 6.2 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.2 1.3-6.6L2.5 9l6.6-.8Z"/></svg></span>
+        <span class="stat-num"><span class="val" data-count="239">239</span></span>
+        <span class="stat-label">Winning videos in 30 days<i>Of 2,013 judged</i></span>
+      </article>
+      <article class="stat card card--lift">
+        <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <span class="stat-num"><span class="val" data-count="833">833</span></span>
+        <span class="stat-label">Creators in one database<i>Handles, whitelist, tiers</i></span>
+      </article>
+      <article class="stat card card--lift">
+        <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+        <span class="stat-num"><span class="pre">US$</span><span class="val" data-count="13.9">13.9</span><span class="suf">M</span></span>
+        <span class="stat-label">Ad spend in the last 30 days<i>Weekly analysis, 800+ creators</i></span>
+      </article>
+      <article class="stat card card--lift">
+        <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></span>
+        <span class="stat-num"><span class="val" data-count="1">1</span><span class="suf">B+</span></span>
+        <span class="stat-label">Social media views<i>100M+ a month at peak, creator campaigns</i></span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BRAND ROW (static)
      ============================================================ -->
 <section class="ticker" aria-label="Brands I have worked with">
   <div class="ticker-viewport">
@@ -234,61 +240,7 @@
       <li>MaryRuth's<span class="ticker-tag">Philippines</span></li>
       <li>JP Franklin<span class="ticker-tag">Automotive</span></li>
     </ul>
-    <ul class="ticker-list" aria-hidden="true">
-      <li>AMA Holdings<span class="ticker-tag">USA</span></li>
-      <li>The Loaded Teashop<span class="ticker-tag">USA · AMA Holdings</span></li>
-      <li>SUPR<span class="ticker-tag">Singapore</span></li>
-      <li>ONTHEGO<span class="ticker-tag">Singapore</span></li>
-      <li>Goli Nutrition<span class="ticker-tag">USA · PH</span></li>
-      <li>Biolane<span class="ticker-tag">Philippines</span></li>
-      <li>MaryRuth's<span class="ticker-tag">Philippines</span></li>
-      <li>JP Franklin<span class="ticker-tag">Automotive</span></li>
-    </ul>
   </div>
-  </div>
-  <button class="ticker-pause" type="button" aria-pressed="false" aria-label="Pause brand ticker">
-    <span class="ticker-pause__on">Pause</span><span class="ticker-pause__off">Play</span>
-  </button>
-</section>
-
-<!-- ============================================================
-     HEADLINE RESULTS
-     ============================================================ -->
-<section class="stats" id="results" aria-labelledby="resultsTitle">
-  <div class="wrap">
-    <h2 class="sub-head mono-line reveal" id="resultsTitle">Headline results</h2>
-    <div class="stats-grid stats-grid--6" data-stagger="90">
-      <article class="stat card card--lift">
-        <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
-        <span class="stat-num"><span class="pre">US$</span><span class="val" data-count="60">60</span><span class="suf">M+</span></span>
-        <span class="stat-label">Facebook Ads revenue<i>Accounts and teams I've worked in, some I can't name</i></span>
-      </article>
-      <article class="stat card card--lift">
-        <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
-        <span class="stat-num"><span class="pre">US$</span><span class="val" data-count="44">44</span><span class="suf">M+</span></span>
-        <span class="stat-label">Creator ad spend tracked<i>The Loaded Teashop · AMA Holdings · Apr to Nov 2026 · Meta + TikTok</i></span>
-      </article>
-      <article class="stat card card--lift">
-        <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></span>
-        <span class="stat-num"><span class="val" data-count="1">1</span><span class="suf">B+</span></span>
-        <span class="stat-label">Social media views<i>From the campaigns I managed creators for</i></span>
-      </article>
-      <article class="stat card card--lift">
-        <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-        <span class="stat-num"><span class="val" data-count="833">833</span></span>
-        <span class="stat-label">Creators in one database<i>Handles · whitelist status · tiers · built for The Loaded Teashop</i></span>
-      </article>
-      <article class="stat card card--lift">
-        <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.9 6.2 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.2 1.3-6.6L2.5 9l6.6-.8Z"/></svg></span>
-        <span class="stat-num"><span class="val" data-count="239">239</span></span>
-        <span class="stat-label">Winning videos in 30 days<i>Of 2,013 judged · ROAS 1.4× and CPA $26 or better</i></span>
-      </article>
-      <article class="stat card card--lift">
-        <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
-        <span class="stat-num"><span class="val" data-count="8.71">8.71</span><span class="suf">×</span></span>
-        <span class="stat-label">Peak Meta ROAS<i>4.9× blended across accounts</i></span>
-      </article>
-    </div>
   </div>
 </section>
 
@@ -338,6 +290,8 @@
         <ul class="tile-list">
           <li><b>100M+</b> views a month, creator campaign</li>
           <li><b>₱4.99M</b> TikTok Shop LIVE GMV</li>
+          <li><b>52M+</b> organic views on brand accounts</li>
+          <li><b>₱2M+</b> a month in Shopify sales under management</li>
         </ul>
         <span class="tile-go" aria-hidden="true"><span id="tg-results">See the proof</span> →</span>
       </article>
@@ -371,12 +325,12 @@
         <span class="tile-go" aria-hidden="true"><span id="tg-exp">Where the numbers came from</span> →</span>
       </article>
 
-      <article class="tile tile--contact card">
+      <article class="tile tile--contact card coral">
         <div>
           <p class="eyebrow">Let's talk</p>
           <h3 class="tile-title tile-title--xl"><a class="tile-link" id="tl-contact" aria-labelledby="tl-contact tg-contact" href="contact.html"><span data-vt="vt-contact">Tell me about <em>your brand.</em></span></a></h3>
         </div>
-        <span class="btn btn--primary" aria-hidden="true"><span id="tg-contact">Book a strategy call</span> →</span>
+        <span class="btn btn--primary" aria-hidden="true"><span id="tg-contact">Book a call</span> →</span>
       </article>
     </div>
   </div>
@@ -415,7 +369,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <nav class="footer-col" aria-label="Jump to">
+    <nav class="footer-col footer-col--jump" aria-label="Jump to">
       <p class="footer-h">Jump to</p>
       <ul class="footer-links">
         <li><a href="ama-holdings.html#automations">Systems</a></li>
@@ -446,7 +400,6 @@
 </button>
 <!-- /shell:footer -->
 
-<a class="cta-dock" href="contact.html" aria-label="Book a strategy call">Book a strategy call →</a>
 <script src="main.js?v=10"></script>
 </body>
 </html>

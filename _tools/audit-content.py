@@ -78,6 +78,9 @@ ALLOW = {
     'across creator campaigns',
     'paid media, e-commerce, creators and ai automation — the four things a growing brand usually splits across four vendors. i run them as one system.',
     'a content engine that never runs dry',
+    # 2026-11-02 flat redesign findings: the hero hook now carries an outcome number ("4.9× blended ROAS, one operator.");
+    # the one-person point is made by the Services tile ("One operator.") and the services.html lede
+    'one person, one feedback loop.',
     '— then rebuilt the campaigns around what the data showed.',
     'right creators, right hooks, tested fast — reach compounds.',
     'shopify · sep 7–14, 2026 · +67% vs. the previous week',
@@ -110,6 +113,22 @@ ALLOW = {
     'ugc creators managed',
     'recruited · briefed · tracked',
     'the computer science degree is the quiet advantage. i build n8n automations for reporting and content ops, wrote an ai seo agent that audits and fixes stores through the shopify admin api, and produce ai video and imagery in-house.',
+    # 2026-11-02 flat, calm redesign (docs/design/2026-11-02-flat-calm-redesign.md): the hero rotator, the scroll cue,
+    # the marquee pause button and the floating dock are gone, every button reads "Book a call", the Home sublabels are one
+    # clause each, and the Services #edge copy and pains list were cut (the .versus cards carry the argument)
+    'meta media buying, shopify growth & cro, ugc & creator programs, ai marketing automation and marketplace launches',
+    'shopify growth & cro',
+    'ugc & creator programs',
+    'ai marketing automation',
+    'book a strategy call',
+    'book a strategy call →',
+    '4.9× blended across accounts',
+    'when your strategist, your media buyer, your creative team and your shopify developer are four different vendors, feedback dies in a slack thread. '
+    "the ad account says hook #3 is winning; the next batch of creative never hears about it. the product page leaks half the traffic; nobody's job is to notice.",
+    'your creative testing is random',
+    'your store leaks the traffic your ads pay for',
+    'scroll to results',
+    'pause brand ticker',
 }
 # Intentional removals whose text is confidential (the employer's name, kept off the public site in the
 # SEO pass 2026-09-30). This repo is public, so they are listed as sha256 of the lowercased text.

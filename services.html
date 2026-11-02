@@ -27,7 +27,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Schibsted+Grotesk:wght@400;500;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=16">
+<link rel="stylesheet" href="styles.css?v=18">
+<noscript><style>.snap-in,.reveal,.is-split .wi,.tape rect,.spend .bar path,.step-node,.steps-line i{opacity:1;transform:none}</style></noscript>
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"selector_matches":"a[href$='.html'], a[href='./']"},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}
 </script>
@@ -81,16 +82,10 @@
 <!-- shell:nav -->
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- Ambient background glows (fixed, decorative) -->
-<div class="ambient" aria-hidden="true">
-  <i class="glow glow--a"></i>
-  <i class="glow glow--b"></i>
-  <i class="grain"></i>
-</div>
-
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
     <a class="brand" href="./" aria-label="Carl G. home">CARL<b>G.</b></a>
+    <a class="btn btn--primary btn--sm nav-cta" href="contact.html" data-nav="contact">Book a call</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
       <span class="nav-toggle-bar" aria-hidden="true"></span>
       <span class="nav-toggle-bar" aria-hidden="true"></span>
@@ -105,7 +100,6 @@
         <li style="--i:4"><a href="services.html" data-nav="services" aria-current="page">Services</a></li>
         <li style="--i:5"><a href="about.html" data-nav="about">About</a></li>
       </ul>
-      <a class="btn btn--primary btn--sm nav-cta" href="contact.html" data-nav="contact">Book a call</a>
     </div>
   </div>
   <div class="pagebar" aria-hidden="true"><i></i></div>
@@ -115,11 +109,14 @@
 <main id="main">
 
 <header class="page-hero" id="top">
-  <span class="hero-dots" aria-hidden="true"></span>
   <div class="wrap">
     <p class="eyebrow snap-in d1"><span class="ph-index">05</span><span class="ph-sep" aria-hidden="true">·</span>What I do</p>
     <h1 class="hook page-title" id="page-title" data-split data-vt="vt-services">Four growth levers. <em>One operator.</em></h1>
     <p class="lede snap-in d3">Paid media, e-commerce, creators and AI automation. Most growing brands split those four across four vendors. I run them as one system, today for three brands in the Philippines and for The Loaded Teashop's creator ad program at <a href="ama-holdings.html">AMA Holdings</a>, the US owner of The Loaded Teashop and Goli Nutrition.</p>
+    <div class="hero-ctas snap-in d4">
+      <a class="btn btn--primary" href="contact.html">Book a call</a>
+      <a class="btn--link" href="#process">How it works ↓</a>
+    </div>
   </div>
 </header>
 
@@ -174,16 +171,12 @@
         <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></svg></span>
         <span class="chip">AI &amp; search</span>
         <h2 class="card-title">Automation that does the busywork</h2>
-        <p>n8n workflows (20+ live for one client), dashboards and knowledge bots on Supabase, Vercel and the Claude API, an AI SEO agent that audits and fixes stores through the Shopify Admin API, and SEO, GEO (generative engine optimization) and AEO (answer engine optimization) so your brand shows up in search and in AI answers.</p>
+        <p>n8n workflows (20+ live for one client), dashboards and knowledge bots on Supabase, Vercel and the Claude API, and an AI SEO agent that audits and fixes stores through the Shopify Admin API. Plus SEO, GEO (generative engine optimization) and AEO (answer engine optimization), so your brand shows up in search and in AI answers.</p>
         <ul class="svc-tags">
           <li>n8n</li>
           <li>Claude API</li>
-          <li>Supabase</li>
           <li>AI SEO agent</li>
-          <li>SEO</li>
-          <li>GEO</li>
-          <li>AEO</li>
-          <li>AI video</li>
+          <li>SEO · GEO · AEO</li>
         </ul>
       </article>
     </div>
@@ -219,19 +212,14 @@
           </g>
         </g>
         <text class="loop-label" x="315" y="150" text-anchor="middle" font-family="'Martian Mono', monospace" font-size="10" letter-spacing="2" fill="#9E99C6">DATA</text>
-        <g class="loop-packets">
-          <circle class="packet packet--a" r="3.5" fill="#FF4D5E">
-            <animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#loopPathA"/></animateMotion>
-          </circle>
-          <circle class="packet packet--b" r="3.5" fill="#6C8BFF">
-            <animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite"><mpath href="#loopPathB"/></animateMotion>
-          </circle>
-          <circle class="packet packet--c" r="3.5" fill="#F4F2FC">
-            <animateMotion dur="4.2s" begin="1.6s" repeatCount="indefinite"><mpath href="#loopPathC"/></animateMotion>
-          </circle>
-        </g>
       </svg>
       </div>
+      <ol class="ops-steps" aria-label="The growth loop, step by step">
+        <li>Creative<small>UGC, edits and statics, made in-house</small></li>
+        <li>Ads<small>Meta and TikTok, tested fast</small></li>
+        <li>Store<small>Shopify and the marketplaces</small></li>
+        <li>Data back to creative<small>What won decides the next batch</small></li>
+      </ol>
       <figcaption>Ads, store, creators and automation <strong>in one loop.</strong></figcaption>
     </figure>
   </div></section>
@@ -244,17 +232,7 @@
       <p class="lede reveal">Same budget, fewer hand-offs. One person makes the creative, runs the ads, reads the data and fixes the store, all in one feedback loop.</p>
     </div>
 
-    <div class="edge-grid">
-      <div class="edge-copy reveal reveal--left">
-        <p>When your strategist, your media buyer, your creative team and your Shopify developer are four different vendors, feedback dies in a Slack thread. The ad account says hook #3 is winning; the next batch of creative never hears about it. The product page leaks half the traffic; nobody's job is to notice.</p>
-        <p>I run the whole loop myself. <strong>Every metric I see in Ads Manager shapes the next move in the funnel, the budget, the creative and the store.</strong></p>
-        <ul class="pains" data-stagger="80">
-          <li>Your creative testing is random</li>
-          <li>CPA creeps up while the feed goes quiet</li>
-          <li>The reports don't say what to make next</li>
-          <li>Your store leaks the traffic your ads pay for</li>
-        </ul>
-      </div>
+    <div class="edge-grid edge-grid--solo">
       <div class="ops-stack reveal reveal--right">
         <figure>
           <img src="assets/media/ops-02.png" alt="Meta Business Suite, scheduled posts queue" loading="lazy">
@@ -332,11 +310,11 @@
   </div>
 </section>
 
-<section class="cta-band" aria-labelledby="ctaTitle">
+<section class="cta-band coral" aria-labelledby="ctaTitle">
   <div class="wrap cta-band-inner">
     <p class="eyebrow reveal">Let's talk</p>
     <h2 class="hook" id="ctaTitle" data-split>Your next winning ad is <em>one call away.</em></h2>
-    <a class="btn btn--primary magnet reveal" href="contact.html">Book a strategy call</a>
+    <a class="btn btn--primary reveal" href="contact.html">Book a call</a>
     <span class="mono-line reveal">Remote · works in your timezone</span>
   </div>
 </section>
@@ -375,7 +353,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <nav class="footer-col" aria-label="Jump to">
+    <nav class="footer-col footer-col--jump" aria-label="Jump to">
       <p class="footer-h">Jump to</p>
       <ul class="footer-links">
         <li><a href="ama-holdings.html#automations">Systems</a></li>
@@ -406,7 +384,6 @@
 </button>
 <!-- /shell:footer -->
 
-<a class="cta-dock" href="contact.html" aria-label="Book a strategy call">Book a strategy call →</a>
 <script src="main.js?v=10"></script>
 </body>
 </html>

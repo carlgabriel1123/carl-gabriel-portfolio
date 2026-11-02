@@ -27,7 +27,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Schibsted+Grotesk:wght@400;500;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=16">
+<link rel="stylesheet" href="styles.css?v=18">
+<noscript><style>.snap-in,.reveal,.is-split .wi,.tape rect,.spend .bar path,.step-node,.steps-line i{opacity:1;transform:none}</style></noscript>
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"selector_matches":"a[href$='.html'], a[href='./']"},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}
 </script>
@@ -81,16 +82,10 @@
 <!-- shell:nav -->
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- Ambient background glows (fixed, decorative) -->
-<div class="ambient" aria-hidden="true">
-  <i class="glow glow--a"></i>
-  <i class="glow glow--b"></i>
-  <i class="grain"></i>
-</div>
-
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
     <a class="brand" href="./" aria-label="Carl G. home">CARL<b>G.</b></a>
+    <a class="btn btn--primary btn--sm nav-cta" href="contact.html" data-nav="contact">Book a call</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
       <span class="nav-toggle-bar" aria-hidden="true"></span>
       <span class="nav-toggle-bar" aria-hidden="true"></span>
@@ -105,7 +100,6 @@
         <li style="--i:4"><a href="services.html" data-nav="services">Services</a></li>
         <li style="--i:5"><a href="about.html" data-nav="about">About</a></li>
       </ul>
-      <a class="btn btn--primary btn--sm nav-cta" href="contact.html" data-nav="contact">Book a call</a>
     </div>
   </div>
   <div class="pagebar" aria-hidden="true"><i></i></div>
@@ -114,12 +108,15 @@
 
 <main id="main">
 <header class="page-hero" id="top">
-  <span class="hero-dots" aria-hidden="true"></span>
   <div class="wrap">
     <p class="eyebrow snap-in d1"><span class="ph-index">04</span><span class="ph-sep" aria-hidden="true">·</span>Proof</p>
     <h1 class="hook page-title" id="page-title" data-split data-vt="vt-results">Numbers from Ads Manager, <em>not a pitch deck.</em></h1>
     <p class="lede snap-in d3">Selected results from the stores, marketplaces and ad accounts I've run. The raw dashboards are in the gallery below.</p>
-    <p class="lede lede-more snap-in d3">Right now that includes ₱2M+ a month in Shopify sales under management in the Philippines, and The Loaded Teashop's creator ad program at <a href="ama-holdings.html">AMA Holdings</a>, the US owner of The Loaded Teashop and Goli Nutrition: US$44M+ of ad spend tracked, US$13.9M of it in the last 30 days, with 239 winning videos in that month. I've also worked inside ad accounts that did US$60M+ in Facebook Ads revenue and creator campaigns that passed 1B+ views. Team and client scale, not mine alone.</p>
+    <p class="lede lede-more snap-in d3">Team and client scale, not mine alone. Sources: Ads Manager, Shopify, the creator platform, Triple Whale and Northbeam.</p>
+    <div class="hero-ctas snap-in d4">
+      <a class="btn btn--primary" href="contact.html">Book a call</a>
+      <a class="btn--link" href="#gallery">See the dashboards ↓</a>
+    </div>
   </div>
 </header>
 
@@ -134,29 +131,29 @@
 
 <section class="section" id="proof"><div class="wrap">
     <div class="result-grid" data-stagger="100">
-      <article class="result card tilt">
-        <span class="chip chip--win">ROAS lift</span>
-        <span class="res-num"><span class="from">1.4× →</span><b>3.2</b><span class="suf">×</span></span>
-        <span class="res-k">Shopify rebuild + Meta restructure</span>
-        <p class="res-d">Rebuilt the store for conversion and restructured the campaigns around sales objectives. <strong>ROAS more than doubled.</strong></p>
+      <article class="result result--hl card">
+        <span class="chip chip--accent">Creator ads · AMA Holdings</span>
+        <span class="res-num"><span class="pre">US$</span><b class="val" data-count="44.2">44.2</b><span class="suf">M</span></span>
+        <span class="res-k">Creator ad spend tracked</span>
+        <p class="res-d">The Loaded Teashop's creator ad program on Meta and TikTok, April to November 2026, at <strong>1.56× blended ROAS</strong>.</p>
       </article>
-      <article class="result card tilt">
-        <span class="chip chip--accent">Peak performance</span>
-        <span class="res-num"><b>8.71</b><span class="suf">×</span></span>
-        <span class="res-k">Peak Meta ROAS · 4.9× blended</span>
-        <p class="res-d">The highest ROAS I've hit on Meta. The blended figure counts every campaign across the accounts I manage, <strong>winners and losers together.</strong></p>
+      <article class="result card">
+        <span class="chip">Last 30 days</span>
+        <span class="res-num"><span class="pre">US$</span><b class="val" data-count="13.9">13.9</b><span class="suf">M</span></span>
+        <span class="res-k">Ad spend in the last 30 days</span>
+        <p class="res-d">The program I report on every week, at <strong>1.47× blended ROAS</strong> to 2 November 2026.</p>
       </article>
-      <article class="result card tilt">
-        <span class="chip chip--blue">Tracking fix</span>
-        <span class="res-num"><span class="from">Stalled →</span><span class="suf">Live</span></span>
-        <span class="res-k">Pixel + Conversions API</span>
-        <p class="res-d">I set up Meta Pixel and Conversions API tracking to <strong>restore delivery on stalled ad accounts</strong>. Then I rebuilt the campaigns around what the data showed.</p>
+      <article class="result card">
+        <span class="chip chip--win">Winners</span>
+        <span class="res-num"><span class="from">Of 2,013 judged</span><b class="val" data-count="239">239</b></span>
+        <span class="res-k">Winning videos in 30 days</span>
+        <p class="res-d">The team's rule, applied to every video by the dashboard: <strong>ROAS 1.4× and CPA $26 or better</strong> on $100+ of spend.</p>
       </article>
-      <article class="result card tilt">
-        <span class="chip chip--accent">Creator campaign</span>
-        <span class="res-num"><b>100</b><span class="suf">M+</span></span>
-        <span class="res-k">Views per month · by month two</span>
-        <p class="res-d">A UGC-creator campaign that hit <strong>100M+ views a month by its second month live.</strong> You pick the right creators, test hooks fast, and the reach compounds.</p>
+      <article class="result card">
+        <span class="chip">Creators</span>
+        <span class="res-num"><b class="val" data-count="833">833</b></span>
+        <span class="res-k">Creators in one database</span>
+        <p class="res-d">Handles, whitelist status, tiers and drop lists in one table the whole team edits. <strong>429 whitelisted and set up.</strong></p>
       </article>
     </div>
 
@@ -164,12 +161,48 @@
       <h2 class="sub-head mono-line reveal">By channel</h2>
       <div class="proof-tablist seg reveal" role="tablist" aria-label="Results by channel">
         <span class="seg-ind" aria-hidden="true"></span>
-        <button class="proof-tab seg-btn is-active" type="button" role="tab" id="ptab-ecom" aria-selected="true" aria-controls="ppanel-ecom" tabindex="0">E-commerce</button>
+        <button class="proof-tab seg-btn is-active" type="button" role="tab" id="ptab-creator" aria-selected="true" aria-controls="ppanel-creator" tabindex="0">Creator ads</button>
+        <button class="proof-tab seg-btn" type="button" role="tab" id="ptab-ecom" aria-selected="false" aria-controls="ppanel-ecom" tabindex="-1">E-commerce</button>
         <button class="proof-tab seg-btn" type="button" role="tab" id="ptab-meta" aria-selected="false" aria-controls="ppanel-meta" tabindex="-1">Meta Ads</button>
         <button class="proof-tab seg-btn" type="button" role="tab" id="ptab-social" aria-selected="false" aria-controls="ppanel-social" tabindex="-1">Social</button>
-        <button class="proof-tab seg-btn" type="button" role="tab" id="ptab-creator" aria-selected="false" aria-controls="ppanel-creator" tabindex="-1">Creator ads</button>
       </div>
-      <div class="proof-panel" id="ppanel-ecom" role="tabpanel" aria-labelledby="ptab-ecom" tabindex="0">
+      <div class="proof-panel" id="ppanel-creator" role="tabpanel" aria-labelledby="ptab-creator" tabindex="0">
+        <div class="proof-grid proof-grid--3">
+            <article class="stat stat--hl card card--lift">
+              <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
+              <span class="stat-num"><span class="pre">US$</span><span class="val" data-count="44.2">44.2</span><span class="suf">M</span></span>
+              <span class="stat-label">Creator ad spend, all time<i>The Loaded Teashop · AMA Holdings · Apr to Nov 2026 · 1.56× blended</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+              <span class="stat-num"><span class="pre">US$</span><span class="val" data-count="13.9">13.9</span><span class="suf">M</span></span>
+              <span class="stat-label">Ad spend in the last 30 days<i>1.47× blended ROAS · to Nov 2, 2026</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="239">239</span></span>
+              <span class="stat-label">Winning videos in 30 days<i>Of 2,013 judged · ROAS 1.4× and CPA $26 or better</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="833">833</span></span>
+              <span class="stat-label">Creators in the database<i>429 whitelisted and set up</i></span>
+            </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2.67-1.5L9.33 22 12 20.5 14.67 22l2.66-1.5L20 22V2l-2.67 1.5L14.67 2 12 3.5 9.33 2 6.67 3.5Z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg></span>
+              <span class="stat-num"><span class="val" data-count="2394">2,394</span></span>
+              <span class="stat-label">Videos sent to the media buyers<i>Last 30 days · logged by the pipeline</i></span>
+            </article>
+            <article class="result card">
+              <span class="chip chip--accent">Creator campaign</span>
+              <span class="res-num"><b>100</b><span class="suf">M+</span></span>
+              <span class="res-k">Views per month · by month two</span>
+              <p class="res-d">A UGC-creator campaign that hit <strong>100M+ views a month by its second month live.</strong> You pick the right creators, test hooks fast, and the reach compounds.</p>
+            </article>
+        </div>
+        <a class="proof-to-gal" href="ama-holdings.html">Read the AMA Holdings case study <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="proof-panel" id="ppanel-ecom" role="tabpanel" aria-labelledby="ptab-ecom" tabindex="0" hidden>
         <div class="proof-grid proof-grid--3">
             <article class="stat stat--hl card card--lift">
               <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
@@ -226,6 +259,29 @@
               <span class="stat-num"><span class="pre">₱</span><span class="val" data-count="227">227</span></span>
               <span class="stat-label">Lowest cost / purchase<i>Best-performing campaign</i></span>
             </article>
+            <article class="stat card card--lift">
+              <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
+              <span class="stat-num"><span class="pre">US$</span><span class="val" data-count="60">60</span><span class="suf">M+</span></span>
+              <span class="stat-label">Facebook Ads revenue<i>Accounts and teams I've worked in, some I can't name</i></span>
+            </article>
+            <article class="result card">
+              <span class="chip chip--accent">Peak performance</span>
+              <span class="res-num"><b>8.71</b><span class="suf">×</span></span>
+              <span class="res-k">Peak Meta ROAS · 4.9× blended</span>
+              <p class="res-d">The highest ROAS I've hit on Meta. The blended figure counts every campaign across the accounts I manage, <strong>winners and losers together.</strong></p>
+            </article>
+            <article class="result card">
+              <span class="chip chip--win">ROAS lift</span>
+              <span class="res-num"><span class="from">1.4× →</span><b>3.2</b><span class="suf">×</span></span>
+              <span class="res-k">Shopify rebuild + Meta restructure</span>
+              <p class="res-d">Rebuilt the store for conversion and restructured the campaigns around sales objectives. <strong>ROAS more than doubled.</strong></p>
+            </article>
+            <article class="result card">
+              <span class="chip chip--blue">Tracking fix</span>
+              <span class="res-num"><span class="from">Stalled →</span><span class="suf">Live</span></span>
+              <span class="res-k">Pixel + Conversions API</span>
+              <p class="res-d">I set up Meta Pixel and Conversions API tracking to <strong>restore delivery on stalled ad accounts</strong>. Then I rebuilt the campaigns around what the data showed.</p>
+            </article>
         </div>
         <a class="proof-to-gal" href="#gallery" data-gal-filter="meta">See the Meta Ads Manager screenshots <span aria-hidden="true">→</span></a>
       </div>
@@ -263,31 +319,6 @@
             </article>
         </div>
         <a class="proof-to-gal" href="#gallery" data-gal-filter="social">See the social analytics <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="proof-panel" id="ppanel-creator" role="tabpanel" aria-labelledby="ptab-creator" tabindex="0" hidden>
-        <div class="proof-grid proof-grid--4">
-            <article class="stat stat--hl card card--lift">
-              <span class="ic-tile ic-tile--solid" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
-              <span class="stat-num"><span class="pre">US$</span><span class="val" data-count="44.2">44.2</span><span class="suf">M</span></span>
-              <span class="stat-label">Creator ad spend, all time<i>The Loaded Teashop · AMA Holdings · Apr to Nov 2026 · 1.56× blended</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
-              <span class="stat-num"><span class="pre">US$</span><span class="val" data-count="13.9">13.9</span><span class="suf">M</span></span>
-              <span class="stat-label">Ad spend in the last 30 days<i>1.47× blended ROAS · to Nov 2, 2026</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile ic-tile--win" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="239">239</span></span>
-              <span class="stat-label">Winning videos in 30 days<i>Of 2,013 judged · ROAS 1.4× and CPA $26 or better</i></span>
-            </article>
-            <article class="stat card card--lift">
-              <span class="ic-tile ic-tile--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-              <span class="stat-num"><span class="val" data-count="833">833</span></span>
-              <span class="stat-label">Creators in the database<i>429 whitelisted and set up</i></span>
-            </article>
-        </div>
-        <a class="proof-to-gal" href="ama-holdings.html">Read the AMA Holdings case study <span aria-hidden="true">→</span></a>
       </div>
     </div>
 </div></section>
@@ -380,11 +411,11 @@
   </div>
 </section>
 
-<section class="cta-band" aria-labelledby="ctaTitle">
+<section class="cta-band coral" aria-labelledby="ctaTitle">
   <div class="wrap cta-band-inner">
     <p class="eyebrow reveal">Let's talk</p>
     <h2 class="hook" id="ctaTitle" data-split>Your next winning ad is <em>one call away.</em></h2>
-    <a class="btn btn--primary magnet reveal" href="contact.html">Book a strategy call</a>
+    <a class="btn btn--primary reveal" href="contact.html">Book a call</a>
     <span class="mono-line reveal">Remote · works in your timezone</span>
   </div>
 </section>
@@ -422,7 +453,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <nav class="footer-col" aria-label="Jump to">
+    <nav class="footer-col footer-col--jump" aria-label="Jump to">
       <p class="footer-h">Jump to</p>
       <ul class="footer-links">
         <li><a href="ama-holdings.html#automations">Systems</a></li>
@@ -453,7 +484,6 @@
 </button>
 <!-- /shell:footer -->
 
-<a class="cta-dock" href="contact.html" aria-label="Book a strategy call">Book a strategy call →</a>
 
 <dialog class="lightbox" id="lightbox" aria-labelledby="lbTitle">
   <button class="lb-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>

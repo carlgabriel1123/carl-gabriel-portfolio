@@ -409,16 +409,18 @@
       });
     }
 
-    // Hide on scroll down / show on scroll up, .nav--scrolled past 20px
+    // Hide on scroll down / show on scroll up (desktop only), .nav--scrolled past 20px.
+    // Phones never hide the nav: its "Book a call" pill is the page's one reachable CTA.
+    var phone = window.matchMedia ? window.matchMedia('(max-width:860px)') : { matches: false };
     var lastY = window.pageYOffset || 0;
     scrollBus.add(function (y) {
       nav.classList.toggle('nav--scrolled', y > 20);
-      if (body.classList.contains('nav-open')) {
+      if (body.classList.contains('nav-open') || phone.matches) {
         nav.classList.remove('nav--hidden');
       } else {
         var dy = y - lastY;
-        if (dy > 4 && y > 140) nav.classList.add('nav--hidden');
-        else if (dy < -4 || y <= 140) nav.classList.remove('nav--hidden');
+        if (dy > 8 && y > 200) nav.classList.add('nav--hidden');
+        else if (dy < -8 || y <= 200) nav.classList.remove('nav--hidden');
       }
       lastY = y;
     });
@@ -608,10 +610,12 @@
       io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           var v = entry.target;
-          if (entry.isIntersecting) { if (!v.userPaused) play(v); } else v.pause();
+          if (entry.isIntersecting) { if (!v.userPaused && !v.waitForTap) play(v); } else v.pause();
         });
       }, { threshold: 0.35 });
     }
+    // touch screens: the Home bento reel keeps its poster and starts on the play button
+    var coarse = !!(window.matchMedia && window.matchMedia('(hover:none)').matches);
 
     videos.forEach(function (v) {
       var frame = v.closest ? v.closest('.vframe, .bento-video') : v.parentElement;
@@ -626,8 +630,9 @@
       function sync() { if (toggle) toggle.setAttribute('aria-pressed', v.paused ? 'false' : 'true'); }
       v.addEventListener('play', sync);
       v.addEventListener('pause', sync);
+      if (coarse && frame && frame.classList.contains('bento-video')) v.waitForTap = true;
       function userToggle() {
-        if (v.paused) { v.userPaused = false; play(v); }
+        if (v.paused) { v.userPaused = false; v.waitForTap = false; play(v); }
         else { v.userPaused = true; v.pause(); }
       }
       if (toggle) toggle.addEventListener('click', userToggle); else v.addEventListener('click', userToggle);
@@ -664,6 +669,9 @@
     s.setProperty('--ind-x', x + 'px');
     s.setProperty('--ind-w', w + 'px');
     seg.classList.add('seg--ready');
+    if (!instant && btn.scrollIntoView) {
+      try { btn.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (err) { /* older engines take a boolean */ }
+    }
     if (instant) {
       void ind.offsetWidth; // commit the jump before transitions come back
       raf(function () { s.transition = ''; });
@@ -1037,11 +1045,28 @@
     // horizontal swipes stay with the page script; while the visual viewport is pinch-zoomed,
     // hand touch back to the browser so one-finger panning still works (low-vision users rely on it)
     function zoomed() { return !!(window.visualViewport && window.visualViewport.scale > 1.01); }
+    var coarse = !!(window.matchMedia && window.matchMedia('(hover:none)').matches);
+    var WIDE_HINT = 'Drag sideways to see the whole screenshot. ';
     function syncTouch() {
       var z = zoomed();
       dlg.style.touchAction = z ? 'auto' : 'pan-y pinch-zoom';
-      img.style.touchAction = z ? 'auto' : 'pinch-zoom';
+      // a wide screenshot (.lb-img--wide, phones) pans inside .lb-figure, so horizontal drags go to the browser there
+      img.style.touchAction = z ? 'auto' : (img.classList.contains('lb-img--wide') ? 'pan-x pinch-zoom' : 'pinch-zoom');
     }
+    // once the image's size is known: wider than 1.6:1 gets .lb-img--wide (styles.css 12 lets it pan on phones)
+    // and, on touch screens, a hint in front of the description (never prefixed twice)
+    function markWide() {
+      var w = img.naturalWidth, h = img.naturalHeight;
+      var wide = !!(w && h && w / h > 1.6);
+      img.classList.toggle('lb-img--wide', wide);
+      if (desc) {
+        var t = desc.textContent || '';
+        if (t.indexOf(WIDE_HINT) === 0) t = t.slice(WIDE_HINT.length);
+        desc.textContent = (wide && coarse ? WIDE_HINT : '') + t;
+      }
+      syncTouch();
+    }
+    img.addEventListener('load', markWide);
     syncTouch();
     if (window.visualViewport) window.visualViewport.addEventListener('resize', syncTouch);
 
@@ -1082,6 +1107,7 @@
       var h = t && t.getAttribute('height');
       if (w) img.setAttribute('width', w); else img.removeAttribute('width');
       if (h) img.setAttribute('height', h); else img.removeAttribute('height');
+      img.classList.remove('lb-img--wide'); // decided again by markWide once this image has loaded
       img.setAttribute('src', it.getAttribute('href') || (t && t.getAttribute('src')) || '');
       img.alt = t ? (t.getAttribute('alt') || '') : '';
 
@@ -1323,6 +1349,13 @@
   function initTimeline() {
     var timeline = $('.timeline');
     if (!timeline) return;
+    var more = $$('.tl-more', timeline);
+    if (more.length && window.matchMedia) {
+      var wide = window.matchMedia('(min-width:761px)');
+      var openOnDesktop = function () { if (wide.matches) more.forEach(function (d) { d.open = true; }); };
+      openOnDesktop();
+      if (wide.addEventListener) wide.addEventListener('change', openOnDesktop);
+    }
     var nodes = $$('.tl-node', timeline);
 
     if (reduceMotion) {
@@ -1429,11 +1462,11 @@
       }
     }
     function openMail(lead) {
-      var subject = 'Strategy call — ' + (lead.store || lead.name);
+      var subject = 'Strategy call: ' + (lead.store || lead.name);
       var body = 'Hi Carl,\n\n' +
         'Name: ' + lead.name + '\n' +
         'Email: ' + lead.email + '\n' +
-        'Brand / website: ' + (lead.store || '—') + '\n\n' +
+        'Brand / website: ' + (lead.store || 'not given') + '\n\n' +
         lead.message + '\n';
       window.location.href = 'mailto:piramocarlgabriel@gmail.com?subject=' +
         encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
